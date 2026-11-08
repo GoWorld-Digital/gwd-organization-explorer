@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">GWD Mission Simulator — illustrative scenario wireframe</title>
+<desc id="desc">An interactive mission scenario with objective, connected organizational units, shared services, capability domains, human approval gates and illustrative-only labels.</desc>
+<defs>
+ <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050913"/><stop offset="1" stop-color="#0B1C2E"/></linearGradient>
+ <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#66D9E8"/><stop offset="1" stop-color="#5C86FF"/></linearGradient>
+</defs>
+<rect width="1440" height="900" fill="url(#bg3)"/>
+<rect width="1440" height="66" fill="#081321"/><path d="M0 66H1440" stroke="#294158"/>
+<g font-family="Arial,Helvetica,sans-serif">
+ <text x="32" y="40" fill="#F2F6FA" font-size="16" font-weight="700" letter-spacing="2">GWD</text>
+ <text x="104" y="40" fill="#7E95AA" font-size="9" letter-spacing="1.6">MISSION SIMULATOR</text>
+ <text x="950" y="40" fill="#8FA5B9" font-size="10" letter-spacing="1">ORGANIZATION</text>
+ <text x="1068" y="40" fill="#66D9E8" font-size="10" letter-spacing="1">MISSIONS</text>
+ <text x="1160" y="40" fill="#8FA5B9" font-size="10" letter-spacing="1">CAPABILITIES</text>
+ <rect x="1284" y="18" width="124" height="30" rx="15" fill="#132B42" stroke="#3A6178"/>
+ <text x="1346" y="37" fill="#C9DAE7" font-size="9" text-anchor="middle">ILLUSTRATIVE</text>
+ <text x="62" y="123" fill="#66D9E8" font-size="9" letter-spacing="2.4">SCENARIO / 001</text>
+ <text x="62" y="165" fill="#F2F6FA" font-size="29" font-weight="700">Launch a digital learning product</text>
+ <text x="62" y="194" fill="#A3B6C7" font-size="13">Explore how a hypothetical mission activates units, shared services and candidate capabilities.</text>
+ <rect x="62" y="220" width="1316" height="1" fill="#294158"/>
+ <rect x="62" y="248" width="838" height="552" rx="10" fill="#0A1928" stroke="#29465D"/>
+ <text x="92" y="285" fill="#7791A7" font-size="9" letter-spacing="1.8">MISSION FLOW</text>
+ <text x="92" y="310" fill="#DDE8F0" font-size="14" font-weight="700">From validation to launch</text>
+ <path d="M152 440H790" stroke="url(#line)" stroke-width="2" stroke-opacity=".7"/>
+ <g fill="#66D9E8"><circle cx="152" cy="440" r="5"/><circle cx="360" cy="440" r="5"/><circle cx="568" cy="440" r="5"/><circle cx="790" cy="440" r="5"/></g>
+ <g>
+  <rect x="94" y="362" width="118" height="150" rx="7" fill="#122A40" stroke="#3B718B"/>
+  <circle cx="153" cy="392" r="13" fill="#1C5065" stroke="#66D9E8"/>
+  <text x="153" y="396" text-anchor="middle" fill="#E5F9FC" font-size="10">01</text>
+  <text x="153" y="471" fill="#EAF2F8" text-anchor="middle" font-size="11" font-weight="700">VALIDATE</text>
+  <text x="153" y="491" fill="#8EA6B9" text-anchor="middle" font-size="9">Market &amp; audience</text>
+  <rect x="302" y="362" width="118" height="150" rx="7" fill="#122A40" stroke="#3B718B"/>
+  <circle cx="361" cy="392" r="13" fill="#1C5065" stroke="#66D9E8"/>
+  <text x="361" y="396" text-anchor="middle" fill="#E5F9FC" font-size="10">02</text>
+  <text x="361" y="471" fill="#EAF2F8" text-anchor="middle" font-size="11" font-weight="700">DESIGN</text>
+  <text x="361" y="491" fill="#8EA6B9" text-anchor="middle" font-size="9">Offer &amp; journey</text>
+  <rect x="510" y="362" width="118" height="150" rx="7" fill="#122A40" stroke="#3B718B"/>
+  <circle cx="569" cy="392" r="13" fill="#1C5065" stroke="#66D9E8"/>
+  <text x="569" y="396" text-anchor="middle" fill="#E5F9FC" font-size="10">03</text>
+  <text x="569" y="471" fill="#EAF2F8" text-anchor="middle" font-size="11" font-weight="700">PREPARE</text>
+  <text x="569" y="491" fill="#8EA6B9" text-anchor="middle" font-size="9">Content &amp; launch</text>
+  <rect x="731" y="362" width="118" height="150" rx="7" fill="#142540" stroke="#C9A96E"/>
+  <circle cx="790" cy="392" r="13" fill="#5A4625" stroke="#C9A96E"/>
+  <text x="790" y="396" text-anchor="middle" fill="#F8E8C8" font-size="10">04</text>
+  <text x="790" y="471" fill="#F3E8D2" text-anchor="middle" font-size="11" font-weight="700">APPROVE</text>
+  <text x="790" y="491" fill="#BFAF91" text-anchor="middle" font-size="9">Human launch gate</text>
+ </g>
+ <path d="M152 512V548M361 512V548M569 512V548M790 512V548" stroke="#45647C" stroke-dasharray="3 5"/>
+ <text x="94" y="578" fill="#7791A7" font-size="9" letter-spacing="1.4">PARTICIPATING ORGANIZATION</text>
+ <g>
+   <rect x="94" y="599" width="228" height="61" rx="6" fill="#11344A" stroke="#66D9E8"/>
+   <text x="114" y="625" fill="#E7F4F8" font-size="12" font-weight="700">GWD ACADEMY</text>
+   <text x="114" y="644" fill="#94B7C5" font-size="9">Offer owner · Learning design</text>
+   <rect x="340" y="599" width="228" height="61" rx="6" fill="#11344A" stroke="#66D9E8"/>
+   <text x="360" y="625" fill="#E7F4F8" font-size="12" font-weight="700">MEDIA FACTORY &amp; GROWTH</text>
+   <text x="360" y="644" fill="#94B7C5" font-size="9">Campaign · Distribution</text>
+   <rect x="586" y="599" width="228" height="61" rx="6" fill="#11344A" stroke="#66D9E8"/>
+   <text x="606" y="625" fill="#E7F4F8" font-size="12" font-weight="700">SALES &amp; CUSTOMER OPS</text>
+   <text x="606" y="644" fill="#94B7C5" font-size="9">Sales journey · Support</text>
+ </g>
+ <text x="94" y="702" fill="#7791A7" font-size="9" letter-spacing="1.4">CROSS-FUNCTIONAL SERVICES</text>
+ <g fill="#14243A" stroke="#38526B">
+   <rect x="94" y="720" width="138" height="38" rx="4"/><rect x="242" y="720" width="138" height="38" rx="4"/><rect x="390" y="720" width="138" height="38" rx="4"/><rect x="538" y="720" width="138" height="38" rx="4"/><rect x="686" y="720" width="138" height="38" rx="4"/>
+ </g>
+ <g fill="#BDD0DF" font-size="9" text-anchor="middle">
+   <text x="163" y="743">STRATEGY</text><text x="311" y="743">PRODUCT</text><text x="459" y="743">MARKETING</text><text x="607" y="743">FINANCE / LEGAL</text><text x="755" y="743">AI / SECURITY</text>
+ </g>
+</g>
+<rect x="930" y="248" width="448" height="552" rx="10" fill="#091827" stroke="#29465D"/>
+<g font-family="Arial,Helvetica,sans-serif">
+ <text x="962" y="285" fill="#7791A7" font-size="9" letter-spacing="1.8">MISSION BRIEF</text>
+ <text x="962" y="326" fill="#F2F6FA" font-size="20" font-weight="700">Learning product launch</text>
+ <rect x="962" y="347" width="164" height="23" rx="11" fill="#352B1B" stroke="#80663B"/>
+ <text x="1044" y="363" fill="#E7C58A" font-size="9" text-anchor="middle">ILLUSTRATIVE ONLY</text>
+ <text x="962" y="411" fill="#90A5B8" font-size="10" letter-spacing="1.2">OBJECTIVE</text>
+ <text x="962" y="435" fill="#CBD8E3" font-size="12">Design and launch a digital learning offer</text>
+ <text x="962" y="455" fill="#CBD8E3" font-size="12">in two hypothetical markets.</text>
+ <path d="M962 482H1346" stroke="#294158"/>
+ <text x="962" y="516" fill="#90A5B8" font-size="10" letter-spacing="1.2">HUMAN APPROVAL GATES</text>
+ <g fill="#C9A96E"><circle cx="971" cy="548" r="3"/><circle cx="971" cy="580" r="3"/><circle cx="971" cy="612" r="3"/></g>
+ <g fill="#D2DFE8" font-size="11">
+   <text x="986" y="552">Approve target segment and offer</text>
+   <text x="986" y="584">Approve public claims and creative</text>
+   <text x="986" y="616">Approve budget, legal terms and launch</text>
+ </g>
+ <path d="M962 645H1346" stroke="#294158"/>
+ <text x="962" y="679" fill="#90A5B8" font-size="10" letter-spacing="1.2">ECONOMICS</text>
+ <text x="962" y="707" fill="#B8C9D6" font-size="11">No financial assumptions supplied.</text>
+ <text x="962" y="728" fill="#6C849A" font-size="10">Visitors may enter local scenario inputs.</text>
+ <rect x="962" y="753" width="184" height="30" rx="4" fill="#153A50" stroke="#39738C"/>
+ <text x="1054" y="773" fill="#DDF4F8" font-size="9" text-anchor="middle" letter-spacing="1">PLAY SCENARIO</text>
+</g>
+<path d="M62 840H1378" stroke="#294158"/>
+<text x="62" y="865" fill="#6C8399" font-family="Arial,Helvetica,sans-serif" font-size="9" letter-spacing="1.4">GWD  /  AI-NATIVE ORGANIZATION EXPLORER</text>
+<text x="1378" y="865" text-anchor="end" fill="#6C8399" font-family="Arial,Helvetica,sans-serif" font-size="9">03 — MISSION SIMULATOR CONCEPT</text>
+</svg>
