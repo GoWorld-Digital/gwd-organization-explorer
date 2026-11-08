@@ -13,7 +13,7 @@ Do not infer one domain from another. A source profile does not create a GWD rol
 Each node should have: stable id; display name; type (governance, executive, shared_service, business_unit, cost_centre, profit_centre, investment_centre, lab or venture); status (proposed, approved, active, paused or retired); mandate; optional confirmed owner role; parentId; tags; optional evidence references.
 
 ## Relationship fields
-Each relationship has id, from, to, type (reports_to, provides_service_to, capability_supports, participates_in_mission or invests_in), status, rationale and provenance. Never use a generic connected relationship when the type is known.
+Each relationship has id, from, to, type (reports_to, advises, provides_service_to, capability_supports, participates_in_mission or invests_in), status, rationale and provenance. Never use a generic connected relationship when the type is known.
 
 ## Agency Agents source record
 Each imported profile retains sourceId, sourceName, sourceDivision, sourcePath, sourceRepository, sourceCommit, sourceUrl, sourceLicense, licenseReviewStatus, attribution, importedAt, sourceContentHash, authored summary, GWD mapping IDs, and GWD maturity status (catalogued, evaluated, adapted, tested or active).
