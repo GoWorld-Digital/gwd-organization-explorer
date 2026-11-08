@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">GWD Organization Explorer — desktop interface wireframe</title>
+<desc id="desc">A dark desktop interface with left navigation, central five-layer organizational map, selected business unit and right detail panel.</desc>
+<defs>
+ <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050913"/><stop offset="1" stop-color="#0A1B2D"/></linearGradient>
+ <linearGradient id="sel" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#173D56"/><stop offset="1" stop-color="#172B49"/></linearGradient>
+ <filter id="g"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1440" height="900" fill="url(#bg2)"/>
+<rect width="1440" height="66" fill="#081321"/>
+<path d="M0 66H1440" stroke="#294158"/>
+<g font-family="Arial,Helvetica,sans-serif">
+  <g transform="translate(26 18)">
+    <path d="M0 4L13 0L26 4V20L13 25L0 20Z" fill="none" stroke="#66D9E8" stroke-width="1.5"/>
+    <text x="36" y="17" font-size="16" fill="#F2F6FA" font-weight="700" letter-spacing="2">GWD</text>
+    <text x="92" y="17" font-size="9" fill="#7E95AA" letter-spacing="1.6">ORGANIZATION EXPLORER</text>
+  </g>
+  <text x="825" y="39" fill="#8FA5B9" font-size="10" letter-spacing="1">OVERVIEW</text>
+  <text x="920" y="39" fill="#8FA5B9" font-size="10" letter-spacing="1">CAPABILITIES</text>
+  <text x="1040" y="39" fill="#8FA5B9" font-size="10" letter-spacing="1">SIMULATOR</text>
+  <rect x="1255" y="18" width="150" height="30" rx="15" fill="#132B42" stroke="#3A6178"/>
+  <text x="1330" y="37" text-anchor="middle" fill="#C9DAE7" font-size="10" letter-spacing="1">2D VIEW  /  3D VIEW</text>
+</g>
+<rect x="0" y="66" width="226" height="834" fill="#081321" opacity=".96"/>
+<path d="M226 66V900" stroke="#294158"/>
+<g font-family="Arial,Helvetica,sans-serif">
+  <text x="28" y="111" fill="#5C7A91" font-size="9" letter-spacing="2">EXPLORER</text>
+  <rect x="16" y="132" width="194" height="38" rx="5" fill="#14344D" stroke="#2A6A83"/>
+  <circle cx="36" cy="151" r="4" fill="#66D9E8"/>
+  <text x="52" y="155" fill="#F2F6FA" font-size="12">Organization map</text>
+  <text x="28" y="204" fill="#9AABC0" font-size="11">Capabilities</text>
+  <text x="28" y="243" fill="#9AABC0" font-size="11">Business model</text>
+  <text x="28" y="282" fill="#9AABC0" font-size="11">Mission simulator</text>
+  <text x="28" y="321" fill="#9AABC0" font-size="11">Ventures &amp; Labs</text>
+  <path d="M18 348H208" stroke="#294158"/>
+  <text x="28" y="377" fill="#5C7A91" font-size="9" letter-spacing="2">LAYERS</text>
+  <g fill="#C0D0DD" font-size="10">
+    <circle cx="34" cy="410" r="3" fill="#C9A96E"/><text x="48" y="414">01 Governance</text>
+    <circle cx="34" cy="446" r="3" fill="#66D9E8"/><text x="48" y="450">02 Executive</text>
+    <circle cx="34" cy="482" r="3" fill="#5C86FF"/><text x="48" y="486">03 Shared services</text>
+    <circle cx="34" cy="518" r="3" fill="#66D9E8"/><text x="48" y="522">04 Business units</text>
+    <circle cx="34" cy="554" r="3" fill="#9C8CFF"/><text x="48" y="558">05 Labs &amp; innovation</text>
+  </g>
+  <path d="M18 585H208" stroke="#294158"/>
+  <text x="28" y="615" fill="#5C7A91" font-size="9" letter-spacing="2">DISPLAY</text>
+  <rect x="26" y="632" width="174" height="30" rx="4" fill="#11283D" stroke="#294A61"/>
+  <text x="40" y="651" fill="#C2D1DD" font-size="10">Reporting lines</text>
+  <rect x="26" y="670" width="174" height="30" rx="4" fill="#11283D" stroke="#294A61"/>
+  <text x="40" y="689" fill="#C2D1DD" font-size="10">Shared-service links</text>
+  <rect x="26" y="708" width="174" height="30" rx="4" fill="#11283D" stroke="#294A61"/>
+  <text x="40" y="727" fill="#C2D1DD" font-size="10">Capability links</text>
+</g>
+<rect x="226" y="66" width="848" height="834" fill="#071321" opacity=".4"/>
+<g font-family="Arial,Helvetica,sans-serif">
+  <text x="266" y="118" fill="#66D9E8" font-size="9" letter-spacing="2.2">ORGANIZATIONAL ARCHITECTURE</text>
+  <text x="266" y="154" fill="#F2F6FA" font-size="27" font-weight="700">Explore the organization</text>
+  <text x="266" y="181" fill="#8399AC" font-size="11">Five proposed layers · Select a layer or unit to inspect its mandate and relationships.</text>
+  <rect x="266" y="210" width="768" height="618" rx="12" fill="#0A1928" stroke="#244158"/>
+  <text x="294" y="244" fill="#648199" font-size="9" letter-spacing="1.6">STRUCTURE / OVERVIEW</text>
+  <g stroke="#4A6A82" stroke-opacity=".7" fill="none">
+    <path d="M650 322V370M650 429V468M650 545V580M650 666V700"/>
+    <path d="M400 506H900M400 506V556M900 506V556"/>
+  </g>
+  <g>
+    <rect x="505" y="270" width="290" height="54" rx="7" fill="#182A3B" stroke="#C9A96E" stroke-opacity=".7"/>
+    <text x="650" y="293" fill="#E8EFF5" font-size="12" text-anchor="middle" font-weight="700">BOARD OF ADMINISTRATION</text>
+    <text x="650" y="309" fill="#B99E6D" font-size="8" text-anchor="middle" letter-spacing="1">PROPOSED GOVERNANCE</text>
+    <rect x="537" y="370" width="226" height="59" rx="7" fill="#143049" stroke="#66D9E8" stroke-opacity=".75"/>
+    <text x="650" y="394" fill="#F2F6FA" font-size="12" text-anchor="middle" font-weight="700">CEO &amp; EXECUTIVE DIRECTION</text>
+    <text x="650" y="412" fill="#9CB5C7" font-size="9" text-anchor="middle">Strategy · Coordination · Accountability</text>
+    <rect x="340" y="468" width="620" height="78" rx="7" fill="#10283D" stroke="#4A77A7"/>
+    <text x="650" y="490" fill="#C6D7E4" font-size="10" text-anchor="middle" letter-spacing="1">TRANSVERSAL SHARED SERVICES</text>
+    <g fill="#1A3852" stroke="#47718F">
+      <rect x="356" y="501" width="136" height="32" rx="4"/><rect x="503" y="501" width="136" height="32" rx="4"/><rect x="650" y="501" width="136" height="32" rx="4"/><rect x="797" y="501" width="146" height="32" rx="4"/>
+    </g>
+    <g fill="#CBD8E3" font-size="8" text-anchor="middle">
+      <text x="424" y="521">STRATEGY &amp; INTELLIGENCE</text><text x="571" y="521">FINANCE &amp; PERFORMANCE</text><text x="718" y="521">AI PLATFORM &amp; ENGINEERING</text><text x="870" y="521">RISK &amp; SECURITY</text>
+    </g>
+    <path d="M400 556V580M650 546V580M900 556V580" stroke="#4A6A82"/>
+    <rect x="310" y="580" width="680" height="86" rx="7" fill="#0E293C" stroke="#3D7D91"/>
+    <text x="650" y="600" fill="#A6C7D4" font-size="9" text-anchor="middle" letter-spacing="1.2">BUSINESS UNITS &amp; VENTURES</text>
+    <g>
+      <rect x="330" y="614" width="148" height="40" rx="5" fill="#17384F" stroke="#66D9E8"/>
+      <rect x="493" y="614" width="148" height="40" rx="5" fill="#17384F" stroke="#66D9E8"/>
+      <rect x="656" y="614" width="148" height="40" rx="5" fill="url(#sel)" stroke="#66D9E8" stroke-width="1.5" filter="url(#g)"/>
+      <rect x="819" y="614" width="152" height="40" rx="5" fill="#17384F" stroke="#C9A96E"/>
+      <g fill="#F1F6FA" font-size="9" text-anchor="middle">
+        <text x="404" y="638">GWD ACADEMY</text>
+        <text x="567" y="638">MEDIA FACTORY &amp; GROWTH</text>
+        <text x="730" y="631">SALES &amp; CUSTOMER</text><text x="730" y="644">OPERATIONS</text>
+        <text x="895" y="638">VENTURES STUDIO</text>
+      </g>
+    </g>
+    <path d="M650 666V700" stroke="#4A6A82"/>
+    <rect x="386" y="700" width="528" height="76" rx="7" fill="#161F3A" stroke="#796BC1"/>
+    <text x="650" y="722" fill="#D5CEF8" font-size="10" text-anchor="middle" letter-spacing="1.1">LABS &amp; INNOVATION</text>
+    <g fill="#211F3D" stroke="#6C62A9">
+      <rect x="409" y="738" width="145" height="26" rx="4"/><rect x="578" y="738" width="145" height="26" rx="4"/><rect x="747" y="738" width="145" height="26" rx="4"/>
+    </g>
+    <g fill="#C9C2E9" font-size="8" text-anchor="middle"><text x="481" y="755">AI &amp; SYSTEMS LAB</text><text x="650" y="755">ORG DESIGN LAB</text><text x="819" y="755">VENTURE LAB</text></g>
+  </g>
+  <rect x="835" y="265" width="170" height="28" rx="14" fill="#152E43" stroke="#355D77"/>
+  <text x="920" y="283" fill="#BBD1DF" font-size="9" text-anchor="middle">2D ORGANIZATION MAP</text>
+</g>
+<rect x="1074" y="66" width="366" height="834" fill="#091827"/>
+<path d="M1074 66V900" stroke="#294158"/>
+<g font-family="Arial,Helvetica,sans-serif">
+  <text x="1104" y="112" fill="#66D9E8" font-size="9" letter-spacing="2">SELECTED BUSINESS UNIT</text>
+  <text x="1104" y="156" fill="#F2F6FA" font-size="22" font-weight="700">Sales &amp; Customer</text>
+  <text x="1104" y="183" fill="#F2F6FA" font-size="22" font-weight="700">Operations</text>
+  <rect x="1104" y="203" width="78" height="22" rx="11" fill="#4B3B20" stroke="#8A6B36"/>
+  <text x="1143" y="218" fill="#E7C58A" font-size="9" text-anchor="middle">PROPOSED</text>
+  <text x="1104" y="265" fill="#95A9BB" font-size="11">Mandate</text>
+  <text x="1104" y="289" fill="#C7D3DE" font-size="12">Sales operations, CRM, support,</text>
+  <text x="1104" y="309" fill="#C7D3DE" font-size="12">service delivery coordination and</text>
+  <text x="1104" y="329" fill="#C7D3DE" font-size="12">customer success.</text>
+  <path d="M1104 357H1408" stroke="#294158"/>
+  <text x="1104" y="388" fill="#95A9BB" font-size="10" letter-spacing="1">ECONOMIC ROLE</text>
+  <text x="1104" y="414" fill="#E4EDF4" font-size="12">Candidate profit centre</text>
+  <text x="1104" y="433" fill="#738CA3" font-size="9">Not an accounting status yet</text>
+  <path d="M1104 460H1408" stroke="#294158"/>
+  <text x="1104" y="491" fill="#95A9BB" font-size="10" letter-spacing="1">SHARED SERVICES</text>
+  <g fill="#B9CBD8" font-size="11">
+    <text x="1116" y="522">›  AI Platform &amp; Engineering</text>
+    <text x="1116" y="550">›  Security &amp; Data Governance</text>
+    <text x="1116" y="578">›  Finance &amp; Performance</text>
+    <text x="1116" y="606">›  Marketing &amp; Communications</text>
+  </g>
+  <path d="M1104 636H1408" stroke="#294158"/>
+  <text x="1104" y="668" fill="#95A9BB" font-size="10" letter-spacing="1">CAPABILITY FIELD</text>
+  <rect x="1104" y="688" width="300" height="68" rx="6" fill="#10273A" stroke="#2E566C"/>
+  <text x="1120" y="713" fill="#D9E6EE" font-size="10">Candidate specializations</text>
+  <text x="1120" y="738" fill="#66D9E8" font-size="11">Sales · Support · Engineering · Security</text>
+  <text x="1104" y="800" fill="#678198" font-size="9">MODEL VERSION  /  PROPOSED V1</text>
+</g>
+</svg>
