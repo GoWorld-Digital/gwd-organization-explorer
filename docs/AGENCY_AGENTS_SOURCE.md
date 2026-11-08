@@ -1,7 +1,7 @@
 # Agency Agents — Source, Provenance and Use
 
 Source repository: https://github.com/msitarzewski/agency-agents  
-Recorded source tree commit: `b859515c`  
+Recorded source tree commit: `b859515c813efcfc4755d3471dd9e7686c7706d`  
 Snapshot date: 8 Nov 2026  
 Observed upstream licence: MIT; verify exact licence file and retain all notices before redistribution.
 
