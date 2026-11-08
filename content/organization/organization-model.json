@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "organization": {
+    "id": "gwd",
+    "name": "GoWorld Digital",
+    "shortName": "GWD",
+    "modelStatus": "proposed",
+    "publicDomain": "explore.goworld.digital",
+    "disclaimer": "Proposed organizational model; this does not assert legal constitution, staffing or operational deployment."
+  },
+  "layers": [
+    {"id":"governance","label":"Governance","rank":1,"status":"proposed","purpose":"Strategic direction, oversight, capital principles, risk and accountability.","units":[
+      {"id":"board","label":"Board of Administration","status":"proposed","kind":"governance"},
+      {"id":"advisory-council","label":"Advisory / Strategic Council","status":"proposed","kind":"advisory"}
+    ]},
+    {"id":"executive","label":"Executive Leadership","rank":2,"status":"proposed","purpose":"Coordinate strategy, priorities, performance and operational authority.","units":[
+      {"id":"ceo-direction","label":"CEO & Executive Direction","status":"proposed","kind":"executive"},
+      {"id":"ai-operations","label":"AI Operations / Ops Core","status":"design-principle","kind":"coordination","note":"Intended control plane, not the public Explorer and not assumed to be in production."}
+    ]},
+    {"id":"shared-services","label":"Shared Services","rank":3,"status":"proposed","purpose":"Transversal capabilities serving multiple business units.","units":[
+      {"id":"strategy-intelligence","label":"Strategy & Intelligence","economicType":"cost-centre"},
+      {"id":"finance-admin","label":"Finance & Administration","economicType":"cost-centre"},
+      {"id":"people-agent-ops","label":"People & Agent Operations","economicType":"cost-centre"},
+      {"id":"ai-platform-engineering","label":"AI Platform & Engineering","economicType":"cost-centre"},
+      {"id":"legal-risk-compliance","label":"Legal, Risk & Compliance","economicType":"cost-centre"},
+      {"id":"marketing-comms","label":"Marketing & Communications","economicType":"cost-centre-or-allocated-service"},
+      {"id":"product-innovation","label":"Product & Innovation","economicType":"cost-centre-or-allocated-service"},
+      {"id":"security-data-governance","label":"Security & Data Governance","economicType":"cost-centre"}
+    ]},
+    {"id":"business-units","label":"Business Units","rank":4,"status":"proposed","purpose":"Own customer outcomes, products, services and unit economics.","units":[
+      {"id":"academy","label":"GWD Academy","economicType":"profit-centre-candidate","status":"proposed"},
+      {"id":"media-growth","label":"GWD Media Factory & Growth","economicType":"profit-centre-candidate","status":"proposed"},
+      {"id":"sales-customer-ops","label":"GWD Sales & Customer Operations","economicType":"profit-centre-candidate","status":"proposed"},
+      {"id":"ventures","label":"GWD Ventures & Venture Studio","economicType":"investment-centre-candidate","status":"proposed"}
+    ]},
+    {"id":"labs-innovation","label":"Labs & Innovation","rank":5,"status":"proposed","purpose":"Research, experimentation, prototypes and validation.","units":[
+      {"id":"ai-research-lab","label":"AI Research & Systems Lab","status":"proposed"},
+      {"id":"agentic-architecture-lab","label":"Agentic Architecture Lab","status":"proposed"},
+      {"id":"data-knowledge-lab","label":"Data & Knowledge Lab","status":"proposed"},
+      {"id":"human-ai-interaction-lab","label":"Human-AI Interaction Lab","status":"proposed"},
+      {"id":"venture-experimentation-lab","label":"Venture Experimentation Lab","status":"proposed"}
+    ]}
+  ],
+  "economicModelDisclaimer": "Centre types are proposed classifications. No real revenue, cost, budget, valuation or return is represented."
+}
