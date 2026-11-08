@@ -84,6 +84,18 @@ prompts/                     execution prompts by agent and phase
 .claude/skills/              Claude Code skill mirrors
 ```
 
+
+
+## Additional implementation resources
+- [Financial simulation model](docs/FINANCIAL_SIMULATION_MODEL.md)
+- [Accessibility and performance gates](docs/QUALITY_ACCESSIBILITY_PERFORMANCE.md)
+- [Visual mockups](docs/MOCKUPS.md)
+- [AI agent workflow and skills](docs/AI_AGENT_WORKFLOW.md)
+- [Agent skill setup](docs/AGENT_SKILLS.md)
+- [Work coordination prompt](prompts/WORK_COORDINATION_PROMPT.md)
+- [Codex implementation prompt](prompts/CODEX_IMPLEMENTATION_PROMPT.md)
+- [Antigravity visual prompt](prompts/ANTIGRAVITY_VISUAL_PROMPT.md)
+
 ## First engineering objective
 
 Build a **high-fidelity vertical slice**, not a broad but shallow app:
