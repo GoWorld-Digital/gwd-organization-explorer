@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "source": {
     "repository": "https://github.com/msitarzewski/agency-agents",
-    "commit": "b859515c",
+    "commit": "b859515c813efcfc4755d3471dd9e7686c7706d",
     "snapshotDate": "2026-11-08",
     "license": "MIT - re-check exact upstream licence text before redistributing profile files",
     "profileCount": 283,
