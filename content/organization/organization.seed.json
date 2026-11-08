@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "modelId": "gwd-proposed-ai-native-v1",
+  "title": "GWD AI-Native Organization",
+  "status": "proposed",
+  "asOf": "2026-11-08",
+  "notice": "Proposed organizational model for exploration. This file is not a legal or operational register.",
+  "layers": [
+    {"id":"governance","name":"Governance","order":1,"description":"Purpose, stewardship, strategy, capital and risk oversight."},
+    {"id":"executive","name":"Executive Leadership","order":2,"description":"Direction, coordination, priorities and accountability."},
+    {"id":"shared-services","name":"Transversal Shared Services","order":3,"description":"Common capabilities serving multiple business units."},
+    {"id":"business-units","name":"Business Units & Ventures","order":4,"description":"Offers, delivery, customers, revenue and portfolio opportunities."},
+    {"id":"labs","name":"Labs & Innovation","order":5,"description":"Research, prototypes, validation and future ventures."}
+  ],
+  "nodes": [
+    {"id":"board","name":"Board of Administration","type":"governance","layer":"governance","status":"proposed","mandate":"Purpose, strategy, capital allocation, risk oversight and executive accountability."},
+    {"id":"advisory-council","name":"Advisory & Strategic Council","type":"governance","layer":"governance","status":"proposed","mandate":"Independent advice, domain expertise, research, partnerships and strategic challenge."},
+    {"id":"ceo","name":"CEO & Executive Direction","type":"executive","layer":"executive","status":"proposed","mandate":"Translate purpose into strategy, priorities, resource allocation and performance expectations."},
+    {"id":"ai-operations","name":"Executive Coordination & AI Operations","type":"executive","layer":"executive","status":"proposed","mandate":"Coordinate missions, dependencies, approvals, evidence and operating rhythm. Not a live Ops Core claim."},
+
+    {"id":"strategy-intelligence","name":"Strategy, Research & Intelligence","type":"shared_service","layer":"shared-services","economicRole":"cost-centre-candidate","status":"proposed","mandate":"Strategic analysis, market intelligence, foresight and decision support."},
+    {"id":"finance-performance","name":"Finance, Administration & Performance","type":"shared_service","layer":"shared-services","economicRole":"cost-centre-candidate","status":"proposed","mandate":"Financial control, administration, management reporting and performance measurement."},
+    {"id":"people-agent-ops","name":"People, Talent & Agent Operations","type":"shared_service","layer":"shared-services","economicRole":"cost-centre-candidate","status":"proposed","mandate":"Human roles, talent, agent lifecycle, capability stewardship and training."},
+    {"id":"ai-platform-engineering","name":"AI Platform, Engineering & Automation","type":"shared_service","layer":"shared-services","economicRole":"cost-centre-candidate","status":"proposed","mandate":"AI architecture, software engineering, integrations, automation and platform reliability."},
+    {"id":"legal-risk-compliance","name":"Legal, Risk, Compliance & Governance","type":"shared_service","layer":"shared-services","economicRole":"cost-centre-candidate","status":"proposed","mandate":"Legal review, compliance, contracts, risk controls and policy."},
+    {"id":"marketing-brand","name":"Marketing, Brand & Communications","type":"shared_service","layer":"shared-services","economicRole":"cost-centre-candidate","status":"proposed","mandate":"Institutional brand, communications, demand generation and shared marketing systems."},
+    {"id":"product-design","name":"Product, Design & Experience","type":"shared_service","layer":"shared-services","economicRole":"cost-centre-candidate","status":"proposed","mandate":"Product strategy, research, design systems, UX and quality of experience."},
+    {"id":"security-data","name":"Security, Data Governance & Quality","type":"shared_service","layer":"shared-services","economicRole":"cost-centre-candidate","status":"proposed","mandate":"Security architecture, privacy, data access, quality and assurance."},
+
+    {"id":"academy","name":"GWD Academy","type":"business_unit","layer":"business-units","economicRole":"candidate-profit-centre","status":"proposed","mandate":"Education, training, learning experiences, communities and certification."},
+    {"id":"media-factory-growth","name":"GWD Media Factory & Growth","type":"business_unit","layer":"business-units","economicRole":"candidate-profit-centre","status":"proposed","mandate":"Content production, campaigns, media distribution and growth services."},
+    {"id":"sales-customer-ops","name":"GWD Sales & Customer Operations","type":"business_unit","layer":"business-units","economicRole":"candidate-profit-centre","status":"proposed","mandate":"Sales operations, CRM, customer support, service coordination and customer success."},
+    {"id":"ventures-studio","name":"GWD Ventures & Venture Studio","type":"venture_portfolio","layer":"business-units","economicRole":"candidate-investment-centre","status":"proposed","mandate":"Opportunity development, venture design, pilots, partnerships and potential spin-outs."},
+
+    {"id":"ai-systems-lab","name":"AI & Systems Lab","type":"lab","layer":"labs","economicRole":"innovation-cost-centre-candidate","status":"proposed","mandate":"Research in agentic systems, orchestration, memory, evaluation and applied AI."},
+    {"id":"organization-design-lab","name":"Organization Design Lab","type":"lab","layer":"labs","economicRole":"innovation-cost-centre-candidate","status":"proposed","mandate":"Experiment with AI-native operating models, human-agent collaboration and decision rights."},
+    {"id":"venture-lab","name":"Venture Lab","type":"lab","layer":"labs","economicRole":"innovation-cost-centre-candidate","status":"proposed","mandate":"Discover opportunities, validate problems, prototype and prepare future ventures."}
+  ],
+  "relationships": [
+    {"id":"r1","from":"ceo","to":"board","type":"reports_to","status":"proposed"},
+    {"id":"r2","from":"advisory-council","to":"board","type":"advises","status":"proposed"},
+    {"id":"r3","from":"ai-operations","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r4","from":"strategy-intelligence","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r5","from":"finance-performance","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r6","from":"people-agent-ops","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r7","from":"ai-platform-engineering","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r8","from":"legal-risk-compliance","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r9","from":"marketing-brand","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r10","from":"product-design","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r11","from":"security-data","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r12","from":"academy","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r13","from":"media-factory-growth","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r14","from":"sales-customer-ops","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r15","from":"ventures-studio","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r16","from":"ai-systems-lab","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r17","from":"organization-design-lab","to":"ceo","type":"reports_to","status":"proposed"},
+    {"id":"r18","from":"venture-lab","to":"ventures-studio","type":"reports_to","status":"proposed"},
+
+    {"id":"s1","from":"strategy-intelligence","to":"academy","type":"provides_service_to","status":"proposed"},
+    {"id":"s2","from":"strategy-intelligence","to":"media-factory-growth","type":"provides_service_to","status":"proposed"},
+    {"id":"s3","from":"finance-performance","to":"academy","type":"provides_service_to","status":"proposed"},
+    {"id":"s4","from":"finance-performance","to":"ventures-studio","type":"provides_service_to","status":"proposed"},
+    {"id":"s5","from":"ai-platform-engineering","to":"academy","type":"provides_service_to","status":"proposed"},
+    {"id":"s6","from":"ai-platform-engineering","to":"sales-customer-ops","type":"provides_service_to","status":"proposed"},
+    {"id":"s7","from":"marketing-brand","to":"academy","type":"provides_service_to","status":"proposed"},
+    {"id":"s8","from":"marketing-brand","to":"media-factory-growth","type":"provides_service_to","status":"proposed"},
+    {"id":"s9","from":"legal-risk-compliance","to":"ventures-studio","type":"provides_service_to","status":"proposed"},
+    {"id":"s10","from":"security-data","to":"sales-customer-ops","type":"provides_service_to","status":"proposed"}
+  ]
+}
