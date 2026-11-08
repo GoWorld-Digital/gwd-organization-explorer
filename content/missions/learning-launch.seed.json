@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "mission-learning-product-launch",
+  "title": "Launch a digital learning product in two markets",
+  "scenarioStatus": "illustrative",
+  "badge": "Illustrative simulation — not a live GWD operation",
+  "objective": "Design and launch a new digital learning offer in two selected markets.",
+  "assumptions": [
+    "The product offer and target markets are hypothetical.",
+    "No real customer data, revenue, budget or team capacity is used.",
+    "Candidate capabilities are selected from a source catalogue and require evaluation before deployment."
+  ],
+  "participatingUnits": [
+    "academy",
+    "media-factory-growth",
+    "sales-customer-ops"
+  ],
+  "sharedServices": [
+    "strategy-intelligence",
+    "finance-performance",
+    "legal-risk-compliance",
+    "marketing-brand",
+    "product-design",
+    "ai-platform-engineering",
+    "security-data"
+  ],
+  "candidateCapabilityDivisions": [
+    "academic",
+    "product",
+    "design",
+    "marketing",
+    "sales",
+    "finance",
+    "legal-risk-compliance",
+    "engineering",
+    "testing"
+  ],
+  "steps": [
+    {"id":"step-01","title":"Validate market and audience","ownerUnit":"academy","support":["strategy-intelligence","product-design"],"humanGate":"Approve target segment and learning problem."},
+    {"id":"step-02","title":"Design offer and learning journey","ownerUnit":"academy","support":["product-design","ai-platform-engineering"],"humanGate":"Approve offer, curriculum and learner promise."},
+    {"id":"step-03","title":"Prepare launch content","ownerUnit":"media-factory-growth","support":["marketing-brand"],"humanGate":"Approve claims, creative and public messaging."},
+    {"id":"step-04","title":"Configure sales and support journey","ownerUnit":"sales-customer-ops","support":["ai-platform-engineering","security-data"],"humanGate":"Approve data collection, consent and customer process."},
+    {"id":"step-05","title":"Review economics and risk","ownerUnit":"academy","support":["finance-performance","legal-risk-compliance"],"humanGate":"Approve budget, legal terms and launch authorization."},
+    {"id":"step-06","title":"Launch and evaluate","ownerUnit":"academy","support":["media-factory-growth","sales-customer-ops"],"humanGate":"Human launch approval and post-launch review."}
+  ],
+  "economics": {
+    "mode": "illustrative",
+    "values": [],
+    "notice": "No revenue, margin, budget, conversion or customer figures are assumed. Values may be entered later by a visitor and must remain labelled as scenario inputs."
+  }
+}
