@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "status": "source_snapshot",
+  "source": {
+    "repository": "https://github.com/msitarzewski/agency-agents",
+    "commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+    "tree": "94d97cfd0c3731995a3b22ae96e2a88a004482a5",
+    "commitDate": "2026-11-06T01:58:56Z",
+    "inspectedAt": "2026-11-08",
+    "countMeaning": "Markdown agent profile files in the 18 source divisions; not deployed GWD agents."
+  },
+  "totalProfiles": 283,
+  "divisions": [
+    {"id":"academic","name":"Academic","profileCount":6},
+    {"id":"design","name":"Design","profileCount":10},
+    {"id":"engineering","name":"Engineering","profileCount":66},
+    {"id":"finance","name":"Finance","profileCount":5},
+    {"id":"game-development","name":"Game Development","profileCount":21},
+    {"id":"gis","name":"GIS","profileCount":13},
+    {"id":"healthcare","name":"Healthcare","profileCount":3},
+    {"id":"marketing","name":"Marketing","profileCount":37},
+    {"id":"paid-media","name":"Paid Media","profileCount":7},
+    {"id":"product","name":"Product","profileCount":6},
+    {"id":"project-management","name":"Project Management","profileCount":7},
+    {"id":"research","name":"Research","profileCount":1},
+    {"id":"sales","name":"Sales","profileCount":9},
+    {"id":"security","name":"Security","profileCount":12},
+    {"id":"spatial-computing","name":"Spatial Computing","profileCount":6},
+    {"id":"specialized","name":"Specialized","profileCount":59},
+    {"id":"support","name":"Support","profileCount":6},
+    {"id":"testing","name":"Testing","profileCount":9}
+  ],
+  "displayLabel": "283 source profiles catalogued",
+  "notice": "These are upstream profiles. They are not represented as installed, adapted, tested or active GWD agents."
+}
