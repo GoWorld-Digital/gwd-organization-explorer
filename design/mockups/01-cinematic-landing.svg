@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">GWD AI-Native Organization Explorer — cinematic landing wireframe</title>
+<desc id="desc">Dark institutional landing artboard with product statement, navigation and a five-layer spatial organization architecture with a surrounding capability field.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050913"/><stop offset=".55" stop-color="#09182A"/><stop offset="1" stop-color="#07101D"/></linearGradient>
+  <radialGradient id="halo"><stop stop-color="#2D8DAB" stop-opacity=".27"/><stop offset="1" stop-color="#2D8DAB" stop-opacity="0"/></radialGradient>
+  <linearGradient id="layer" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#18344F"/><stop offset="1" stop-color="#0D1B2B"/></linearGradient>
+  <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#66D9E8"/><stop offset="1" stop-color="#5C86FF"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft"><feGaussianBlur stdDeviation="28"/></filter>
+</defs>
+<rect width="1440" height="900" fill="url(#bg)"/>
+<circle cx="1050" cy="470" r="430" fill="url(#halo)"/>
+<g opacity=".10" stroke="#89A9C6" stroke-width="1">
+  <path d="M0 130H1440M0 220H1440M0 310H1440M0 400H1440M0 490H1440M0 580H1440M0 670H1440M0 760H1440"/>
+  <path d="M120 0V900M240 0V900M360 0V900M480 0V900M600 0V900M720 0V900M840 0V900M960 0V900M1080 0V900M1200 0V900M1320 0V900"/>
+</g>
+<g font-family="Arial,Helvetica,sans-serif">
+  <g transform="translate(78 48)">
+    <path d="M0 4L20 0L40 4V24L20 31L0 24Z" fill="none" stroke="#66D9E8" stroke-width="1.8"/>
+    <path d="M9 9L20 6L31 9V20L20 24L9 20Z" fill="#66D9E8" fill-opacity=".2"/>
+    <text x="54" y="17" fill="#F2F6FA" font-size="19" font-weight="700" letter-spacing="2.4">GWD</text>
+    <text x="54" y="34" fill="#8EA4BA" font-size="9" letter-spacing="2.2">GO WORLD DIGITAL</text>
+  </g>
+  <g transform="translate(650 59)" fill="#9AABC0" font-size="12" letter-spacing="1.3">
+    <text x="0" y="0">ORGANIZATION</text><text x="155" y="0">CAPABILITIES</text><text x="294" y="0">SIMULATOR</text><text x="425" y="0">METHODOLOGY</text>
+  </g>
+  <rect x="1320" y="36" width="68" height="32" rx="16" fill="none" stroke="#55728A"/>
+  <text x="1354" y="56" text-anchor="middle" fill="#D7E2EB" font-size="10" letter-spacing="1">EN / PT</text>
+  <path d="M78 94H1362" stroke="#294158" stroke-width="1"/>
+  <text x="98" y="198" fill="#66D9E8" font-size="11" letter-spacing="3.2">A NEW ORGANIZATIONAL ARCHITECTURE</text>
+  <text x="96" y="286" fill="#F2F6FA" font-size="58" font-weight="700" letter-spacing="-2.2">The organization</text>
+  <text x="96" y="354" fill="#F2F6FA" font-size="58" font-weight="700" letter-spacing="-2.2">is the intelligence.</text>
+  <rect x="98" y="390" width="70" height="2" fill="url(#cyan)"/>
+  <text x="98" y="445" fill="#B2C1D0" font-size="18">Explore an AI-Native architecture built around</text>
+  <text x="98" y="473" fill="#B2C1D0" font-size="18">accountable human direction, shared intelligence</text>
+  <text x="98" y="501" fill="#B2C1D0" font-size="18">and adaptive business units.</text>
+  <rect x="98" y="556" width="214" height="54" rx="4" fill="url(#cyan)"/>
+  <text x="123" y="589" fill="#06111E" font-size="12" font-weight="700" letter-spacing="1.1">EXPLORE THE SYSTEM  ↗</text>
+  <text x="98" y="653" fill="#8296AA" font-size="11" letter-spacing="1.4">PROPOSED ORGANIZATIONAL MODEL</text>
+  <text x="98" y="677" fill="#61788E" font-size="10">A living map of governance, capabilities and value creation.</text>
+  <text x="800" y="156" fill="#8DA6BD" font-size="10" letter-spacing="2">FIVE-LAYER ARCHITECTURE</text>
+  <text x="800" y="175" fill="#5F7B94" font-size="9">SELECT A LAYER TO EXPLORE</text>
+</g>
+<g stroke="#66D9E8" stroke-opacity=".22" fill="none">
+  <ellipse cx="1054" cy="490" rx="355" ry="114" stroke-dasharray="2 8"/>
+  <ellipse cx="1054" cy="490" rx="294" ry="94" stroke-dasharray="2 10"/>
+  <path d="M766 475L690 430L650 440M1330 455L1388 410M1267 610L1350 650M800 620L714 674"/>
+</g>
+<g fill="#66D9E8" filter="url(#glow)">
+  <circle cx="690" cy="430" r="3"/><circle cx="650" cy="440" r="2"/><circle cx="1388" cy="410" r="3"/><circle cx="1350" cy="650" r="2"/><circle cx="714" cy="674" r="2"/>
+</g>
+<g transform="translate(770 205)">
+  <ellipse cx="286" cy="456" rx="280" ry="44" fill="#020812" opacity=".75" filter="url(#soft)"/>
+  <g>
+    <path d="M82 290L287 248L485 294L282 341Z" fill="#1A3853" stroke="#66D9E8" stroke-opacity=".65"/>
+    <path d="M82 290V320L282 368V341Z" fill="#0B1C2E" stroke="#35536B"/>
+    <path d="M282 341V368L485 322V294Z" fill="#10273D" stroke="#35536B"/>
+    <path d="M82 290L287 248L485 294L282 341Z" fill="url(#layer)" opacity=".9"/>
+    <g fill="#CFE3EE" font-size="10"><text x="282" y="295" text-anchor="middle">GOVERNANCE</text></g>
+    <circle cx="286" cy="289" r="3" fill="#C9A96E"/>
+  </g>
+  <g>
+    <path d="M50 352L286 302L522 355L283 411Z" fill="#17344E" stroke="#5C86FF" stroke-opacity=".7"/>
+    <path d="M50 352V382L283 438V411Z" fill="#0A1B2D" stroke="#35536B"/>
+    <path d="M283 411V438L522 384V355Z" fill="#112941" stroke="#35536B"/>
+    <text x="283" y="366" text-anchor="middle" fill="#EAF2F8" font-size="11">EXECUTIVE LEADERSHIP</text>
+    <circle cx="283" cy="359" r="3" fill="#66D9E8"/>
+  </g>
+  <g>
+    <path d="M18 423L284 367L554 427L285 490Z" fill="#15324A" stroke="#66D9E8" stroke-opacity=".7"/>
+    <path d="M18 423V453L285 518V490Z" fill="#09192A" stroke="#35536B"/>
+    <path d="M285 490V518L554 455V427Z" fill="#10263A" stroke="#35536B"/>
+    <text x="285" y="445" text-anchor="middle" fill="#EAF2F8" font-size="11">SHARED SERVICES</text>
+    <g fill="#66D9E8"><circle cx="205" cy="433" r="2"/><circle cx="285" cy="451" r="2"/><circle cx="362" cy="432" r="2"/></g>
+  </g>
+  <g>
+    <path d="M-4 502L285 440L574 505L286 575Z" fill="#16334A" stroke="#66D9E8" stroke-opacity=".72"/>
+    <path d="M-4 502V531L286 604V575Z" fill="#081829" stroke="#35536B"/>
+    <path d="M286 575V604L574 534V505Z" fill="#10263B" stroke="#35536B"/>
+    <text x="285" y="526" text-anchor="middle" fill="#F2F6FA" font-size="11">BUSINESS UNITS &amp; VENTURES</text>
+    <g fill="#C9A96E"><circle cx="179" cy="507" r="3"/><circle cx="285" cy="532" r="3"/><circle cx="390" cy="506" r="3"/></g>
+  </g>
+  <g>
+    <path d="M28 584L285 529L543 587L285 649Z" fill="#10283E" stroke="#5C86FF" stroke-opacity=".7"/>
+    <path d="M28 584V610L285 675V649Z" fill="#071626" stroke="#35536B"/>
+    <path d="M285 649V675L543 613V587Z" fill="#0B2035" stroke="#35536B"/>
+    <text x="285" y="607" text-anchor="middle" fill="#D6E3EF" font-size="11">LABS &amp; INNOVATION</text>
+  </g>
+  <g stroke="#66D9E8" stroke-opacity=".5" stroke-dasharray="3 7" fill="none">
+    <path d="M286 239V154L116 94M286 239V130L480 72M286 440V94L28 40M286 440V67L588 32"/>
+  </g>
+</g>
+<g fill="#92AFC4" font-family="Arial,Helvetica,sans-serif" font-size="9" letter-spacing="1.3">
+  <text x="1190" y="325">18 CAPABILITY DIVISIONS</text>
+  <text x="1190" y="341" fill="#5F7B94">SOURCE CATALOGUE</text>
+  <text x="1190" y="736">283 SOURCE PROFILES</text>
+  <text x="1190" y="752" fill="#5F7B94">NOT ACTIVE GWD AGENTS</text>
+</g>
+<path d="M78 820H1362" stroke="#294158"/>
+<text x="80" y="850" fill="#6C8399" font-family="Arial,Helvetica,sans-serif" font-size="10" letter-spacing="1.4">GWD  /  AI-NATIVE ORGANIZATION EXPLORER</text>
+<text x="1358" y="850" text-anchor="end" fill="#6C8399" font-family="Arial,Helvetica,sans-serif" font-size="10">01 — EXPERIENCE CONCEPT</text>
+</svg>
