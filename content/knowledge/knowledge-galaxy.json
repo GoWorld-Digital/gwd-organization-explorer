@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0.0",
+  "title": "GWD Intelligence & Knowledge Galaxy",
+  "subtitle": "A governed architecture of organizational knowledge, structured vaults, memory layers and capability constellations.",
+  "status": "proposed",
+  "disclaimer": "Visual metaphors of constellations, nodes and synapses illustrate GWD's proposed knowledge architecture. They do not imply biological consciousness, autonomous sentience or live production telemetry. Obsidian is a structured knowledge vault/interface, not the agents' runtime memory engine.",
+  "corePillars": [
+    {
+      "id": "pillar-gbrain",
+      "code": "KB-01",
+      "label": "GBrain · Organizational Memory Layer",
+      "kind": "memory-architecture",
+      "status": "proposed",
+      "color": "#D9A64A",
+      "position3D": [0, 0.3, 0],
+      "summary": "Central governed intelligence and memory architecture that indexes institutional context, decisions, mission outcomes and domain knowledge.",
+      "technicalTruth": "Proposed architectural layer coordinating structured indexing, access-controlled persistence and context governance across GWD.",
+      "naturalParallel": "Long-term cortical memory integration and institutional wisdom.",
+      "connectedUnits": ["ai-operations", "strategy-intelligence", "data-knowledge-lab", "ai-platform-engineering"],
+      "connectedDivisions": ["engineering", "research", "specialized"]
+    },
+    {
+      "id": "pillar-knowledge-hub",
+      "code": "KB-02",
+      "label": "Knowledge Hub · Curated Institutional Corpus",
+      "kind": "knowledge-hub",
+      "status": "proposed",
+      "color": "#55D9E8",
+      "position3D": [-2.2, 0.55, 1.3],
+      "summary": "Curated, human-verified repository of playbooks, policies, domain syntheses, brand standards and approved operational procedures.",
+      "technicalTruth": "Editorial and governance layer ensuring agents and human teams consult verified organizational sources rather than unverified assumptions.",
+      "naturalParallel": "Library of verified human knowledge, standards and cultural canon.",
+      "connectedUnits": ["strategy-intelligence", "people-agent-ops", "product-innovation", "academy"],
+      "connectedDivisions": ["academic", "product", "research", "project-management"]
+    },
+    {
+      "id": "pillar-obsidian-vault",
+      "code": "KB-03",
+      "label": "Obsidian Vault · Structured Knowledge Interface",
+      "kind": "vault-interface",
+      "status": "proposed",
+      "color": "#8C7AE6",
+      "position3D": [-2.6, -0.25, -1.4],
+      "summary": "Markdown-native knowledge vault and graph authoring environment used by humans and workflows to structure interlinked notes, ADRs and domain dossiers.",
+      "technicalTruth": "Obsidian acts as the human-navigable knowledge vault and structured documentation interface — it is NOT, by itself, the runtime memory engine of the agents.",
+      "naturalParallel": "Written notebooks, cartographic atlases and cross-referenced archives.",
+      "connectedUnits": ["data-knowledge-lab", "strategy-intelligence", "human-ai-interaction-lab"],
+      "connectedDivisions": ["research", "design", "gis", "academic"]
+    },
+    {
+      "id": "pillar-knowledge-graph",
+      "code": "KB-04",
+      "label": "Knowledge Graph · Entity & Capability Topology",
+      "kind": "knowledge-graph",
+      "status": "proposed",
+      "color": "#168DFF",
+      "position3D": [2.3, 0.5, -1.2],
+      "summary": "Typed network of relationships linking organizational units, capability profiles, documents, missions, risks and domain concepts.",
+      "technicalTruth": "Explicit graph relationships (reports_to, advises, provides_service_to, capability_supports and semantic topic links) enabling traceable traversal.",
+      "naturalParallel": "Synaptic pathways associating concepts, causes and relationships.",
+      "connectedUnits": ["data-knowledge-lab", "ai-research-lab", "strategy-intelligence"],
+      "connectedDivisions": ["engineering", "gis", "research", "spatial-computing"]
+    },
+    {
+      "id": "pillar-working-memory",
+      "code": "KB-05",
+      "label": "Working Memory · Ephemeral Task Context",
+      "kind": "working-memory",
+      "status": "proposed",
+      "color": "#55D9E8",
+      "position3D": [2.5, -0.3, 1.5],
+      "summary": "Short-lived operational context window scoped to a single bounded mission step, task execution or human-supervised session.",
+      "technicalTruth": "Ephemeral session state holding active instructions, step inputs and tool outputs; cleared or summarized upon gate completion.",
+      "naturalParallel": "Prefrontal working attention focused on an immediate task.",
+      "connectedUnits": ["agentic-architecture-lab", "ai-operations", "ai-platform-engineering"],
+      "connectedDivisions": ["engineering", "project-management", "testing"]
+    },
+    {
+      "id": "pillar-persistent-memory",
+      "code": "KB-06",
+      "label": "Persistent Memory · Governed Durable State",
+      "kind": "persistent-memory",
+      "status": "proposed",
+      "color": "#D9A64A",
+      "position3D": [0.2, -0.75, 2.6],
+      "summary": "Durable retained context subject to strict data governance, privacy rules, retention policies and human audit.",
+      "technicalTruth": "Access-controlled state store where only verified, policy-compliant lessons and artifacts are promoted after human or quality review.",
+      "naturalParallel": "Consolidated long-term episodic and procedural memory.",
+      "connectedUnits": ["security-data-governance", "legal-risk-compliance", "ai-platform-engineering"],
+      "connectedDivisions": ["security", "engineering", "finance"]
+    },
+    {
+      "id": "pillar-smart-retrieval",
+      "code": "KB-07",
+      "label": "Smart Retrieval · Context Supply & Provenance",
+      "kind": "retrieval-engine",
+      "status": "proposed",
+      "color": "#67E8D2",
+      "position3D": [-0.1, 0.85, -2.5],
+      "summary": "Mechanisms that locate, rank and supply relevant, provenance-tagged context from GBrain, Knowledge Hub and Vaults to agents and teams.",
+      "technicalTruth": "Hybrid lexical, graph and vector retrieval pipelines that attach source citations and confidence boundaries to every supplied context block.",
+      "naturalParallel": "Associative recall bringing the right knowledge to mind at the right moment.",
+      "connectedUnits": ["data-knowledge-lab", "ai-research-lab", "ai-platform-engineering"],
+      "connectedDivisions": ["research", "engineering", "testing", "support"]
+    },
+    {
+      "id": "pillar-agent-identity",
+      "code": "KB-08",
+      "label": "Agent Identity & Context · Operational Soul",
+      "kind": "agent-identity",
+      "status": "catalogued",
+      "color": "#F4CF8E",
+      "position3D": [0.1, -0.85, -2.4],
+      "summary": "Structured role definition, domain specialization, operating rules, tool boundaries and escalation requirements for each catalogued profile.",
+      "technicalTruth": "Explicit system specification and role charter (283 source profiles across 18 divisions) — operational identity, never biological consciousness.",
+      "naturalParallel": "Professional vocation, ethical charter and specialized craft.",
+      "connectedUnits": ["people-agent-ops", "agentic-architecture-lab", "human-ai-interaction-lab"],
+      "connectedDivisions": ["specialized", "project-management", "design", "academic"]
+    }
+  ],
+  "links": [
+    {
+      "id": "klink-vault-hub",
+      "from": "pillar-obsidian-vault",
+      "to": "pillar-knowledge-hub",
+      "label": "Curates structured Markdown dossiers into",
+      "status": "proposed"
+    },
+    {
+      "id": "klink-hub-gbrain",
+      "from": "pillar-knowledge-hub",
+      "to": "pillar-gbrain",
+      "label": "Feeds verified institutional canon into",
+      "status": "proposed"
+    },
+    {
+      "id": "klink-graph-gbrain",
+      "from": "pillar-knowledge-graph",
+      "to": "pillar-gbrain",
+      "label": "Maps entity & capability topology within",
+      "status": "proposed"
+    },
+    {
+      "id": "klink-gbrain-retrieval",
+      "from": "pillar-gbrain",
+      "to": "pillar-smart-retrieval",
+      "label": "Indexes provenance-tagged context for",
+      "status": "proposed"
+    },
+    {
+      "id": "klink-retrieval-working",
+      "from": "pillar-smart-retrieval",
+      "to": "pillar-working-memory",
+      "label": "Supplies bounded task context into",
+      "status": "proposed"
+    },
+    {
+      "id": "klink-identity-working",
+      "from": "pillar-agent-identity",
+      "to": "pillar-working-memory",
+      "label": "Defines role charter and guardrails for",
+      "status": "proposed"
+    },
+    {
+      "id": "klink-working-persistent",
+      "from": "pillar-working-memory",
+      "to": "pillar-persistent-memory",
+      "label": "Promotes human-approved outcomes into",
+      "status": "proposed"
+    },
+    {
+      "id": "klink-persistent-gbrain",
+      "from": "pillar-persistent-memory",
+      "to": "pillar-gbrain",
+      "label": "Consolidates governed organizational memory in",
+      "status": "proposed"
+    }
+  ]
+}

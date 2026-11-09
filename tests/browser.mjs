@@ -41,10 +41,36 @@ try {
     () => document.querySelector("canvas")?.width > 300,
   );
   await page.waitForTimeout(1100);
+
+  // Verify Screen A — GWD Genesis Opening (Direction B)
+  await page
+    .getByRole("heading", { name: /THE BIRTH OF AN AI-NATIVE WORLD/i })
+    .waitFor();
+  assert.equal(await page.locator(".territory-dock-card").count(), 6);
   await page.screenshot({ path: out + "/desktop.png" });
+
+  // Open 6-Act Genesis Film stage & verify acts + close
+  await page.getByRole("button", { name: /ENTER THE GENESIS/i }).click();
+  await page
+    .getByRole("heading", { name: /Act 01 — The Void/i })
+    .waitFor();
+  assert.equal(await page.locator(".film-act-btn").count(), 6);
+  await page.locator(".film-act-btn").nth(5).click();
+  await page
+    .getByRole("heading", { name: /Act 06 — GoWorld/i })
+    .waitFor();
+  await page.getByRole("button", { name: "Close ×" }).click();
+
+  // Trigger THE PULSE event & verify Dual-World Parallel Lens
+  await page.getByRole("button", { name: /Human Approval Gate Sign-Off/i }).click();
+  await page
+    .getByText(/Cosmic Origin & Human Purpose/i)
+    .waitFor();
 
   // Experience 1: 3D Organization Explorer, skippable intro, layer & unit selection
   const canvas = page.locator("canvas");
+  await canvas.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(300);
   const anchor = page.locator(".callout").filter({ hasText: "Governance" });
   const point = await anchor.evaluate((el) => {
     const rect = el.getBoundingClientRect(),
@@ -86,8 +112,18 @@ try {
   await page.locator(".outline button").nth(1).click();
   await page.getByText("design principle", { exact: true }).waitFor();
 
-  // Experience 2: Agency Agents Source Catalogue (search & filter)
+  // Screen C / Experience 2: Intelligence & Knowledge Galaxy + 18/283 Catalogue
   await page.getByRole("button", { name: "Source catalogue" }).click();
+  await page
+    .getByRole("heading", { name: "GWD Intelligence & Knowledge Galaxy" })
+    .waitFor();
+  assert.equal(await page.locator(".pillar-pill").count(), 8);
+  await page.getByRole("button", { name: "Obsidian Vault", exact: true }).click();
+  await page
+    .getByRole("heading", {
+      name: "Obsidian Vault · Structured Knowledge Interface",
+    })
+    .waitFor();
   assert.equal(await page.locator(".catalog-grid article").count(), 18);
   await page.screenshot({ path: out + "/catalog.png" });
   const searchInput = page.getByRole("searchbox", {
@@ -224,7 +260,7 @@ try {
   assert.equal(await blocked.locator(".outline button").count(), 5);
   assert.deepEqual(errors, []);
   console.log(
-    "PASS all 5 experiences (3D/2D Organization, 18/283 Catalogue search/filter, 3 Missions + Human Gates, Deterministic Business Simulator, 5 Labs + Ventures), context loss, mobile touch and reduced motion",
+    "PASS GWD Genesis Direction B: Screen A (Genesis Opening + 6-Act Film + 6 Territory Dock), Screen B (THE PULSE + Dual-World Lens + 3D/2D Universe), Screen C (Knowledge Galaxy + Obsidian Guardrail + 18/283 Catalogue), 3 Missions + Human Gates, Deterministic Business Simulator, 5 Labs + Ventures, context loss, mobile touch and reduced motion",
   );
 } finally {
   await browser.close();

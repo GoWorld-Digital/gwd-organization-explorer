@@ -5,12 +5,16 @@ import catalog from "../content/agency-agents/divisions.json" with { type: "json
 import missionsModel from "../content/missions/missions-model.json" with { type: "json" };
 import financialModel from "../content/finance/scenarios-model.json" with { type: "json" };
 import designTokens from "../design/tokens.json" with { type: "json" };
+import territoriesModel from "../content/organization/territories-model.json" with { type: "json" };
+import knowledgeGalaxyModel from "../content/knowledge/knowledge-galaxy.json" with { type: "json" };
 import {
   OrganizationModelSchema,
   AgencyAgentsCatalogSchema,
   MissionsModelSchema,
   FinancialScenariosModelSchema,
   DesignTokensSchema,
+  TerritoriesModelSchema,
+  KnowledgeGalaxyModelSchema,
   validateCanonicalDomain,
 } from "../lib/schemas.ts";
 import {
@@ -94,6 +98,8 @@ test("2. Relationship validity: reports_to, advises, provides_service_to and cap
     missionsModel,
     financialModel,
     designTokens,
+    territoriesModel,
+    knowledgeGalaxyModel,
   });
 
   const rels = validated.organization.relationships;
@@ -231,7 +237,9 @@ test("5. Deterministic financial calculations: presets, formulas, boundary clamp
   assert.equal(academyResult.contribution, 144000 - 42000);
   assert.equal(academyResult.illustrativeMargin, 102000 - 48000);
   assert.equal(academyResult.netPositionAfterExperiments, 54000 - 12000);
-  assert.ok(Math.abs(academyResult.contributionMarginRatio - 102000 / 144000) < 1e-9);
+  assert.ok(
+    Math.abs(academyResult.contributionMarginRatio - 102000 / 144000) < 1e-9,
+  );
 
   const venturePreset = parsedFinance.presets.find(
     (p) => p.id === "preset-venture-validation",
@@ -241,6 +249,7 @@ test("5. Deterministic financial calculations: presets, formulas, boundary clamp
     venturePreset.inputs,
     parsedFinance.bounds,
   );
+  assert.equal(ventureResult.status, "illustrative");
   assert.equal(ventureResult.grossRevenue, 0);
   assert.equal(ventureResult.contribution, 0);
   assert.equal(ventureResult.contributionMarginRatio, 0);
@@ -316,9 +325,54 @@ test("6. Human approval gates: every mission step enforces a typed humanGate acr
   }
 });
 
-test("7. Design tokens schema integrity", () => {
+test("7. Design tokens schema integrity (including Visual Bible V1 tokens)", () => {
   const parsed = DesignTokensSchema.parse(designTokens);
+  assert.equal(parsed.colors.void, "#050811");
+  assert.equal(parsed.colors.deepSpace, "#101B30");
+  assert.equal(parsed.colors.genesisGold, "#D9A64A");
+  assert.equal(parsed.colors.digitalBlue, "#168DFF");
+  assert.equal(parsed.colors.pulseCyan, "#55D9E8");
   assert.equal(parsed.colors.abyss, "#07111F");
   assert.equal(parsed.colors.accentCyan, "#67E8D2");
   assert.equal(parsed.layout.gridColumns, 12);
+});
+
+test("8. GWD Genesis Direction B: 6 territories, 6-Act Genesis Film and 5-state THE PULSE model integrity", () => {
+  const parsed = TerritoriesModelSchema.parse(territoriesModel);
+  assert.equal(parsed.creativeDirection, "B");
+  assert.equal(parsed.headline, "THE BIRTH OF AN AI-NATIVE WORLD");
+  assert.equal(parsed.genesisFilm.acts.length, 6);
+  assert.equal(parsed.pulseModel.states.length, 5);
+  assert.equal(parsed.territories.length, 6);
+  assert.deepEqual(
+    parsed.territories.map((t) => t.id),
+    [
+      "genesis-core",
+      "intelligence",
+      "infrastructure",
+      "economy",
+      "frontier",
+      "convergence",
+    ],
+  );
+});
+
+test("9. GWD Intelligence & Knowledge Galaxy: 8 core pillars, Obsidian vault-interface guardrail and referential links", () => {
+  const parsed = KnowledgeGalaxyModelSchema.parse(knowledgeGalaxyModel);
+  assert.equal(parsed.status, "proposed");
+  assert.equal(parsed.corePillars.length, 8);
+  const obsidian = parsed.corePillars.find(
+    (p) => p.id === "pillar-obsidian-vault",
+  );
+  assert.ok(obsidian);
+  assert.equal(obsidian.kind, "vault-interface");
+  assert.ok(obsidian.technicalTruth.includes("NOT, by itself, the runtime memory engine"));
+
+  const badGalaxy = structuredClone(knowledgeGalaxyModel);
+  badGalaxy.corePillars.find((p) => p.id === "pillar-obsidian-vault").kind =
+    "memory-architecture";
+  assert.throws(
+    () => KnowledgeGalaxyModelSchema.parse(badGalaxy),
+    /vault-interface/,
+  );
 });

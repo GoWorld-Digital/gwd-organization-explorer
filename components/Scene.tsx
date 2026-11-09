@@ -9,15 +9,19 @@ import {
   useState,
   type RefObject,
 } from "react";
-import { InstancedMesh, Object3D, Vector3 } from "three";
+import { Group, InstancedMesh, Object3D, Vector3 } from "three";
 import { gsap } from "gsap";
 import {
   divisions,
   layers,
   relationships,
   capabilityMappings,
+  territories,
   yFor,
+  type TerritoryId,
 } from "../lib/model";
+
+export type QualityMode = "ultra" | "balanced" | "lite";
 
 type Props = {
   selected: number | null;
@@ -26,7 +30,11 @@ type Props = {
   selectUnit?: (unitId: string | null) => void;
   selectedDivisionId?: string | null;
   selectDivision?: (divisionId: string | null) => void;
+  selectedTerritoryId?: TerritoryId | null;
+  selectTerritory?: (territoryId: TerritoryId) => void;
   showConnections?: boolean;
+  qualityMode?: QualityMode;
+  pulseActive?: boolean;
   reset: number;
   quiet: boolean;
   fail: () => void;
@@ -34,11 +42,11 @@ type Props = {
 
 const radii = [1.18, 1.48, 1.92, 2.22, 2.48];
 const layerPalette = [
-  { base: "#24485c", plate: "#3d7a8a", active: "#58b7c4", ring: "#67e8d2" },
-  { base: "#233f63", plate: "#3b6598", active: "#5c8ef2", ring: "#6d9dff" },
-  { base: "#26445b", plate: "#426f8f", active: "#5ca4c9", ring: "#7fd8f5" },
-  { base: "#31365e", plate: "#545b94", active: "#7e84d4", ring: "#b59aff" },
-  { base: "#3d392e", plate: "#6b6147", active: "#b3965b", ring: "#e6b978" },
+  { base: "#2c2416", plate: "#7a5b28", active: "#d9a64a", ring: "#f4cf8e" },
+  { base: "#172d4f", plate: "#27528e", active: "#168dff", ring: "#55d9e8" },
+  { base: "#14314a", plate: "#215a80", active: "#39b2d9", ring: "#55d9e8" },
+  { base: "#2a2318", plate: "#6e5529", active: "#d9a64a", ring: "#ffd98e" },
+  { base: "#211f3d", plate: "#473f82", active: "#8c7ae6", ring: "#b59aff" },
 ];
 
 function Repeated({
@@ -69,7 +77,7 @@ function Repeated({
   return (
     <instancedMesh ref={mesh} args={[undefined, undefined, points.length]}>
       <boxGeometry args={[width, height, depth]} />
-      <meshStandardMaterial color={color} roughness={0.33} metalness={0.35} />
+      <meshStandardMaterial color={color} roughness={0.28} metalness={0.48} />
     </instancedMesh>
   );
 }
@@ -81,7 +89,11 @@ function radial(count: number, r: number, y: number) {
   });
 }
 
-function unitWorldPosition(layerIdx: number, unitIdx: number, unitCount: number): [number, number, number] {
+function unitWorldPosition(
+  layerIdx: number,
+  unitIdx: number,
+  unitCount: number,
+): [number, number, number] {
   const r = radii[layerIdx] * 0.56;
   const angle = (unitIdx * 2 * Math.PI) / Math.max(1, unitCount);
   return [Math.sin(angle) * r, yFor(layerIdx) + 0.22, Math.cos(angle) * r];
@@ -91,6 +103,186 @@ function divisionWorldPosition(divIdx: number): [number, number, number] {
   const angle = (divIdx * 2 * Math.PI) / divisions.length;
   const r = 3.25;
   return [Math.sin(angle) * r, -2.72, Math.cos(angle) * r];
+}
+
+function DualWorldsAndPulseBridge({
+  qualityMode = "balanced",
+  pulseActive = false,
+  quiet = false,
+}: {
+  qualityMode?: QualityMode;
+  pulseActive?: boolean;
+  quiet?: boolean;
+}) {
+  const naturalRef = useRef<Group>(null);
+  const digitalRef = useRef<Group>(null);
+  const pulseParticlesRef = useRef<InstancedMesh>(null);
+  const dummy = useMemo(() => new Object3D(), []);
+
+  const particleCount =
+    qualityMode === "ultra" ? 48 : qualityMode === "balanced" ? 28 : 12;
+
+  const arcGoldPoints = useMemo(() => {
+    const pts: [number, number, number][] = [];
+    for (let i = 0; i <= 32; i++) {
+      const u = i / 32;
+      const x = -7.2 + u * 14.4;
+      const y = Math.sin(u * Math.PI) * 2.1 + 0.4;
+      const z = -4.6 + Math.sin(u * Math.PI * 2) * 0.9;
+      pts.push([x, y, z]);
+    }
+    return pts;
+  }, []);
+
+  const arcCyanPoints = useMemo(() => {
+    const pts: [number, number, number][] = [];
+    for (let i = 0; i <= 32; i++) {
+      const u = i / 32;
+      const x = -7.2 + u * 14.4;
+      const y = Math.sin(u * Math.PI) * 1.4 - 0.2;
+      const z = -4.6 - Math.sin(u * Math.PI * 2) * 0.9;
+      pts.push([x, y, z]);
+    }
+    return pts;
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!pulseParticlesRef.current) return;
+    for (let i = 0; i < particleCount; i++) {
+      const u = i / particleCount;
+      const x = -6.8 + u * 13.6;
+      const y = Math.sin(u * Math.PI) * 1.8 + 0.2;
+      const z = -4.4 + Math.cos(u * Math.PI * 2) * 0.6;
+      dummy.position.set(x, y, z);
+      const s = pulseActive ? 1.35 : 0.85;
+      dummy.scale.set(s, s, s);
+      dummy.updateMatrix();
+      pulseParticlesRef.current.setMatrixAt(i, dummy.matrix);
+    }
+    pulseParticlesRef.current.instanceMatrix.needsUpdate = true;
+  }, [particleCount, pulseActive, dummy]);
+
+  useFrame(({ clock }) => {
+    if (quiet) return;
+    const t = clock.getElapsedTime();
+    if (naturalRef.current) {
+      naturalRef.current.rotation.y = t * 0.04;
+    }
+    if (digitalRef.current) {
+      digitalRef.current.rotation.y = -t * 0.05;
+    }
+  });
+
+  return (
+    <group>
+      {/* Left: Natural Universe Planetary Horizon */}
+      <group ref={naturalRef} position={[-7.6, 0.5, -5.2]}>
+        <mesh>
+          <sphereGeometry args={[2.35, 32, 32]} />
+          <meshStandardMaterial
+            color="#102b4c"
+            emissive="#1b3b5c"
+            emissiveIntensity={0.45}
+            roughness={0.55}
+            metalness={0.2}
+          />
+        </mesh>
+        <mesh rotation={[0.35, 0.2, -0.2]}>
+          <ringGeometry args={[2.42, 2.52, 64]} />
+          <meshBasicMaterial color="#d9a64a" />
+        </mesh>
+      </group>
+
+      {/* Right: Digital Universe Network Sphere */}
+      <group ref={digitalRef} position={[7.6, 0.5, -5.2]}>
+        <mesh>
+          <sphereGeometry args={[2.35, 24, 24]} />
+          <meshStandardMaterial
+            color="#091a34"
+            emissive="#168dff"
+            emissiveIntensity={0.55}
+            wireframe
+          />
+        </mesh>
+        <mesh rotation={[-0.35, 0.1, 0.25]}>
+          <ringGeometry args={[2.48, 2.56, 64]} />
+          <meshBasicMaterial color="#55d9e8" />
+        </mesh>
+      </group>
+
+      {/* THE PULSE — Central Golden & Cyan Energy Strands */}
+      <Line
+        points={arcGoldPoints}
+        color={pulseActive ? "#fff1c2" : "#d9a64a"}
+        lineWidth={pulseActive ? 2.4 : 1.5}
+      />
+      <Line
+        points={arcCyanPoints}
+        color="#55d9e8"
+        lineWidth={pulseActive ? 2.0 : 1.2}
+        dashed
+        dashScale={4}
+        dashSize={0.35}
+        gapSize={0.18}
+      />
+
+      <instancedMesh
+        ref={pulseParticlesRef}
+        args={[undefined, undefined, particleCount]}
+      >
+        <sphereGeometry args={[0.055, 8, 8]} />
+        <meshBasicMaterial color={pulseActive ? "#fff4d1" : "#d9a64a"} />
+      </instancedMesh>
+    </group>
+  );
+}
+
+function TerritoryHubs3D({
+  selectedTerritoryId,
+  selectTerritory,
+}: {
+  selectedTerritoryId?: TerritoryId | null;
+  selectTerritory?: (id: TerritoryId) => void;
+}) {
+  return (
+    <group>
+      {territories.map((t) => {
+        const [tx, ty, tz] = t.position3D;
+        const isSelected = selectedTerritoryId === t.id;
+        return (
+          <group
+            key={t.id}
+            position={[tx, ty, tz]}
+            onClick={(e) => {
+              if (e.delta < 5) {
+                e.stopPropagation();
+                selectTerritory?.(t.id);
+              }
+            }}
+          >
+            <mesh position-y={-0.18} rotation-x={-Math.PI / 2}>
+              <ringGeometry
+                args={[isSelected ? 0.56 : 0.44, isSelected ? 0.64 : 0.5, 6]}
+              />
+              <meshBasicMaterial
+                color={isSelected ? "#fff2c6" : t.primaryColor}
+              />
+            </mesh>
+            <mesh>
+              <cylinderGeometry args={[0.22, 0.34, isSelected ? 0.48 : 0.34, 6]} />
+              <meshStandardMaterial
+                color={isSelected ? t.accentColor : t.primaryColor}
+                emissive={t.primaryColor}
+                emissiveIntensity={isSelected ? 0.65 : 0.25}
+                metalness={0.55}
+                roughness={0.28}
+              />
+            </mesh>
+          </group>
+        );
+      })}
+    </group>
+  );
 }
 
 function Plate({
@@ -108,7 +300,7 @@ function Plate({
 }) {
   const r = radii[i];
   const palette = layerPalette[i] ?? layerPalette[0];
-  const accent = active ? "#9bf9df" : palette.ring;
+  const accent = active ? "#fff0c4" : palette.ring;
   const fins = useMemo(() => radial(32, r * 0.73, 0.21), [r]);
   const layerUnits = layers[i].units;
   const unitPositions = useMemo(
@@ -130,24 +322,24 @@ function Plate({
         <cylinderGeometry args={[r, r * 0.92, 0.18, 8]} />
         <meshStandardMaterial
           color={active ? palette.active : palette.base}
-          metalness={0.52}
-          roughness={0.32}
+          metalness={0.58}
+          roughness={0.28}
         />
       </mesh>
       <mesh>
         <cylinderGeometry args={[r, r, 0.085, 8]} />
         <meshStandardMaterial
           color={active ? palette.active : palette.plate}
-          roughness={0.42}
-          metalness={0.4}
+          roughness={0.35}
+          metalness={0.48}
         />
       </mesh>
       <mesh position-y={0.051}>
         <cylinderGeometry args={[r * 0.97, r * 0.97, 0.018, 8]} />
-        <meshStandardMaterial color="#132638" />
+        <meshStandardMaterial color="#091322" />
       </mesh>
       <mesh position-y={0.07} rotation-x={-Math.PI / 2}>
-        <ringGeometry args={[r * 0.825, r * 0.845, 64]} />
+        <ringGeometry args={[r * 0.825, r * 0.848, 64]} />
         <meshBasicMaterial color={accent} />
       </mesh>
       <Repeated
@@ -155,14 +347,14 @@ function Plate({
         width={0.04}
         depth={0.068}
         height={0.28}
-        color="#8ca6b4"
+        color={i === 0 || i === 3 ? "#d9a64a" : "#55d9e8"}
       />
       {layerUnits.map((unit, uIdx) => {
         const [ux, uy, uz, uAngle] = unitPositions[uIdx];
         const isUnitSelected = selectedUnitId === unit.id;
         const w = i === 3 ? r * 0.38 : r * 0.25;
         const d = i === 3 ? r * 0.4 : r * 0.23;
-        const h = isUnitSelected ? 0.54 : i === 3 ? 0.46 : 0.34;
+        const h = isUnitSelected ? 0.56 : i === 3 ? 0.46 : 0.34;
         return (
           <mesh
             key={unit.id}
@@ -180,13 +372,15 @@ function Plate({
             <meshStandardMaterial
               color={
                 isUnitSelected
-                  ? "#9bf9df"
+                  ? "#fff1c2"
                   : active
-                    ? "#7cc4cf"
+                    ? "#55d9e8"
                     : palette.plate
               }
-              roughness={0.32}
-              metalness={0.38}
+              emissive={isUnitSelected ? "#d9a64a" : "#000000"}
+              emissiveIntensity={isUnitSelected ? 0.45 : 0}
+              roughness={0.28}
+              metalness={0.45}
             />
           </mesh>
         );
@@ -195,24 +389,24 @@ function Plate({
         <mesh position-y={0.4}>
           <cylinderGeometry args={[r * 0.79, r * 0.77, 0.07, 32]} />
           <meshStandardMaterial
-            color={active ? "#8dbabf" : "#537892"}
-            metalness={0.3}
-            roughness={0.34}
+            color={active ? "#d9a64a" : "#274b6e"}
+            metalness={0.38}
+            roughness={0.32}
           />
         </mesh>
       )}
       {i < 3 && (
         <mesh position-y={0.45} rotation-x={-Math.PI / 2}>
-          <ringGeometry args={[r * 0.61, r * 0.622, 64]} />
+          <ringGeometry args={[r * 0.61, r * 0.625, 64]} />
           <meshBasicMaterial color={accent} />
         </mesh>
       )}
       <mesh position-y={0.48}>
         <cylinderGeometry args={[r * 0.24, r * 0.34, 0.13, 8]} />
         <meshStandardMaterial
-          color="#9db3bd"
-          metalness={0.45}
-          roughness={0.35}
+          color="#d9a64a"
+          metalness={0.55}
+          roughness={0.3}
         />
       </mesh>
     </group>
@@ -284,10 +478,10 @@ function ConnectionArcs({
       ];
       const color =
         rel.type === "advises"
-          ? "#e6b978"
+          ? "#d9a64a"
           : rel.type === "provides_service_to"
-            ? "#67e8d2"
-            : "#6d9dff";
+            ? "#55d9e8"
+            : "#168dff";
 
       result.push({
         id: rel.id,
@@ -341,7 +535,7 @@ function ConnectionArcs({
           key={line.id}
           points={line.points}
           color={line.color}
-          lineWidth={1.35}
+          lineWidth={1.45}
           dashed={line.dashed}
           dashScale={6}
           dashSize={0.22}
@@ -376,7 +570,11 @@ function World({
   selectUnit,
   selectedDivisionId,
   selectDivision,
+  selectedTerritoryId,
+  selectTerritory,
   showConnections = true,
+  qualityMode = "balanced",
+  pulseActive = false,
   reset,
   quiet,
   fail,
@@ -432,14 +630,14 @@ function World({
     }
     flight.current = gsap.to(frame, {
       t: 1,
-      duration: 0.8,
+      duration: 0.85,
       ease: "power2.inOut",
       onUpdate: update,
     });
     return () => {
       flight.current?.kill();
     };
-  }, [selected, reset, quiet, camera, invalidate]);
+  }, [selected, selectedTerritoryId, reset, quiet, camera, invalidate]);
   useEffect(() => {
     const el = gl.domElement;
     el.setAttribute("tabindex", "0");
@@ -491,16 +689,36 @@ function World({
 
   return (
     <>
-      <color attach="background" args={["#0a1523"]} />
-      <fog attach="fog" args={["#0a1523", 12, 26]} />
-      <ambientLight intensity={1.4} />
-      <directionalLight position={[4, 8, 5]} intensity={2.25} color="#d2e9f4" />
-      <directionalLight position={[-4, 2, -4]} intensity={3.8} color="#648cff" />
-      <gridHelper position-y={-2.9} args={[36, 60, "#28485b", "#182e40"]} />
+      <color attach="background" args={["#050811"]} />
+      <fog attach="fog" args={["#050811", 13, 28]} />
+      <ambientLight intensity={1.45} />
+      <directionalLight position={[4, 8, 5]} intensity={2.4} color="#f5e7c6" />
+      <directionalLight position={[-4, 2, -4]} intensity={3.6} color="#168dff" />
+      <pointLight position={[0, 3.2, 0]} intensity={2.2} color="#d9a64a" />
+      <gridHelper position-y={-2.9} args={[36, 60, "#1c3554", "#0d1b2e"]} />
+
+      {/* Dual-World Spheres + THE PULSE Bridge */}
+      <DualWorldsAndPulseBridge
+        qualityMode={qualityMode}
+        pulseActive={pulseActive}
+        quiet={quiet}
+      />
+
+      {/* 6 Orbital Territory Hubs */}
+      <TerritoryHubs3D
+        selectedTerritoryId={selectedTerritoryId}
+        selectTerritory={selectTerritory}
+      />
+
+      {/* Central Genesis Core Spire & 5 Organizational Layers */}
       <group>
         <mesh>
-          <cylinderGeometry args={[0.07, 0.07, 4.75, 12]} />
-          <meshStandardMaterial color="#759cae" />
+          <cylinderGeometry args={[0.08, 0.08, 4.85, 16]} />
+          <meshStandardMaterial
+            color="#d9a64a"
+            emissive="#d9a64a"
+            emissiveIntensity={0.35}
+          />
         </mesh>
         {layers.map((l, i) => (
           <Plate
@@ -513,12 +731,15 @@ function World({
           />
         ))}
       </group>
+
       <ConnectionArcs
         selected={selected}
         selectedUnitId={selectedUnitId}
         selectedDivisionId={selectedDivisionId}
         showConnections={showConnections}
       />
+
+      {/* 18 Capability Division Constellation Ring */}
       <group>
         {divisions.map((div, idx) => {
           const [dx, dy, dz] = divisionWorldPosition(idx);
@@ -539,17 +760,17 @@ function World({
             >
               <boxGeometry args={[0.12, h, 0.22]} />
               <meshStandardMaterial
-                color={isDivActive ? "#e6b978" : "#67e8d2"}
-                roughness={0.3}
-                metalness={0.4}
+                color={isDivActive ? "#d9a64a" : "#55d9e8"}
+                roughness={0.28}
+                metalness={0.45}
               />
             </mesh>
           );
         })}
       </group>
       <mesh position-y={-2.8} rotation-x={-Math.PI / 2}>
-        <ringGeometry args={[3.22, 3.25, 144]} />
-        <meshBasicMaterial color="#416778" />
+        <ringGeometry args={[3.22, 3.26, 144]} />
+        <meshBasicMaterial color="#168dff" />
       </mesh>
       <OrbitControls
         ref={controls}
@@ -584,14 +805,22 @@ export default function Scene(props: Props) {
         Checking spatial rendering…
       </p>
     );
+
+  const dprRange: [number, number] =
+    props.qualityMode === "ultra"
+      ? [1, 1.75]
+      : props.qualityMode === "lite"
+        ? [1, 1]
+        : [1, 1.4];
+
   return (
     <>
       <Canvas
         aria-label="Five suspended organizational layers"
-        frameloop="demand"
-        dpr={[1, 1.5]}
+        frameloop={props.quiet ? "demand" : "always"}
+        dpr={dprRange}
         camera={{ position: [7.5, 5.4, 9], fov: 40 }}
-        gl={{ antialias: true, alpha: false }}
+        gl={{ antialias: props.qualityMode !== "lite", alpha: false }}
       >
         <World {...props} />
         <LabelPositions labels={labels} />

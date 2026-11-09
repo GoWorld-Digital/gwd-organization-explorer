@@ -1,0 +1,377 @@
+{
+  "schemaVersion": "1.0.0",
+  "project": "GWD Genesis — GoWorld.Digital",
+  "creativeDirection": "B",
+  "headline": "THE BIRTH OF AN AI-NATIVE WORLD",
+  "subheadline": "Two worlds. Different foundations. Connected futures.",
+  "signature": "HELLO, WORLD. GO WORLD.",
+  "workingManifesto": {
+    "status": "working-draft-copy",
+    "pt": "No início, fez-se a luz. Na nossa Genesis, fez-se a ligação. E da ligação nasceu um novo mundo.",
+    "en": "In the beginning, there was light. In our Genesis, there was connection. And from connection, a new world was born.",
+    "editorialNote": "Creative working copy — subject to final editorial and brand approval."
+  },
+  "genesisFilm": {
+    "status": "illustrative",
+    "targetDurationSec": 80,
+    "acts": [
+      {
+        "id": "act-01-void",
+        "order": 1,
+        "motionId": "M01",
+        "title": "The Void",
+        "timeRange": "00:00–00:10",
+        "startSec": 0,
+        "endSec": 10,
+        "visualSummary": "Darkness, stillness and the first point of golden origin light awakening in the void.",
+        "narrativeCaption": "Before structure, there is intention — a single point of origin in the quiet void."
+      },
+      {
+        "id": "act-02-first-light",
+        "order": 2,
+        "motionId": "M01",
+        "title": "The First Light",
+        "timeRange": "00:10–00:22",
+        "startSec": 10,
+        "endSec": 22,
+        "visualSummary": "Controlled cosmic expansion as stars, nebulae and luminous filaments form across deep space.",
+        "narrativeCaption": "Light expands into cosmic order — matter, gravity and the first constellations."
+      },
+      {
+        "id": "act-03-life",
+        "order": 3,
+        "motionId": "M02",
+        "title": "Life",
+        "timeRange": 
+"00:22–00:35",
+        "startSec": 22,
+        "endSec": 35,
+        "visualSummary": "Camera approaches Earth: atmosphere, oceans, organic ecosystems, human cities and biological intelligence.",
+        "narrativeCaption": "In the natural universe, life, society and human purpose emerge on a living planet."
+      },
+      {
+        "id": "act-04-digital-genesis",
+        "order": 4,
+        "motionId": "M03",
+        "title": "Digital Genesis",
+        "timeRange": "00:35–00:48",
+        "startSec": 35,
+        "endSec": 48,
+        "visualSummary": "Matter and signals translate into code, structured information, neural lattices and digital networks.",
+        "narrativeCaption": "A second foundation takes shape — built from information, code, context and networks."
+      },
+      {
+        "id": "act-05-the-world",
+        "order": 5,
+        "motionId": "M04",
+        "title": "The World",
+        "timeRange": "00:48–01:05",
+        "startSec": 48,
+        "endSec": 65,
+        "visualSummary": "THE PULSE crosses the horizon as digital structures, capability constellations and six territories emerge.",
+        "narrativeCaption": "THE PULSE ignites: human governance and digital capability organize into a living ecosystem."
+      },
+      {
+        "id": "act-06-goworld",
+        "order": 6,
+        "motionId": "M06",
+        "title": "GoWorld",
+        "timeRange": "01:05–01:20",
+        "startSec": 65,
+        "endSec": 80,
+        "visualSummary": "Natural and digital worlds align across the golden-cyan bridge as the camera enters the navigable GWD Universe.",
+        "narrativeCaption": "HELLO, WORLD. GO WORLD. Two worlds. Different foundations. Connected futures."
+      }
+    ]
+  },
+  "pulseModel": {
+    "status": "simulated",
+    "disclaimer": "THE PULSE visualizations in this public release are deterministic simulations of organizational signaling, not live GWD Ops Core telemetry.",
+    "states": [
+      {
+        "id": "dormant",
+        "order": 1,
+        "label": "01 · Dormant",
+        "description": "Low-intensity ambient golden/cyan equilibrium across the core and territory rings."
+      },
+      {
+        "id": "initiated",
+        "order": 2,
+        "label": "02 · Initiated",
+        "description": "Origin signal ignites at a governance gate, mission trigger or knowledge node."
+      },
+      {
+        "id": "transmitting",
+        "order": 3,
+        "label": "03 · Transmitting",
+        "description": "Luminous energy packet travels along typed organizational or knowledge pathways."
+      },
+      {
+        "id": "connected",
+        "order": 4,
+        "label": "04 · Connected",
+        "description": "Source and destination nodes synchronize and illuminate their shared capability links."
+      },
+      {
+        "id": "completed",
+        "order": 5,
+        "label": "05 · Completed",
+        "description": "Destination stabilizes, logs provenance and returns to balanced readiness."
+      }
+    ],
+    "events": [
+      {
+        "id": "pulse-mission-dispatch",
+        "label": "Mission Mobilization Signal",
+        "category": "mission",
+        "status": "simulated",
+        "fromTerritoryId": "genesis-core",
+        "toTerritoryId": "convergence",
+        "summary": "Simulates executive direction mobilizing a cross-unit mission workflow with bounded scope."
+      },
+      {
+        "id": "pulse-human-approval",
+        "label": "Human Approval Gate Sign-Off",
+        "category": "governance",
+        "status": "simulated",
+        "fromTerritoryId": "genesis-core",
+        "toTerritoryId": "economy",
+        "summary": "Simulates mandatory human authorization unlocking a legal, financial or launch stage gate."
+      },
+      {
+        "id": "pulse-knowledge-indexing",
+        "label": "GBrain & Vault Knowledge Retrieval",
+        "category": "knowledge",
+        "status": "simulated",
+        "fromTerritoryId": "intelligence",
+        "toTerritoryId": "infrastructure",
+        "summary": "Simulates curated context retrieved from Knowledge Hub / Obsidian Vault into operational working memory."
+      },
+      {
+        "id": "pulse-lab-prototype",
+        "label": "Frontier Lab Validation Handoff",
+        "category": "frontier",
+        "status": "simulated",
+        "fromTerritoryId": "frontier",
+        "toTerritoryId": "economy",
+        "summary": "Simulates a validated Lab prototype advancing toward Venture Studio stage-gate review."
+      }
+    ]
+  },
+  "territories": [
+    {
+      "id": "genesis-core",
+      "code": "01",
+      "name": "THE GENESIS CORE",
+      "shortSubtitle": "Our purpose, principles and vision.",
+      "status": "proposed",
+      "primaryColor": "#D9A64A",
+      "accentColor": "#F4CF8E",
+      "position3D": [0, 0.95, 0],
+      "cameraPosition3D": [0, 3.8, 7.6],
+      "cameraTarget3D": [0, 0.7, 0],
+      "overview": "Origin light, institutional purpose, foundational principles, human governance and executive coordination architecture.",
+      "naturalParallel": {
+        "title": "Cosmic Origin & Human Purpose",
+        "description": "Gravity, foundational physical laws, ethical philosophy and human institutional stewardship that give direction to society."
+      },
+      "digitalArchitecture": {
+        "title": "Governance & Executive Core",
+        "description": "Board of Administration, Advisory / Strategic Council, CEO & Executive Direction and the proposed AI Operations / Ops Core coordination architecture."
+      },
+      "convergencePrinciple": {
+        "title": "Human Purpose Directs Agentic Scale",
+        "description": "Humans define purpose, ethics, risk appetite and irreversible decisions; digital systems execute within transparent, auditable boundaries."
+      },
+      "layerIds": ["governance", "executive"],
+      "unitIds": ["board", "advisory-council", "ceo-direction", "ai-operations"],
+      "divisionIds": ["finance", "security", "academic", "research", "product", "project-management"]
+    },
+    {
+      "id": "intelligence",
+      "code": "02",
+      "name": "THE INTELLIGENCE",
+      "shortSubtitle": "Agents, knowledge and digital minds.",
+      "status": "catalogued",
+      "primaryColor": "#55D9E8",
+      "accentColor": "#168DFF",
+      "position3D": [-4.2, 0.25, -1.6],
+      "cameraPosition3D": [-6.6, 2.9, 3.6],
+      "cameraTarget3D": [-4.2, 0.25, -1.6],
+      "overview": "18 catalogued capability divisions (283 upstream source profiles), People & Agent Operations, GBrain, Knowledge Hub, Obsidian Vaults and Knowledge Graph.",
+      "naturalParallel": {
+        "title": "Brain, Synapses & Human Memory",
+        "description": "Biological neural networks, short-term working focus, long-term semantic memory and specialized human expertise."
+      },
+      "digitalArchitecture": {
+        "title": "Capability Catalogue, GBrain & Knowledge Galaxy",
+        "description": "283 source profiles across 18 divisions, governed by People & Agent Operations and connected to GBrain, Knowledge Hub, Obsidian Vault documentation and contextual retrieval."
+      },
+      "convergencePrinciple": {
+        "title": "Curated Context Without False Consciousness",
+        "description": "Agents do not possess biological consciousness; their effectiveness comes from human-curated instructions, governed memory and structured knowledge graphs."
+      },
+      "layerIds": ["shared-services"],
+      "unitIds": ["people-agent-ops", "strategy-intelligence", "data-knowledge-lab"],
+      "divisionIds": [
+        "academic",
+        "design",
+        "engineering",
+        "finance",
+        "game-development",
+        "gis",
+        "healthcare",
+        "marketing",
+        "paid-media",
+        "product",
+        "project-management",
+        "research",
+        "sales",
+        "security",
+        "spatial-computing",
+        "specialized",
+        "support",
+        "testing"
+      ]
+    },
+    {
+      "id": "infrastructure",
+      "code": "03",
+      "name": "THE INFRASTRUCTURE",
+      "shortSubtitle": "Platforms, data and systems.",
+      "status": "proposed",
+      "primaryColor": "#168DFF",
+      "accentColor": "#55D9E8",
+      "position3D": [-2.7, -0.35, 3.2],
+      "cameraPosition3D": [-4.8, 2.3, 7.8],
+      "cameraTarget3D": [-2.7, -0.35, 3.2],
+      "overview": "The Digital Fabric: transversal shared services, software platforms, APIs, cybersecurity, legal compliance and quality verification.",
+      "naturalParallel": {
+        "title": "Cities, Power Grids & Nervous Pathways",
+        "description": "Physical infrastructure, transport arteries, legal codes and civic utilities that sustain modern civilization."
+      },
+      "digitalArchitecture": {
+        "title": "Layer 3 Shared Services & Platform Engineering",
+        "description": "AI Platform & Engineering, Security & Data Governance, Legal Risk & Compliance, Product & Innovation, Marketing & Comms, Finance & Admin and Strategy & Intelligence."
+      },
+      "convergencePrinciple": {
+        "title": "Resilient Systems Under Human Assurance",
+        "description": "Shared technical and legal infrastructure ensures every business unit and agent workflow operates with security, privacy and cost discipline."
+      },
+      "layerIds": ["shared-services"],
+      "unitIds": [
+        "ai-platform-engineering",
+        "security-data-governance",
+        "legal-risk-compliance",
+        "product-innovation",
+        "strategy-intelligence",
+        "finance-admin",
+        "marketing-comms",
+        "people-agent-ops"
+      ],
+      "divisionIds": ["engineering", "security", "testing", "product", "design", "gis", "finance"]
+    },
+    {
+      "id": "economy",
+      "code": "04",
+      "name": "THE ECONOMY",
+      "shortSubtitle": "Value, products and growth.",
+      "status": "proposed",
+      "primaryColor": "#D9A64A",
+      "accentColor": "#55D9E8",
+      "position3D": [2.7, -0.35, 3.2],
+      "cameraPosition3D": [4.8, 2.3, 7.8],
+      "cameraTarget3D": [2.7, -0.35, 3.2],
+      "overview": "Layer 4 Business Units, cost/profit/investment-centre classifications and the deterministic Business Architecture Simulator.",
+      "naturalParallel": {
+        "title": "Markets, Trade & Value Creation",
+        "description": "Human enterprises, education, media, commerce and capital allocation that transform capability into societal value."
+      },
+      "digitalArchitecture": {
+        "title": "Business Units & Deterministic Unit Economics",
+        "description": "GWD Academy, GWD Media Factory & Growth, GWD Sales & Customer Operations and GWD Ventures & Venture Studio, modelled with transparent cost/margin formulas."
+      },
+      "convergencePrinciple": {
+        "title": "Transparent Unit Economics & Accountable Delivery",
+        "description": "AI-amplified delivery is measured against explicit shared-service allocations, direct costs and human commercial accountability."
+      },
+      "layerIds": ["business-units"],
+      "unitIds": ["academy", "media-growth", "sales-customer-ops", "ventures"],
+      "divisionIds": ["academic", "marketing", "paid-media", "sales", "support", "product", "finance", "game-development"]
+    },
+    {
+      "id": "frontier",
+      "code": "05",
+      "name": "THE FRONTIER",
+      "shortSubtitle": "Innovation, research and new ventures.",
+      "status": "proposed",
+      "primaryColor": "#8C7AE6",
+      "accentColor": "#55D9E8",
+      "position3D": [4.2, 0.25, -1.6],
+      "cameraPosition3D": [6.6, 2.9, 3.6],
+      "cameraTarget3D": [4.2, 0.25, -1.6],
+      "overview": "Layer 5 Research Labs (5 documented Labs) and Venture Studio operating across a 6-stage maturity pipeline from Hypothesis to Venture Proposal.",
+      "naturalParallel": {
+        "title": "Scientific Discovery & Exploration",
+        "description": "Observatories, laboratories and scientific hypotheses pushing the boundaries of human understanding."
+      },
+      "digitalArchitecture": {
+        "title": "Five Proposed Research Labs & Stage-Gated Venture Pipeline",
+        "description": "AI Research & Systems Lab, Agentic Architecture Lab, Data & Knowledge Lab, Human-AI Interaction Lab and Venture Experimentation Lab feeding GWD Ventures."
+      },
+      "convergencePrinciple": {
+        "title": "Disciplined Experimentation Before Scale",
+        "description": "Every research hypothesis and agentic prototype passes through human-governed validation gates before becoming a venture candidate."
+      },
+      "layerIds": ["labs-innovation", "business-units"],
+      "unitIds": [
+        "ai-research-lab",
+        "agentic-architecture-lab",
+        "data-knowledge-lab",
+        "human-ai-interaction-lab",
+        "venture-experimentation-lab",
+        "ventures"
+      ],
+      "divisionIds": ["research", "engineering", "gis", "design", "spatial-computing", "specialized", "healthcare"]
+    },
+    {
+      "id": "convergence",
+      "code": "06",
+      "name": "THE CONVERGENCE",
+      "shortSubtitle": "Humans and AI, together.",
+      "status": "illustrative",
+      "primaryColor": "#55D9E8",
+      "accentColor": "#D9A64A",
+      "position3D": [0, -0.1, -4.1],
+      "cameraPosition3D": [0, 3.1, -8.4],
+      "cameraTarget3D": [0, -0.1, -4.1],
+      "overview": "Human leadership and AI capability collaborating across multi-stage missions with mandatory Human Approval Gates across strategy, legal, financial, security, client and launch decisions.",
+      "naturalParallel": {
+        "title": "Collective Intelligence & Creative Teams",
+        "description": "Human judgment, empathy, ethics and creative leadership uniting diverse specialists around a shared mission."
+      },
+      "digitalArchitecture": {
+        "title": "Supervised Multi-Unit Mission Workflows",
+        "description": "3 deterministic mission scenarios mobilizing Business Units, Shared Services and candidate capability divisions under 14 mandatory Human Approval Gates."
+      },
+      "convergencePrinciple": {
+        "title": "The Third Dimension: Human Direction + AI Amplification",
+        "description": "Neither isolated automation nor unassisted manual work: humans hold authority at every gate while digital workers accelerate research, synthesis and execution."
+      },
+      "layerIds": ["governance", "executive", "shared-services", "business-units", "labs-innovation"],
+      "unitIds": [
+        "ceo-direction",
+        "ai-operations",
+        "academy",
+        "media-growth",
+        "sales-customer-ops",
+        "legal-risk-compliance",
+        "security-data-governance",
+        "finance-admin",
+        "human-ai-interaction-lab",
+        "agentic-architecture-lab"
+      ],
+      "divisionIds": ["project-management", "academic", "marketing", "sales", "security", "finance", "testing"]
+    }
+  ]
+}

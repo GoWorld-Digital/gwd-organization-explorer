@@ -2,7 +2,10 @@ import { z } from "zod";
 
 export const HexSha40Schema = z
   .string()
-  .regex(/^[0-9a-f]{40}$/, "Expected a verified 40-character lowercase hexadecimal Git SHA");
+  .regex(
+    /^[0-9a-f]{40}$/,
+    "Expected a verified 40-character lowercase hexadecimal Git SHA",
+  );
 
 export const UnitStatusSchema = z.enum(["proposed", "design-principle"]);
 
@@ -121,7 +124,10 @@ export const OrganizationModelSchema = z
       "labs-innovation",
     ] as const;
 
-    const unitMap = new Map<string, { unit: z.infer<typeof UnitSchema>; layerId: string }>();
+    const unitMap = new Map<
+      string,
+      { unit: z.infer<typeof UnitSchema>; layerId: string }
+    >();
 
     model.layers.forEach((layer, idx) => {
       if (layer.id !== expectedOrder[idx]) {
@@ -425,6 +431,7 @@ export const DesignTokensSchema = z.object({
   name: z.string().min(1),
   colors: z.record(z.string(), z.string().regex(/^#[0-9A-Fa-f]{6}$/)),
   typography: z.object({
+    display: z.string().min(1).optional(),
     sans: z.string().min(1),
     mono: z.string().min(1),
   }),
@@ -433,6 +440,7 @@ export const DesignTokensSchema = z.object({
     panelMs: z.number().int().positive(),
     focusMs: z.number().int().positive(),
     cameraFlightSec: z.number().positive(),
+    genesisFilmDurationSec: z.number().positive().optional(),
     reducedMotionPolicy: z.string().min(1),
   }),
   layout: z.object({
@@ -442,12 +450,176 @@ export const DesignTokensSchema = z.object({
   }),
 });
 
+export const Vec3Schema = z.tuple([z.number(), z.number(), z.number()]);
+
+export const TerritoryIdSchema = z.enum([
+  "genesis-core",
+  "intelligence",
+  "infrastructure",
+  "economy",
+  "frontier",
+  "convergence",
+]);
+
+export const GenesisActSchema = z.object({
+  id: z.string().min(1),
+  order: z.number().int().min(1).max(6),
+  motionId: z.enum(["M01", "M02", "M03", "M04", "M05", "M06"]),
+  title: z.string().min(2),
+  timeRange: z.string().min(5),
+  startSec: z.number().min(0),
+  endSec: z.number().positive(),
+  visualSummary: z.string().min(15),
+  narrativeCaption: z.string().min(15),
+});
+
+export const PulseStateSchema = z.object({
+  id: z.enum(["dormant", "initiated", "transmitting", "connected", "completed"]),
+  order: z.number().int().min(1).max(5),
+  label: z.string().min(3),
+  description: z.string().min(15),
+});
+
+export const PulseEventSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(5),
+  category: z.enum(["mission", "governance", "knowledge", "frontier"]),
+  status: z.literal("simulated"),
+  fromTerritoryId: TerritoryIdSchema,
+  toTerritoryId: TerritoryIdSchema,
+  summary: z.string().min(15),
+});
+
+export const TerritorySchema = z.object({
+  id: TerritoryIdSchema,
+  code: z.string().regex(/^0[1-6]$/),
+  name: z.string().min(5),
+  shortSubtitle: z.string().min(10),
+  status: z.enum(["proposed", "catalogued", "illustrative"]),
+  primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+  accentColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+  position3D: Vec3Schema,
+  cameraPosition3D: Vec3Schema,
+  cameraTarget3D: Vec3Schema,
+  overview: z.string().min(20),
+  naturalParallel: z.object({
+    title: z.string().min(5),
+    description: z.string().min(15),
+  }),
+  digitalArchitecture: z.object({
+    title: z.string().min(5),
+    description: z.string().min(15),
+  }),
+  convergencePrinciple: z.object({
+    title: z.string().min(5),
+    description: z.string().min(15),
+  }),
+  layerIds: z.array(LayerIdSchema).min(1),
+  unitIds: z.array(z.string().min(1)).min(1),
+  divisionIds: z.array(z.string().min(1)).min(1),
+});
+
+export const TerritoriesModelSchema = z.object({
+  schemaVersion: z.string().min(1),
+  project: z.string().min(5),
+  creativeDirection: z.literal("B"),
+  headline: z.literal("THE BIRTH OF AN AI-NATIVE WORLD"),
+  subheadline: z.literal("Two worlds. Different foundations. Connected futures."),
+  signature: z.literal("HELLO, WORLD. GO WORLD."),
+  workingManifesto: z.object({
+    status: z.literal("working-draft-copy"),
+    pt: z.string().min(20),
+    en: z.string().min(20),
+    editorialNote: z.string().min(15),
+  }),
+  genesisFilm: z.object({
+    status: z.literal("illustrative"),
+    targetDurationSec: z.literal(80),
+    acts: z.array(GenesisActSchema).length(6),
+  }),
+  pulseModel: z.object({
+    status: z.literal("simulated"),
+    disclaimer: z.string().min(20),
+    states: z.array(PulseStateSchema).length(5),
+    events: z.array(PulseEventSchema).min(4),
+  }),
+  territories: z.array(TerritorySchema).length(6),
+});
+
+export const KnowledgePillarSchema = z.object({
+  id: z.string().min(1),
+  code: z.string().min(3),
+  label: z.string().min(5),
+  kind: z.enum([
+    "memory-architecture",
+    "knowledge-hub",
+    "vault-interface",
+    "knowledge-graph",
+    "working-memory",
+    "persistent-memory",
+    "retrieval-engine",
+    "agent-identity",
+  ]),
+  status: z.enum(["proposed", "catalogued"]),
+  color: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+  position3D: Vec3Schema,
+  summary: z.string().min(20),
+  technicalTruth: z.string().min(20),
+  naturalParallel: z.string().min(10),
+  connectedUnits: z.array(z.string().min(1)).min(1),
+  connectedDivisions: z.array(z.string().min(1)).min(1),
+});
+
+export const KnowledgeLinkSchema = z.object({
+  id: z.string().min(1),
+  from: z.string().min(1),
+  to: z.string().min(1),
+  label: z.string().min(5),
+  status: z.literal("proposed"),
+});
+
+export const KnowledgeGalaxyModelSchema = z
+  .object({
+    schemaVersion: z.string().min(1),
+    title: z.string().min(5),
+    subtitle: z.string().min(15),
+    status: z.literal("proposed"),
+    disclaimer: z.string().min(30),
+    corePillars: z.array(KnowledgePillarSchema).min(7),
+    links: z.array(KnowledgeLinkSchema).min(6),
+  })
+  .superRefine((galaxy, ctx) => {
+    const obsidian = galaxy.corePillars.find(
+      (p) => p.id === "pillar-obsidian-vault",
+    );
+    if (!obsidian || obsidian.kind !== "vault-interface") {
+      ctx.addIssue({
+        code: "custom",
+        path: ["corePillars"],
+        message:
+          "Obsidian must be represented accurately as a vault-interface, not as the agent memory engine.",
+      });
+    }
+    const pillarIds = new Set(galaxy.corePillars.map((p) => p.id));
+    for (const link of galaxy.links) {
+      if (!pillarIds.has(link.from) || !pillarIds.has(link.to)) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["links"],
+          message: `Knowledge link ${link.id} references unknown pillar`,
+        });
+      }
+    }
+  });
+
 export function validateCanonicalDomain(input: {
   organizationModel: unknown;
   agencyCatalog: unknown;
   missionsModel: unknown;
   financialModel: unknown;
   designTokens?: unknown;
+  territoriesModel?: unknown;
+  knowledgeGalaxyModel?: unknown;
 }) {
   const organization = OrganizationModelSchema.parse(input.organizationModel);
   const catalog = AgencyAgentsCatalogSchema.parse(input.agencyCatalog);
@@ -455,6 +627,12 @@ export function validateCanonicalDomain(input: {
   const finance = FinancialScenariosModelSchema.parse(input.financialModel);
   const tokens = input.designTokens
     ? DesignTokensSchema.parse(input.designTokens)
+    : undefined;
+  const territories = input.territoriesModel
+    ? TerritoriesModelSchema.parse(input.territoriesModel)
+    : undefined;
+  const knowledgeGalaxy = input.knowledgeGalaxyModel
+    ? KnowledgeGalaxyModelSchema.parse(input.knowledgeGalaxyModel)
     : undefined;
 
   const unitIds = new Set<string>();
@@ -582,5 +760,51 @@ export function validateCanonicalDomain(input: {
     }
   }
 
-  return { organization, catalog, missions, finance, tokens };
+  if (territories) {
+    for (const t of territories.territories) {
+      for (const uId of t.unitIds) {
+        if (!unitIds.has(uId)) {
+          throw new Error(
+            `Territory ${t.id} references unknown GWD unit '${uId}'`,
+          );
+        }
+      }
+      for (const dId of t.divisionIds) {
+        if (!divisionIds.has(dId)) {
+          throw new Error(
+            `Territory ${t.id} references unknown Agency Agents division '${dId}'`,
+          );
+        }
+      }
+    }
+  }
+
+  if (knowledgeGalaxy) {
+    for (const pillar of knowledgeGalaxy.corePillars) {
+      for (const uId of pillar.connectedUnits) {
+        if (!unitIds.has(uId)) {
+          throw new Error(
+            `Knowledge pillar ${pillar.id} references unknown GWD unit '${uId}'`,
+          );
+        }
+      }
+      for (const dId of pillar.connectedDivisions) {
+        if (!divisionIds.has(dId)) {
+          throw new Error(
+            `Knowledge pillar ${pillar.id} references unknown division '${dId}'`,
+          );
+        }
+      }
+    }
+  }
+
+  return {
+    organization,
+    catalog,
+    missions,
+    finance,
+    tokens,
+    territories,
+    knowledgeGalaxy,
+  };
 }

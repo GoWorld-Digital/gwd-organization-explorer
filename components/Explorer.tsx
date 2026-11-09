@@ -12,19 +12,25 @@ import { MotionConfig, motion } from "motion/react";
 import {
   layers,
   relationships,
-  capabilityMappings,
   discrepancyNotes,
   source,
   divisions,
   missions,
   financialModel,
   financialPresets,
+  territories,
+  pulseModel,
   formatStatus,
   getUnitById,
+  getTerritoryById,
   getRelationshipsForUnit,
   calculateScenarioEconomics,
   clampScenarioInputs,
+  type TerritoryId,
 } from "../lib/model";
+import GenesisOpening from "./GenesisOpening";
+import KnowledgeGalaxyView from "./KnowledgeGalaxyView";
+import type { QualityMode } from "./Scene";
 
 const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
@@ -51,7 +57,12 @@ class SceneBoundary extends Component<
   }
 }
 
-type TabId = "organization" | "catalog" | "missions" | "finance" | "ventures";
+export type TabId =
+  | "organization"
+  | "catalog"
+  | "missions"
+  | "finance"
+  | "ventures";
 
 const TAB_ITEMS: { id: TabId; label: string }[] = [
   { id: "organization", label: "Organization" },
@@ -105,21 +116,39 @@ function formatUsd(n: number): string {
   );
 }
 
-export default function Explorer() {
+type ExplorerProps = {
+  initialTab?: TabId;
+  initialTerritoryId?: TerritoryId;
+};
+
+export default function Explorer({
+  initialTab = "organization",
+  initialTerritoryId = "genesis-core",
+}: ExplorerProps = {}) {
   const [selected, select] = useState<number | null>(null);
   const [selectedUnitId, setSelectedUnitId] = useState<string | null>(null);
   const [selectedDivisionId, setSelectedDivisionId] = useState<string | null>(
     null,
   );
+  const [selectedTerritoryId, setSelectedTerritoryId] =
+    useState<TerritoryId>(initialTerritoryId);
   const [showConnections, setShowConnections] = useState(true);
   const [introDismissed, setIntroDismissed] = useState(false);
   const [spatial, setSpatial] = useState(false);
+  const [qualityMode, setQualityMode] = useState<QualityMode>("balanced");
   const [quiet, setQuiet] = useState(true);
   const [error, setError] = useState("");
   const [reset, setReset] = useState(0);
-  const [tab, setTab] = useState<TabId>("organization");
+  const [tab, setTab] = useState<TabId>(initialTab);
 
-  // Experience 2 — Agency Agents Explorer state
+  // THE PULSE Engine state
+  const [activePulseStateIndex, setActivePulseStateIndex] = useState<number>(0);
+  const [activePulseEventId, setActivePulseEventId] = useState<string>(
+    pulseModel.events[0].id,
+  );
+  const [pulseActive, setPulseActive] = useState<boolean>(false);
+
+  // Experience 2 — Agency Agents & Knowledge Galaxy state
   const [catalogQuery, setCatalogQuery] = useState("");
   const [catalogLayerFilter, setCatalogLayerFilter] = useState<string>("all");
   const [focusedDivisionId, setFocusedDivisionId] = useState<string>("academic");
@@ -144,15 +173,48 @@ export default function Explorer() {
     useState<string>("ventures");
 
   const nav = useRef<(HTMLButtonElement | null)[]>([]);
+  const workspaceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const pref = matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => setQuiet(pref.matches);
     sync();
-    setSpatial(matchMedia("(min-width: 900px)").matches);
+    const isDesktop = matchMedia("(min-width: 900px)").matches;
+    setSpatial(isDesktop);
+    setQualityMode(isDesktop ? "balanced" : "lite");
     pref.addEventListener("change", sync);
     return () => pref.removeEventListener("change", sync);
   }, []);
+
+  function triggerPulse(eventId?: string) {
+    if (eventId) setActivePulseEventId(eventId);
+    setPulseActive(true);
+    setActivePulseStateIndex((prev) => (prev + 1) % pulseModel.states.length);
+  }
+
+  function selectTerritory(territoryId: TerritoryId) {
+    setSelectedTerritoryId(territoryId);
+    const t = getTerritoryById(territoryId);
+    if (!t) return;
+    if (territoryId === "genesis-core") select(0);
+    else if (territoryId === "intelligence") select(2);
+    else if (territoryId === "infrastructure") select(2);
+    else if (territoryId === "economy") select(3);
+    else if (territoryId === "frontier") select(4);
+    else if (territoryId === "convergence") select(1);
+    setSelectedUnitId(t.unitIds[0] ?? null);
+    triggerPulse();
+  }
+
+  function enterUniverse(territoryId?: TerritoryId) {
+    if (territoryId) {
+      selectTerritory(territoryId);
+    }
+    setTab("organization");
+    workspaceRef.current?.scrollIntoView({
+      behavior: quiet ? "auto" : "smooth",
+    });
+  }
 
   function selectLayer(index: number | null) {
     select(index);
@@ -209,36 +271,12 @@ export default function Explorer() {
   }
 
   const layer = selected === null ? null : layers[selected];
+  const selectedTerritory =
+    getTerritoryById(selectedTerritoryId) ?? territories[0];
   const selectedUnitEntry = selectedUnitId ? getUnitById(selectedUnitId) : null;
   const selectedUnitRelationships = useMemo(
     () => (selectedUnitId ? getRelationshipsForUnit(selectedUnitId) : []),
     [selectedUnitId],
-  );
-
-  const filteredDivisions = useMemo(() => {
-    const q = catalogQuery.trim().toLowerCase();
-    return divisions.filter((d) => {
-      const matchesQuery =
-        !q ||
-        d.label.toLowerCase().includes(q) ||
-        d.id.toLowerCase().includes(q) ||
-        d.summary.toLowerCase().includes(q) ||
-        d.candidateUnits.some((u) => u.toLowerCase().includes(q));
-      if (!matchesQuery) return false;
-      if (catalogLayerFilter === "all") return true;
-      return d.candidateUnits.some((uId) => {
-        const entry = getUnitById(uId);
-        return entry?.layer.id === catalogLayerFilter;
-      });
-    });
-  }, [catalogQuery, catalogLayerFilter]);
-
-  const focusedDivision =
-    divisions.find((d) => d.id === focusedDivisionId) ?? divisions[0];
-  const focusedDivisionMappings = useMemo(
-    () =>
-      capabilityMappings.filter((m) => m.divisionId === focusedDivision.id),
-    [focusedDivision.id],
   );
 
   const activeMission =
@@ -272,35 +310,42 @@ export default function Explorer() {
     [focusedVentureEntry.unit.id],
   );
 
+  const activePulseState =
+    pulseModel.states[activePulseStateIndex] ?? pulseModel.states[0];
+  const activePulseEvent =
+    pulseModel.events.find((e) => e.id === activePulseEventId) ??
+    pulseModel.events[0];
+
   const headingCopy: Record<
     TabId,
     { eyebrow: string; title: string; subtitle: string }
   > = {
     organization: {
-      eyebrow: "GWD / ORGANIZATIONAL ARCHITECTURE",
+      eyebrow: "GWD GENESIS / UNIVERSE & ORGANIZATIONAL ARCHITECTURE",
       title: "Organization Explorer",
-      subtitle: "Explore the five layers of a proposed AI-native organization.",
+      subtitle:
+        "Two worlds. Different foundations. Connected futures — explore the six territories and five organizational layers.",
     },
     catalog: {
-      eyebrow: "GWD / CAPABILITY ECOSYSTEM",
-      title: "Capability Catalogue",
+      eyebrow: "GWD GENESIS / TERRITORY 02 · THE INTELLIGENCE",
+      title: "Intelligence & Knowledge Galaxy",
       subtitle:
-        "Explore capability domains in the Agency Agents source snapshot.",
+        "Explore GBrain, Knowledge Hub, Obsidian Vaults, Knowledge Graph and 283 catalogued Agency Agents source profiles.",
     },
     missions: {
-      eyebrow: "GWD / MISSION DESIGN",
+      eyebrow: "GWD GENESIS / TERRITORY 06 · THE CONVERGENCE",
       title: "Mission Simulator",
       subtitle:
         "Deterministic illustrative scenarios showing how units, capabilities and human approval gates mobilize.",
     },
     finance: {
-      eyebrow: "GWD / UNIT ECONOMICS & OPERATING MODEL",
+      eyebrow: "GWD GENESIS / TERRITORY 04 · THE ECONOMY",
       title: "Business Architecture Simulator",
       subtitle:
         "Illustrative cost, profit and investment-centre models with transparent deterministic formulas.",
     },
     ventures: {
-      eyebrow: "GWD / RESEARCH & VENTURE PIPELINE",
+      eyebrow: "GWD GENESIS / TERRITORY 05 · THE FRONTIER",
       title: "Ventures & Innovation",
       subtitle:
         "Explore proposed research labs, stage-gated experimentation and candidate venture studio hypotheses.",
@@ -320,13 +365,18 @@ export default function Explorer() {
           }
         }}
       >
-        <header>
+        <header className="genesis-header">
           <div className="brand">
             <span className="mark" aria-hidden="true">
               ◈
             </span>{" "}
-            GoWorld <b>Digital</b>
+            <strong className="brand-gwd">GWD</strong>
+            <span className="brand-sep" aria-hidden="true">
+              |
+            </span>
+            <b>GoWorld.Digital</b>
           </div>
+
           <nav aria-label="Explorer sections">
             {TAB_ITEMS.map((item) => (
               <button
@@ -338,12 +388,51 @@ export default function Explorer() {
               </button>
             ))}
           </nav>
-          <span className="status">
-            <i /> Proposed model
-          </span>
+
+          <div className="header-right-controls">
+            <div
+              className="quality-controller"
+              role="group"
+              aria-label="Graphics quality mode"
+            >
+              {(["ultra", "balanced", "lite"] as const).map((qMode) => (
+                <button
+                  key={qMode}
+                  type="button"
+                  aria-pressed={qualityMode === qMode}
+                  onClick={() => setQualityMode(qMode)}
+                >
+                  {qMode}
+                </button>
+              ))}
+            </div>
+            <span className="status">
+              <i /> Proposed model
+            </span>
+            <button
+              type="button"
+              className="btn-enter-gwd"
+              onClick={() => enterUniverse("genesis-core")}
+            >
+              Enter GWD →
+            </button>
+          </div>
         </header>
 
-        <div className="heading">
+        {/* Screen A — GWD Genesis Opening (Monumental Dual-World Hero + 6 Territories Dock) */}
+        {tab === "organization" && !introDismissed && (
+          <GenesisOpening
+            selectedTerritoryId={selectedTerritoryId}
+            onSelectTerritory={selectTerritory}
+            onEnterUniverse={enterUniverse}
+            onOpenGalaxy={() => setTab("catalog")}
+            activePulseStateIndex={activePulseStateIndex}
+            onTriggerPulse={triggerPulse}
+            quiet={quiet}
+          />
+        )}
+
+        <div className="heading" ref={workspaceRef}>
           <div>
             <span className="eyebrow">{headingCopy[tab].eyebrow}</span>
             <h1>{headingCopy[tab].title}</h1>
@@ -360,14 +449,16 @@ export default function Explorer() {
               >
                 <div>
                   <span className="eyebrow">
-                    ARCHITECTURAL OBSERVATORY · PROPOSED MODEL
+                    ARCHITECTURAL OBSERVATORY · PROPOSED MODEL · DIRECTION B
                   </span>
                   <p>
+                    <strong>6 narrative territories</strong> and{" "}
                     <strong>5 proposed organizational layers</strong> surrounded
                     by <strong>18 catalogued capability domains</strong> (
                     {source.profileCount} upstream source profiles). Select any
-                    layer or unit to inspect its mandate, relationships and
-                    economic role, or launch an illustrative mission.
+                    territory, layer or unit to inspect its mandate,
+                    relationships and economic role, or launch an illustrative
+                    mission.
                   </p>
                 </div>
                 <div className="intro-actions">
@@ -392,6 +483,67 @@ export default function Explorer() {
                 </div>
               </section>
             )}
+
+            {/* Screen B — THE PULSE & Six Territories Interactive Selector Bar */}
+            <section
+              className="pulse-territory-bar"
+              aria-label="THE PULSE and Territory Lens"
+            >
+              <div className="pulse-engine-strip">
+                <div>
+                  <span className="eyebrow">
+                    THE PULSE ENGINE · SIMULATED SIGNALING ({activePulseState.label})
+                  </span>
+                  <p className="pulse-desc">
+                    <strong>{activePulseEvent.label}:</strong>{" "}
+                    {activePulseEvent.summary}{" "}
+                    <em>({pulseModel.disclaimer})</em>
+                  </p>
+                </div>
+                <div
+                  className="pulse-event-buttons"
+                  role="group"
+                  aria-label="Trigger simulated pulse events"
+                >
+                  {pulseModel.events.map((ev) => (
+                    <button
+                      key={ev.id}
+                      type="button"
+                      className="chip"
+                      aria-pressed={activePulseEventId === ev.id}
+                      onClick={() => triggerPulse(ev.id)}
+                    >
+                      ✦ {ev.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="dual-world-lens-grid">
+                <div className="lens-card lens-natural">
+                  <span className="eyebrow">
+                    NATURAL UNIVERSE PARALLEL · {selectedTerritory.code}{" "}
+                    {selectedTerritory.name}
+                  </span>
+                  <strong>{selectedTerritory.naturalParallel.title}</strong>
+                  <p>{selectedTerritory.naturalParallel.description}</p>
+                </div>
+                <div className="lens-card lens-digital">
+                  <span className="eyebrow">
+                    GWD DIGITAL ARCHITECTURE · {selectedTerritory.status.toUpperCase()}
+                  </span>
+                  <strong>{selectedTerritory.digitalArchitecture.title}</strong>
+                  <p>{selectedTerritory.digitalArchitecture.description}</p>
+                </div>
+                <div className="lens-card lens-convergence">
+                  <span className="eyebrow">
+                    THE CONVERGENCE · HUMAN + AI SYNERGY
+                  </span>
+                  <strong>{selectedTerritory.convergencePrinciple.title}</strong>
+                  <p>{selectedTerritory.convergencePrinciple.description}</p>
+                </div>
+              </div>
+            </section>
 
             <div className="workspace">
               <section className="viewport" aria-label="Organizational model">
@@ -435,7 +587,11 @@ export default function Explorer() {
                         selectUnit={setSelectedUnitId}
                         selectedDivisionId={selectedDivisionId}
                         selectDivision={setSelectedDivisionId}
+                        selectedTerritoryId={selectedTerritoryId}
+                        selectTerritory={selectTerritory}
                         showConnections={showConnections}
+                        qualityMode={qualityMode}
+                        pulseActive={pulseActive}
                         reset={reset}
                         quiet={quiet}
                         fail={fail}
@@ -468,7 +624,7 @@ export default function Explorer() {
                 <div className="viewfoot">
                   <span>
                     {spatial
-                      ? "Drag to orbit · Scroll or pinch to zoom · Click layer or unit block"
+                      ? "Drag to orbit · Scroll or pinch to zoom · Click territory hub, layer or unit block"
                       : "Select a layer to inspect its units and structural relationships"}
                   </span>
                   <button onClick={overview}>↺ Reset view</button>
@@ -570,6 +726,7 @@ export default function Explorer() {
                     <>
                       <div className="rule">Model composition</div>
                       {[
+                        [territories.length, "Narrative territories"],
                         [layers.length, "Proposed layers"],
                         [divisions.length, "Catalogue divisions"],
                         [source.profileCount, "Upstream source profiles"],
@@ -712,144 +869,16 @@ export default function Explorer() {
         )}
 
         {tab === "catalog" && (
-          <section className="catalog" aria-label="Agency Agents Explorer">
-            <div className="catalog-toolbar">
-              <div>
-                <h2>Agency Agents</h2>
-                <p>
-                  {source.profileCount} upstream source profiles across{" "}
-                  {divisions.length} divisions. Deployment and staffing are
-                  unverified. These domains can support multiple organizational
-                  layers.
-                </p>
-              </div>
-              <div className="catalog-controls">
-                <input
-                  type="search"
-                  aria-label="Search capability divisions"
-                  placeholder="Search divisions, summaries or units…"
-                  value={catalogQuery}
-                  onChange={(e) => setCatalogQuery(e.target.value)}
-                />
-                <div
-                  className="filter-pills"
-                  role="group"
-                  aria-label="Filter divisions by organizational layer"
-                >
-                  {[
-                    ["all", `All (${divisions.length})`],
-                    ["governance", "Governance"],
-                    ["executive", "Executive"],
-                    ["shared-services", "Shared Services"],
-                    ["business-units", "Business Units"],
-                    ["labs-innovation", "Labs & Innovation"],
-                  ].map(([id, label]) => (
-                    <button
-                      key={id}
-                      type="button"
-                      aria-pressed={catalogLayerFilter === id}
-                      onClick={() => setCatalogLayerFilter(id)}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="catalog-grid">
-              {filteredDivisions.map((d) => {
-                const isFocused = focusedDivision.id === d.id;
-                return (
-                  <article
-                    key={d.id}
-                    className={isFocused ? "focused" : undefined}
-                    onClick={() => setFocusedDivisionId(d.id)}
-                  >
-                    <div className="card-top">
-                      <strong>{d.label}</strong>
-                      <em className="badge">{d.status}</em>
-                    </div>
-                    <span>{d.profileCount} profiles</span>
-                    <small className="div-summary">{d.summary}</small>
-                    <div className="unit-chips">
-                      {d.candidateUnits.map((uId) => {
-                        const uEntry = getUnitById(uId);
-                        return (
-                          <button
-                            key={uId}
-                            type="button"
-                            className="chip"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              jumpToUnit(uId);
-                            }}
-                          >
-                            {uEntry?.unit.label ?? uId} ↗
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-
-            <div className="provenance-drawer">
-              <div>
-                <span className="eyebrow">
-                  SELECTED CAPABILITY DOMAIN ·{" "}
-                  {focusedDivision.id.toUpperCase()}
-                </span>
-                <h3>
-                  {focusedDivision.label} ({focusedDivision.profileCount} source
-                  profiles ·{" "}
-                  {(
-                    (focusedDivision.profileCount / source.profileCount) *
-                    100
-                  ).toFixed(1)}
-                  % of catalogue)
-                </h3>
-                <p>{focusedDivision.summary}</p>
-                {focusedDivisionMappings.length > 0 && (
-                  <ul className="mapping-list">
-                    {focusedDivisionMappings.map((m) => {
-                      const targetUnit = getUnitById(m.unitId);
-                      return (
-                        <li key={m.id}>
-                          <strong>
-                            {focusedDivision.label} →{" "}
-                            {targetUnit?.unit.label ?? m.unitId}
-                          </strong>
-                          : {m.rationale}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </div>
-              <div className="provenance-meta">
-                <span className="eyebrow">VERIFIED UPSTREAM PROVENANCE</span>
-                <p>
-                  Inventory recorded {source.snapshotDate} · Verified upstream
-                  commit <code>{source.commit}</code> ({source.license} · tree{" "}
-                  <code>{source.tree}</code> · committed {source.commitDate}).
-                </p>
-                <p className="disclaimer-note">{source.disclaimer}</p>
-                <a
-                  href={`${source.repository}/tree/${source.commit}/${focusedDivision.id}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Inspect {focusedDivision.label} in Agency Agents repository ↗
-                </a>{" "}
-                ·{" "}
-                <a href={source.repository} target="_blank" rel="noreferrer">
-                  Agency Agents source repository ↗
-                </a>
-              </div>
-            </div>
-          </section>
+          <KnowledgeGalaxyView
+            catalogQuery={catalogQuery}
+            setCatalogQuery={setCatalogQuery}
+            catalogLayerFilter={catalogLayerFilter}
+            setCatalogLayerFilter={setCatalogLayerFilter}
+            focusedDivisionId={focusedDivisionId}
+            setFocusedDivisionId={setFocusedDivisionId}
+            onJumpToUnit={jumpToUnit}
+            onTriggerPulse={() => triggerPulse("pulse-knowledge-indexing")}
+          />
         )}
 
         {tab === "missions" && (
@@ -1540,7 +1569,10 @@ export default function Explorer() {
         )}
 
         <footer>
-          <span>GoWorld Digital / Organization Explorer</span>
+          <span>
+            GoWorld Digital · GWD Genesis / Organization Explorer ·{" "}
+            <strong>HELLO, WORLD. GO WORLD.</strong>
+          </span>
           <button aria-pressed={quiet} onClick={() => setQuiet(!quiet)}>
             Reduced motion · {quiet ? "On" : "Off"}
           </button>
