@@ -1,6 +1,6 @@
 "use client";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Line } from "@react-three/drei";
 import {
   useEffect,
   useLayoutEffect,
@@ -11,15 +11,36 @@ import {
 } from "react";
 import { InstancedMesh, Object3D, Vector3 } from "three";
 import { gsap } from "gsap";
-import { divisions, layers, yFor } from "../lib/model";
+import {
+  divisions,
+  layers,
+  relationships,
+  capabilityMappings,
+  yFor,
+} from "../lib/model";
+
 type Props = {
   selected: number | null;
   select: (index: number) => void;
+  selectedUnitId?: string | null;
+  selectUnit?: (unitId: string | null) => void;
+  selectedDivisionId?: string | null;
+  selectDivision?: (divisionId: string | null) => void;
+  showConnections?: boolean;
   reset: number;
   quiet: boolean;
   fail: () => void;
 };
+
 const radii = [1.18, 1.48, 1.92, 2.22, 2.48];
+const layerPalette = [
+  { base: "#24485c", plate: "#3d7a8a", active: "#58b7c4", ring: "#67e8d2" },
+  { base: "#233f63", plate: "#3b6598", active: "#5c8ef2", ring: "#6d9dff" },
+  { base: "#26445b", plate: "#426f8f", active: "#5ca4c9", ring: "#7fd8f5" },
+  { base: "#31365e", plate: "#545b94", active: "#7e84d4", ring: "#b59aff" },
+  { base: "#3d392e", plate: "#6b6147", active: "#b3965b", ring: "#e6b978" },
+];
+
 function Repeated({
   points,
   width,
@@ -52,25 +73,49 @@ function Repeated({
     </instancedMesh>
   );
 }
+
 function radial(count: number, r: number, y: number) {
   return Array.from({ length: count }, (_, i) => {
     const a = (i * 2 * Math.PI) / count;
     return [Math.sin(a) * r, y, Math.cos(a) * r, a];
   });
 }
+
+function unitWorldPosition(layerIdx: number, unitIdx: number, unitCount: number): [number, number, number] {
+  const r = radii[layerIdx] * 0.56;
+  const angle = (unitIdx * 2 * Math.PI) / Math.max(1, unitCount);
+  return [Math.sin(angle) * r, yFor(layerIdx) + 0.22, Math.cos(angle) * r];
+}
+
+function divisionWorldPosition(divIdx: number): [number, number, number] {
+  const angle = (divIdx * 2 * Math.PI) / divisions.length;
+  const r = 3.25;
+  return [Math.sin(angle) * r, -2.72, Math.cos(angle) * r];
+}
+
 function Plate({
   i,
   active,
+  selectedUnitId,
   select,
+  selectUnit,
 }: {
   i: number;
   active: boolean;
+  selectedUnitId?: string | null;
   select: () => void;
+  selectUnit?: (unitId: string) => void;
 }) {
-  const r = radii[i],
-    accent = active ? "#9bf9df" : "#4489ab";
+  const r = radii[i];
+  const palette = layerPalette[i] ?? layerPalette[0];
+  const accent = active ? "#9bf9df" : palette.ring;
   const fins = useMemo(() => radial(32, r * 0.73, 0.21), [r]);
-  const cores = useMemo(() => radial(i === 3 ? 4 : 8, r * 0.45, 0.22), [i, r]);
+  const layerUnits = layers[i].units;
+  const unitPositions = useMemo(
+    () => radial(layerUnits.length, r * 0.52, 0.22),
+    [layerUnits.length, r],
+  );
+
   return (
     <group
       position-y={yFor(i)}
@@ -84,7 +129,7 @@ function Plate({
       <mesh position-y={-0.13}>
         <cylinderGeometry args={[r, r * 0.92, 0.18, 8]} />
         <meshStandardMaterial
-          color={active ? "#347582" : "#294759"}
+          color={active ? palette.active : palette.base}
           metalness={0.52}
           roughness={0.32}
         />
@@ -92,33 +137,60 @@ function Plate({
       <mesh>
         <cylinderGeometry args={[r, r, 0.085, 8]} />
         <meshStandardMaterial
-          color={active ? "#579b9f" : "#46667e"}
-          roughness={0.45}
+          color={active ? palette.active : palette.plate}
+          roughness={0.42}
           metalness={0.4}
         />
       </mesh>
       <mesh position-y={0.051}>
         <cylinderGeometry args={[r * 0.97, r * 0.97, 0.018, 8]} />
-        <meshStandardMaterial color="#172e43" />
+        <meshStandardMaterial color="#132638" />
       </mesh>
       <mesh position-y={0.07} rotation-x={-Math.PI / 2}>
-        <ringGeometry args={[r * 0.825, r * 0.84, 64]} />
+        <ringGeometry args={[r * 0.825, r * 0.845, 64]} />
         <meshBasicMaterial color={accent} />
       </mesh>
       <Repeated
         points={fins}
-        width={0.042}
-        depth={0.07}
-        height={0.29}
+        width={0.04}
+        depth={0.068}
+        height={0.28}
         color="#8ca6b4"
       />
-      <Repeated
-        points={cores}
-        width={i === 3 ? r * 0.48 : r * 0.3}
-        depth={i === 3 ? r * 0.5 : r * 0.26}
-        height={i === 3 ? 0.53 : 0.34}
-        color={active ? "#78b1b8" : "#577a92"}
-      />
+      {layerUnits.map((unit, uIdx) => {
+        const [ux, uy, uz, uAngle] = unitPositions[uIdx];
+        const isUnitSelected = selectedUnitId === unit.id;
+        const w = i === 3 ? r * 0.38 : r * 0.25;
+        const d = i === 3 ? r * 0.4 : r * 0.23;
+        const h = isUnitSelected ? 0.54 : i === 3 ? 0.46 : 0.34;
+        return (
+          <mesh
+            key={unit.id}
+            position={[ux, uy, uz]}
+            rotation-y={uAngle}
+            onClick={(e) => {
+              if (e.delta < 5) {
+                e.stopPropagation();
+                select();
+                selectUnit?.(unit.id);
+              }
+            }}
+          >
+            <boxGeometry args={[w, h, d]} />
+            <meshStandardMaterial
+              color={
+                isUnitSelected
+                  ? "#9bf9df"
+                  : active
+                    ? "#7cc4cf"
+                    : palette.plate
+              }
+              roughness={0.32}
+              metalness={0.38}
+            />
+          </mesh>
+        );
+      })}
       {i < 3 && (
         <mesh position-y={0.4}>
           <cylinderGeometry args={[r * 0.79, r * 0.77, 0.07, 32]} />
@@ -146,6 +218,140 @@ function Plate({
     </group>
   );
 }
+
+function ConnectionArcs({
+  selected,
+  selectedUnitId,
+  selectedDivisionId,
+  showConnections,
+}: {
+  selected: number | null;
+  selectedUnitId?: string | null;
+  selectedDivisionId?: string | null;
+  showConnections: boolean;
+}) {
+  const unitLookup = useMemo(() => {
+    const map = new Map<
+      string,
+      { layerIdx: number; pos: [number, number, number] }
+    >();
+    layers.forEach((layer, lIdx) => {
+      layer.units.forEach((u, uIdx) => {
+        map.set(u.id, {
+          layerIdx: lIdx,
+          pos: unitWorldPosition(lIdx, uIdx, layer.units.length),
+        });
+      });
+    });
+    return map;
+  }, []);
+
+  const divLookup = useMemo(() => {
+    const map = new Map<string, [number, number, number]>();
+    divisions.forEach((d, idx) => {
+      map.set(d.id, divisionWorldPosition(idx));
+    });
+    return map;
+  }, []);
+
+  const lines = useMemo(() => {
+    if (!showConnections) return [];
+    const result: {
+      id: string;
+      points: [number, number, number][];
+      color: string;
+      dashed: boolean;
+    }[] = [];
+
+    for (const rel of relationships) {
+      const from = unitLookup.get(rel.from);
+      const to = unitLookup.get(rel.to);
+      if (!from || !to) continue;
+
+      const matchesSelection =
+        selectedUnitId !== null && selectedUnitId !== undefined
+          ? rel.from === selectedUnitId || rel.to === selectedUnitId
+          : selected !== null
+            ? from.layerIdx === selected || to.layerIdx === selected
+            : rel.type === "provides_service_to" || rel.type === "advises";
+
+      if (!matchesSelection) continue;
+
+      const mid: [number, number, number] = [
+        (from.pos[0] + to.pos[0]) * 0.62,
+        (from.pos[1] + to.pos[1]) * 0.5 + 0.18,
+        (from.pos[2] + to.pos[2]) * 0.62,
+      ];
+      const color =
+        rel.type === "advises"
+          ? "#e6b978"
+          : rel.type === "provides_service_to"
+            ? "#67e8d2"
+            : "#6d9dff";
+
+      result.push({
+        id: rel.id,
+        points: [from.pos, mid, to.pos],
+        color,
+        dashed: rel.type !== "reports_to",
+      });
+    }
+
+    for (const cap of capabilityMappings) {
+      const dPos = divLookup.get(cap.divisionId);
+      const uEntry = unitLookup.get(cap.unitId);
+      if (!dPos || !uEntry) continue;
+
+      const showCap =
+        selectedDivisionId === cap.divisionId ||
+        selectedUnitId === cap.unitId ||
+        (selected !== null && uEntry.layerIdx === selected);
+
+      if (!showCap) continue;
+
+      const mid: [number, number, number] = [
+        (dPos[0] + uEntry.pos[0]) * 0.58,
+        (dPos[1] + uEntry.pos[1]) * 0.5 - 0.2,
+        (dPos[2] + uEntry.pos[2]) * 0.58,
+      ];
+      result.push({
+        id: cap.id,
+        points: [dPos, mid, uEntry.pos],
+        color: "#b59aff",
+        dashed: true,
+      });
+    }
+
+    return result;
+  }, [
+    showConnections,
+    selected,
+    selectedUnitId,
+    selectedDivisionId,
+    unitLookup,
+    divLookup,
+  ]);
+
+  if (!showConnections || lines.length === 0) return null;
+
+  return (
+    <group>
+      {lines.map((line) => (
+        <Line
+          key={line.id}
+          points={line.points}
+          color={line.color}
+          lineWidth={1.35}
+          dashed={line.dashed}
+          dashScale={6}
+          dashSize={0.22}
+          gapSize={0.14}
+        />
+      ))}
+    </group>
+  );
+}
+
 type LabelRefs = RefObject<(HTMLSpanElement | null)[]>;
 function LabelPositions({ labels }: { labels: LabelRefs }) {
   const projected = useMemo(() => new Vector3(), []);
@@ -162,7 +368,19 @@ function LabelPositions({ labels }: { labels: LabelRefs }) {
   });
   return null;
 }
-function World({ selected, select, reset, quiet, fail }: Props) {
+
+function World({
+  selected,
+  select,
+  selectedUnitId,
+  selectUnit,
+  selectedDivisionId,
+  selectDivision,
+  showConnections = true,
+  reset,
+  quiet,
+  fail,
+}: Props) {
   const { camera, gl, invalidate } = useThree();
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
 
@@ -191,14 +409,14 @@ function World({ selected, select, reset, quiet, fail }: Props) {
       origin = control.target.clone();
     const focus = new Vector3(
       0,
-      selected === null ? -0.28 : yFor(selected) * 0.72,
+      selected === null ? -0.18 : yFor(selected) * 0.62,
       0,
     );
     const direction =
       selected === null
         ? new Vector3(6, 3.8, 8).normalize()
         : from.clone().sub(origin).normalize();
-    const distance = selected === null ? 12.3 : 9.2;
+    const distance = selected === null ? 12.4 : 10.1;
     const to = focus.clone().addScaledVector(direction, distance);
     const frame = { t: 0 };
     const update = () => {
@@ -270,14 +488,14 @@ function World({ selected, select, reset, quiet, fail }: Props) {
     el.addEventListener("keydown", key);
     return () => el.removeEventListener("keydown", key);
   }, [camera, gl, invalidate]);
-  const anchors = useMemo(() => radial(divisions.length, 3.1, -2.74), []);
+
   return (
     <>
       <color attach="background" args={["#0a1523"]} />
-      <fog attach="fog" args={["#0a1523", 11, 24]} />
-      <ambientLight intensity={1.35} />
-      <directionalLight position={[4, 8, 5]} intensity={2.2} color="#d2e9f4" />
-      <directionalLight position={[-4, 2, -4]} intensity={4} color="#648cff" />
+      <fog attach="fog" args={["#0a1523", 12, 26]} />
+      <ambientLight intensity={1.4} />
+      <directionalLight position={[4, 8, 5]} intensity={2.25} color="#d2e9f4" />
+      <directionalLight position={[-4, 2, -4]} intensity={3.8} color="#648cff" />
       <gridHelper position-y={-2.9} args={[36, 60, "#28485b", "#182e40"]} />
       <group>
         <mesh>
@@ -289,19 +507,48 @@ function World({ selected, select, reset, quiet, fail }: Props) {
             key={l.id}
             i={i}
             active={selected === i}
+            selectedUnitId={selectedUnitId}
             select={() => select(i)}
+            selectUnit={(uId) => selectUnit?.(uId)}
           />
         ))}
       </group>
-      <Repeated
-        points={anchors}
-        width={0.09}
-        height={0.14}
-        depth={0.18}
-        color="#71d0c6"
+      <ConnectionArcs
+        selected={selected}
+        selectedUnitId={selectedUnitId}
+        selectedDivisionId={selectedDivisionId}
+        showConnections={showConnections}
       />
+      <group>
+        {divisions.map((div, idx) => {
+          const [dx, dy, dz] = divisionWorldPosition(idx);
+          const angle = (idx * 2 * Math.PI) / divisions.length;
+          const isDivActive = selectedDivisionId === div.id;
+          const h = 0.14 + Math.min(0.28, div.profileCount * 0.004);
+          return (
+            <mesh
+              key={div.id}
+              position={[dx, dy + h / 2 - 0.07, dz]}
+              rotation-y={angle}
+              onClick={(e) => {
+                if (e.delta < 5) {
+                  e.stopPropagation();
+                  selectDivision?.(isDivActive ? null : div.id);
+                }
+              }}
+            >
+              <boxGeometry args={[0.12, h, 0.22]} />
+              <meshStandardMaterial
+                color={isDivActive ? "#e6b978" : "#67e8d2"}
+                roughness={0.3}
+                metalness={0.4}
+              />
+            </mesh>
+          );
+        })}
+      </group>
       <mesh position-y={-2.8} rotation-x={-Math.PI / 2}>
-        <ringGeometry args={[3.08, 3.09, 144]} />
+        <ringGeometry args={[3.22, 3.25, 144]} />
         <meshBasicMaterial color="#416778" />
       </mesh>
       <OrbitControls
@@ -317,6 +564,7 @@ function World({ selected, select, reset, quiet, fail }: Props) {
     </>
   );
 }
+
 export default function Scene(props: Props) {
   const labels = useRef<(HTMLSpanElement | null)[]>([]);
   const [supported, setSupported] = useState(false);

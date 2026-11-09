@@ -42,6 +42,8 @@ try {
   );
   await page.waitForTimeout(1100);
   await page.screenshot({ path: out + "/desktop.png" });
+
+  // Experience 1: 3D Organization Explorer, skippable intro, layer & unit selection
   const canvas = page.locator("canvas");
   const anchor = page.locator(".callout").filter({ hasText: "Governance" });
   const point = await anchor.evaluate((el) => {
@@ -59,7 +61,8 @@ try {
   await canvas.focus();
   await page.keyboard.press("ArrowRight");
   await page.keyboard.press("+");
-  await page.getByRole("button", { name: "Reset view" }).click();
+  await page.getByRole("button", { name: "↺ Reset view" }).click();
+
   const layers = page
     .getByRole("navigation", { name: "Organizational layers" })
     .getByRole("button");
@@ -77,11 +80,82 @@ try {
   await page.screenshot({ path: out + "/selected.png" });
   await page.keyboard.press("Escape");
   await page.getByRole("heading", { name: "Organizational model" }).waitFor();
+
+  // 2D representation
   await page.getByRole("button", { name: "2D", exact: true }).click();
   await page.locator(".outline button").nth(1).click();
   await page.getByText("design principle", { exact: true }).waitFor();
+
+  // Experience 2: Agency Agents Source Catalogue (search & filter)
   await page.getByRole("button", { name: "Source catalogue" }).click();
-  assert.equal(await page.locator("article").count(), 18);
+  assert.equal(await page.locator(".catalog-grid article").count(), 18);
+  await page.screenshot({ path: out + "/catalog.png" });
+  const searchInput = page.getByRole("searchbox", {
+    name: "Search capability divisions",
+  });
+  await searchInput.fill("Spatial Computing");
+  assert.equal(await page.locator(".catalog-grid article").count(), 1);
+  await searchInput.fill("");
+  assert.equal(await page.locator(".catalog-grid article").count(), 18);
+
+  // Experience 3: Mission Simulator (3 scenarios + execution steps + human approval gates)
+  await page.getByRole("button", { name: "Missions", exact: true }).click();
+  await page
+    .getByRole("heading", {
+      name: "Launch a digital learning product in two markets",
+    })
+    .waitFor();
+  assert.equal(await page.locator(".scenario-btn").count(), 3);
+  await page.locator(".step-card").nth(4).click();
+  await page.getByText("Finance & Legal Sign-Off Authority").waitFor();
+  await page.screenshot({ path: out + "/missions.png" });
+  await page.locator(".scenario-btn").nth(1).click();
+  await page
+    .getByRole("heading", {
+      name: "Orchestrate a multi-channel thought-leadership and growth campaign",
+    })
+    .waitFor();
+
+  // Experience 4: Business Simulator (deterministic inputs & immediate recalculation)
+  await page
+    .getByRole("button", { name: "Business simulator", exact: true })
+    .click();
+  await page.locator(".preset-buttons button").first().click();
+  assert.equal(
+    await page.getByTestId("kpi-gross-revenue").textContent(),
+    "$144,000",
+  );
+  const custInput = page.getByRole("spinbutton", {
+    name: "Customers numeric input",
+  });
+  await custInput.fill("200");
+  assert.equal(
+    await page.getByTestId("kpi-gross-revenue").textContent(),
+    "$240,000",
+  );
+  await page.screenshot({ path: out + "/finance.png" });
+  await page.getByRole("button", { name: "↺ Reset preset inputs" }).click();
+  assert.equal(
+    await page.getByTestId("kpi-gross-revenue").textContent(),
+    "$144,000",
+  );
+
+  // Experience 5: Ventures & Innovation (5 Labs + Venture Studio, stage gates)
+  await page
+    .getByRole("button", { name: "Ventures & labs", exact: true })
+    .click();
+  assert.equal(await page.locator(".venture-card").count(), 6);
+  await page.screenshot({ path: out + "/ventures.png" });
+  await page.locator(".stage-gate-card").nth(1).click(); // 02 / Research
+  assert.equal(await page.locator(".venture-card").count(), 2);
+  await page
+    .getByRole("button", {
+      name: /Show all Labs & Venture Studio/,
+    })
+    .click();
+  assert.equal(await page.locator(".venture-card").count(), 6);
+
+  // Return to Organization 3D & test WebGL context loss fallback
   await page.getByRole("button", { name: "Organization", exact: true }).click();
   await page.getByRole("button", { name: "3D", exact: true }).click();
   await page.locator("canvas[data-ready]").waitFor();
@@ -97,6 +171,8 @@ try {
     .filter({ hasText: "3D is unavailable" })
     .waitFor();
   await page.screenshot({ path: out + "/fallback.png" });
+
+  // Mobile viewport (390x844, reduced motion, touch, no horizontal overflow)
   const mobile = await browser.newPage({
     viewport: { width: 390, height: 844 },
     reducedMotion: "reduce",
@@ -105,7 +181,9 @@ try {
   });
   await open(mobile);
   await mobile.locator(".outline button").first().tap();
-  await mobile.getByRole("heading", { name: "Governance" }).waitFor();
+  await mobile
+    .getByRole("heading", { name: "Governance", exact: true })
+    .waitFor();
   assert.equal(await mobile.locator("canvas").count(), 0);
   assert.equal(
     await mobile
@@ -119,12 +197,16 @@ try {
     ),
   );
   await mobile.screenshot({ path: out + "/mobile.png", fullPage: true });
+
+  // Tablet viewport (768x1024)
   const tablet = await browser.newPage({
     viewport: { width: 768, height: 1024 },
   });
   await open(tablet);
   await tablet.locator(".outline button").last().click();
   await tablet.screenshot({ path: out + "/tablet.png", fullPage: true });
+
+  // Blocked WebGL2 initialization fallback
   const blocked = await browser.newPage({
     viewport: { width: 1440, height: 900 },
   });
@@ -142,7 +224,7 @@ try {
   assert.equal(await blocked.locator(".outline button").count(), 5);
   assert.deepEqual(errors, []);
   console.log(
-    "PASS desktop WebGL, five layers, keyboard reset, 2D, attribution, context loss, mobile touch and reduced motion",
+    "PASS all 5 experiences (3D/2D Organization, 18/283 Catalogue search/filter, 3 Missions + Human Gates, Deterministic Business Simulator, 5 Labs + Ventures), context loss, mobile touch and reduced motion",
   );
 } finally {
   await browser.close();

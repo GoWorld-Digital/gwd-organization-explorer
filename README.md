@@ -6,7 +6,7 @@
 
 ## Product status
 
-**Stage:** First functional Organization Explorer slice
+**Stage:** Public Beta (5 Connected Experiences — G1–G5 Complete)
 **Public destination (proposed):** `https://explore.goworld.digital`  
 **Repository:** `GoWorld-Digital/gwd-organization-explorer`  
 **Organization:** GoWorld Digital (GWD)
@@ -26,7 +26,7 @@ Open [localhost:3000](http://localhost:3000). Select a layer from the model or t
 
 The **Source catalogue** tab lists the recorded Agency Agents division counts. The initial slice represents proposed structures and candidate economic roles. The snapshot supplies no verified operational-agent inventory or financial results.
 
-[Implementation, verification and limitations](docs/FIRST_BUILD.md) · [Desktop capture](docs/screenshots/desktop.png) · [Mobile capture](docs/screenshots/mobile.png)
+[Implementation, verification and limitations](docs/FIRST_BUILD.md) · [Desktop capture](docs/screenshots/desktop.png) · [Source catalogue](docs/screenshots/catalog.png) · [Mission simulator](docs/screenshots/missions.png) · [Business simulator](docs/screenshots/finance.png) · [Ventures & Labs](docs/screenshots/ventures.png) · [Mobile capture](docs/screenshots/mobile.png)
 
 ## Product roadmap
 
