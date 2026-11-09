@@ -1,15 +1,29 @@
+:root {
+  --gwd-abyss: #07111f;
+  --gwd-deep-navy: #0b1930;
+  --gwd-bg: #08111c;
+  --gwd-surface: #0d1926;
+  --gwd-stage: #0a1523;
+  --gwd-elevated: #11243a;
+  --gwd-text-primary: #eaf3f8;
+  --gwd-text-secondary: #a8bbcb;
+  --gwd-line-quiet: #263b52;
+  --gwd-accent-cyan: #67e8d2;
+  --gwd-accent-cobalt: #6d9dff;
+  --gwd-accent-violet: #b59aff;
+  --gwd-accent-investment: #e6b978;
+  --gwd-accent-warning: #e5a56d;
+  --gwd-font-sans: "Inter", "Segoe UI", Arial, sans-serif;
+  --gwd-font-mono: Consolas, "Courier New", monospace;
+}
 * {
   box-sizing: border-box;
 }
 html {
   color-scheme: dark;
-  background: #08111c;
-  color: #e6eff6;
-  font:
-    16px "Inter",
-    "Segoe UI",
-    Arial,
-    sans-serif;
+  background: var(--gwd-bg);
+  color: var(--gwd-text-primary);
+  font: 16px var(--gwd-font-sans);
 }
 body {
   margin: 0;
@@ -116,9 +130,7 @@ i {
 .eyebrow,
 .layers small,
 .rule {
-  font:
-    10px/1.45 Consolas,
-    monospace;
+  font: 10px/1.45 var(--gwd-font-mono);
   letter-spacing: 1.7px;
   text-transform: uppercase;
   color: #8db7c2;
@@ -144,14 +156,14 @@ h1 {
   display: grid;
   grid-template-columns: minmax(0, 2.5fr) minmax(270px, 1fr);
   border: 1px solid #2a3d4b;
-  background: #0d1926;
+  background: var(--gwd-surface);
 }
 .viewport {
   position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background: #0a1523;
+  background: var(--gwd-stage);
 }
 .viewbar,
 .viewfoot {
@@ -170,9 +182,7 @@ h1 {
 }
 .switch button {
   padding: 6px 12px;
-  font:
-    12px Consolas,
-    monospace;
+  font: 12px var(--gwd-font-mono);
 }
 .switch button[aria-pressed="true"] {
   background: #284454;
@@ -320,8 +330,17 @@ aside li strong {
 aside li small {
   margin-top: 4px;
 }
+aside li small.mandate {
+  color: #c5d4df;
+  line-height: 1.45;
+  margin-top: 6px;
+}
 .catalog p {
   max-width: 760px;
+}
+.catalog code {
+  font-family: var(--gwd-font-mono);
+  color: var(--gwd-accent-cyan);
 }
 .catalog > div {
   display: grid;
@@ -412,9 +431,7 @@ aside li small {
   left: 110px;
   top: -7px;
   white-space: nowrap;
-  font:
-    10px/1.4 Consolas,
-    monospace;
+  font: 10px/1.4 var(--gwd-font-mono);
   letter-spacing: 0.8px;
   color: #a2bcc9;
   text-transform: uppercase;

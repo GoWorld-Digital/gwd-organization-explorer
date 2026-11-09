@@ -194,7 +194,11 @@ export default function Explorer() {
                               {u.economicType
                                 ? " · " + formatStatus(u.economicType)
                                 : ""}
+                              {u.maturityStage
+                                ? " · stage: " + formatStatus(u.maturityStage)
+                                : ""}
                             </small>
+                            <small className="mandate">{u.mandate}</small>
                             {u.note && <small>{u.note}</small>}
                           </li>
                         ))}
@@ -261,8 +265,9 @@ export default function Explorer() {
               ))}
             </div>
             <p>
-              Inventory recorded {source.snapshotDate}. Upstream revision
-              unconfirmed.
+              Inventory recorded {source.snapshotDate} · Verified upstream commit{" "}
+              <code>{source.commit.slice(0, 12)}</code> ({source.license} · tree{" "}
+              <code>{source.tree.slice(0, 10)}</code>).
             </p>
             <a href={source.repository}>Agency Agents source repository ↗</a>
           </section>
