@@ -6,7 +6,7 @@
 
 ## Product status
 
-**Stage:** Public Beta (5 Connected Experiences — G1–G5 Complete)
+**Stage:** Cinematic Genesis integration proposal, with five existing model/simulation experiences preserved.
 **Public destination (proposed):** `https://explore.goworld.digital`  
 **Repository:** `GoWorld-Digital/gwd-organization-explorer`  
 **Organization:** GoWorld Digital (GWD)
@@ -22,7 +22,11 @@ npm ci
 npm run dev
 ```
 
-Open [localhost:3000](http://localhost:3000). Select a layer from the model or the navigation below it. Drag to orbit and scroll or pinch to zoom. When the canvas has keyboard focus, arrows orbit and plus/minus zoom. Escape returns to the overview. The 2D outline shares the selection with the spatial view.
+Open [localhost:3000](http://localhost:3000) for the nine-scene Genesis experience: arrival, Diana's introduction, Universe Explorer, Knowledge Galaxy and five organizational environments. Select the illustrated controls to navigate, inspect units, search the model or follow the guided journey. Full desktop artwork is preserved using verified lossless images; mobile uses readable HTML controls.
+
+Open [localhost:3000/architecture](http://localhost:3000/architecture) for the existing real 3D/2D model, catalogue, missions, business simulator and Ventures/Labs. Drag to orbit and scroll or pinch to zoom. When the canvas has keyboard focus, arrows orbit and plus/minus zoom. Escape returns to the overview. The 2D outline shares the selection with the spatial view.
+
+The cinematic rooms are illustrated interactive environments, not yet freely traversable 3D architecture. See [the fidelity contract, implementation and limitations](docs/CINEMATIC_EXPERIENCE.md). Run `npm run test:cinematic` alongside `npm run test:browser` for the new experience checks.
 
 The **Source catalogue** tab lists the recorded Agency Agents division counts. The initial slice represents proposed structures and candidate economic roles. The snapshot supplies no verified operational-agent inventory or financial results.
 

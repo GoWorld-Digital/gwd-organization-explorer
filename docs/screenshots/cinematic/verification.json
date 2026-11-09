@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-09",
+  "baseCommit": "f7e6da9a895e89af286503403b28381b7d53a4e9",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "nodeTests": {
+      "passed": 9,
+      "failed": 0
+    },
+    "productionBuild": "passed",
+    "cinematicBrowser": "passed",
+    "existingFiveExperiencesBrowser": "passed"
+  },
+  "renderedFidelity": [
+    {
+      "scene": "arrival",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    },
+    {
+      "scene": "genesis",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    },
+    {
+      "scene": "universe",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    },
+    {
+      "scene": "knowledge",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    },
+    {
+      "scene": "governance",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    },
+    {
+      "scene": "executive",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    },
+    {
+      "scene": "shared-services",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    },
+    {
+      "scene": "business-units",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    },
+    {
+      "scene": "labs",
+      "meanAbsoluteChannelError": 0,
+      "maxChannelError": 0,
+      "changedChannels": 0,
+      "totalChannels": 4720056
+    }
+  ],
+  "initialScriptGzipBytes": 260871,
+  "limitations": [
+    "Illustrated interactive environments; volumetric interior reconstruction remains open.",
+    "Mobile uses cropped artwork and reflowed semantic controls.",
+    "Device performance, cross-browser and assistive-technology acceptance remain open.",
+    "Initial JavaScript remains slightly above the 250 KB target."
+  ],
+  "productionDeployed": false
+}

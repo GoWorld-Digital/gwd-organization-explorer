@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import "./globals.css";
+import "./cinematic.css";
 export const metadata: Metadata = {
-  title: "Organization Explorer · GoWorld Digital",
+  title: "GWD Genesis — An AI-Native World",
   description:
     "Explore the five layers of GoWorld Digital’s proposed AI-native organization.",
 };

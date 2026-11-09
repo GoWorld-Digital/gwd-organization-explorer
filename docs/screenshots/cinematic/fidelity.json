@@ -1,0 +1,65 @@
+[
+  {
+    "scene": "arrival",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  },
+  {
+    "scene": "genesis",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  },
+  {
+    "scene": "universe",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  },
+  {
+    "scene": "knowledge",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  },
+  {
+    "scene": "governance",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  },
+  {
+    "scene": "executive",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  },
+  {
+    "scene": "shared-services",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  },
+  {
+    "scene": "business-units",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  },
+  {
+    "scene": "labs",
+    "meanAbsoluteChannelError": 0,
+    "maxChannelError": 0,
+    "changedChannels": 0,
+    "totalChannels": 4720056
+  }
+]
