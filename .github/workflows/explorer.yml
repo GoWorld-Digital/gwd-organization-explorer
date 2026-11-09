@@ -33,6 +33,7 @@ jobs:
           curl -fsS --retry 20 --retry-all-errors --retry-delay 1 http://127.0.0.1:3000/ -o /dev/null
           npm run test:browser
           npm run test:cinematic
+          npm run test:immersion
       - uses: actions/upload-artifact@v4
         if: always()
         with:

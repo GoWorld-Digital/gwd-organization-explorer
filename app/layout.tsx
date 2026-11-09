@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./cinematic.css";
+import "./immersion.css";
+import { LanguageProvider } from '../components/Language';
 export const metadata: Metadata = {
   title: "GWD Genesis — An AI-Native World",
   description:
@@ -9,7 +11,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body><LanguageProvider>{children}</LanguageProvider></body>
     </html>
   );
 }

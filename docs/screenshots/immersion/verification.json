@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-09",
+  "mode": "offline production files in Chrome",
+  "checks": [
+    "PT/FR dossiers, accent-insensitive search, URL and preference persistence",
+    "French/English analysis, interactive inputs and unchanged state on language switch",
+    "All five WebGL architectural studies, camera controls, selection and dossier transition",
+    "Touch navigation and readable dossiers at 320/390/768/1180 widths",
+    "No-WebGL French fallback retains unit selection and dossiers"
+  ],
+  "errors": []
+}
