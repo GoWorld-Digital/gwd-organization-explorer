@@ -146,6 +146,8 @@ export default function Explorer() {
   const nav = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
+    const section = location.hash.slice(1);
+    if (TAB_ITEMS.some(item => item.id === section)) setTab(section as TabId);
     const pref = matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => setQuiet(pref.matches);
     sync();

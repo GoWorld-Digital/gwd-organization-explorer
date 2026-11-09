@@ -1,20 +1,21 @@
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { mkdir, readFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 const browser = await chromium.launch({
-  executablePath: process.env.CHROME_PATH || undefined,
+  executablePath: process.env.CHROME_PATH || (existsSync('C:/Program Files/Google/Chrome/Application/chrome.exe') ? 'C:/Program Files/Google/Chrome/Application/chrome.exe' : undefined),
   args: ["--enable-unsafe-swiftshader", "--use-angle=swiftshader"],
 });
 const out = "docs/screenshots";
 await mkdir(out, { recursive: true });
-const url = process.env.EXPLORER_URL || "http://127.0.0.1:3000";
+const url = process.argv[2] || process.env.EXPLORER_URL || "http://127.0.0.1:3000";
 async function open(page) {
   if (process.env.EXPLORER_BUILD_FILES === "1") {
     await page.route(url + "/**", async (route) => {
       const pathname = new URL(route.request().url()).pathname;
       const file =
-        pathname === "/"
-          ? ".next/server/app/index.html"
+        pathname === "/architecture"
+          ? ".next/server/app/architecture.html"
           : pathname.startsWith("/_next/static/")
             ? ".next/static/" + pathname.slice(14)
             : null;
@@ -27,7 +28,7 @@ async function open(page) {
       await route.fulfill({ body: await readFile(file), contentType });
     });
   }
-  await page.goto(url);
+  await page.goto(url + "/architecture");
 }
 try {
   const page = await browser.newPage({
