@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "1.0.0",
+  "modelStatus": "illustrative",
+  "badge": "Illustrative simulation — not a live GWD operation",
+  "disclaimer": "All mission scenarios, workflows, capability mobilizations and resource estimates are deterministic illustrative simulations. They do not represent live agent execution, staffed operations or actual GWD client commitments.",
+  "missions": [
+    {
+      "id": "mission-learning-product-launch",
+      "code": "01",
+      "shortLabel": "Academy launch",
+      "title": "Launch a digital learning product in two markets",
+      "scenarioStatus": "illustrative",
+      "badge": "Illustrative simulation — not a live GWD operation",
+      "objective": "Design, validate and launch a new executive AI learning cohort across two target markets with full legal, quality and budget governance.",
+      "assumptions": [
+        "The product offer, curriculum and target markets are hypothetical.",
+        "No real customer data, revenue, budget or team capacity is used.",
+        "Candidate capabilities are selected from the Agency Agents source catalogue and require individual review before adaptation or deployment."
+      ],
+      "exclusions": [
+        "No live agent execution or autonomous external publishing.",
+        "No automatic payment processing or binding legal contracting without human sign-off."
+      ],
+      "leadUnit": "academy",
+      "participatingUnits": [
+        "academy",
+        "media-growth",
+        "sales-customer-ops"
+      ],
+      "sharedServices": [
+        "strategy-intelligence",
+        "finance-admin",
+        "legal-risk-compliance",
+        "marketing-comms",
+        "product-innovation",
+        "ai-platform-engineering",
+        "security-data-governance"
+      ],
+      "candidateCapabilityDivisions": [
+        "academic",
+        "product",
+        "design",
+        "marketing",
+        "sales",
+        "finance",
+        "engineering",
+        "testing",
+        "security",
+        "support"
+      ],
+      "financialPresetId": "preset-academy-cohort",
+      "steps": [
+        {
+          "id": "step-01",
+          "order": 1,
+          "stage": "STRATEGY",
+          "title": "Validate market and audience",
+          "ownerUnit": "academy",
+          "supportUnits": ["strategy-intelligence", "product-innovation"],
+          "candidateDivisions": ["research", "academic", "product"],
+          "humanGate": {
+            "id": "gate-academy-01",
+            "category": "strategy",
+            "requiredRole": "Executive Direction & Academy Lead",
+            "description": "Approve target learner segment, market selection and educational problem statement."
+          }
+        },
+        {
+          "id": "step-02",
+          "order": 2,
+          "stage": "BUILD",
+          "title": "Design offer and learning journey",
+          "ownerUnit": "academy",
+          "supportUnits": ["product-innovation", "ai-platform-engineering"],
+          "candidateDivisions": ["academic", "design", "engineering"],
+          "humanGate": {
+            "id": "gate-academy-02",
+            "category": "client",
+            "requiredRole": "Product & Curriculum Review Lead",
+            "description": "Approve curriculum syllabus, pedagogical integrity and public learner promise."
+          }
+        },
+        {
+          "id": "step-03",
+          "order": 3,
+          "stage": "GROW",
+          "title": "Prepare launch content and campaigns",
+          "ownerUnit": "media-growth",
+          "supportUnits": ["marketing-comms"],
+          "candidateDivisions": ["marketing", "design", "paid-media"],
+          "humanGate": {
+            "id": "gate-academy-03",
+            "category": "client",
+            "requiredRole": "Marketing & Brand Governance Lead",
+            "description": "Approve public claims, creative assets and market messaging accuracy."
+          }
+        },
+        {
+          "id": "step-04",
+          "order": 4,
+          "stage": "GROW",
+          "title": "Configure sales and learner support journey",
+          "ownerUnit": "sales-customer-ops",
+          "supportUnits": ["ai-platform-engineering", "security-data-governance"],
+          "candidateDivisions": ["sales", "support", "security", "testing"],
+          "humanGate": {
+            "id": "gate-academy-04",
+            "category": "security",
+            "requiredRole": "Security & Data Governance Lead",
+            "description": "Approve learner data collection boundaries, privacy consent flow and CRM access controls."
+          }
+        },
+        {
+          "id": "step-05",
+          "order": 5,
+          "stage": "CONTROL",
+          "title": "Review unit economics and legal risk",
+          "ownerUnit": "academy",
+          "supportUnits": ["finance-admin", "legal-risk-compliance"],
+          "candidateDivisions": ["finance", "security"],
+          "humanGate": {
+            "id": "gate-academy-05",
+            "category": "financial",
+            "requiredRole": "Finance & Legal Sign-Off Authority",
+            "description": "Approve illustrative cohort budget, terms of service, refund policy and regulatory compliance."
+          }
+        },
+        {
+          "id": "step-06",
+          "order": 6,
+          "stage": "CONTROL",
+          "title": "Authorize launch and post-launch evaluation",
+          "ownerUnit": "academy",
+          "supportUnits": ["media-growth", "sales-customer-ops", "ai-operations"],
+          "candidateDivisions": ["project-management", "testing"],
+          "humanGate": {
+            "id": "gate-academy-06",
+            "category": "launch",
+            "requiredRole": "CEO & Executive Direction",
+            "description": "Final human launch authorization and commitment of operational resources."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mission-market-campaign",
+      "code": "02",
+      "shortLabel": "Market campaign",
+      "title": "Orchestrate a multi-channel thought-leadership and growth campaign",
+      "scenarioStatus": "illustrative",
+      "badge": "Illustrative simulation — not a live GWD operation",
+      "objective": "Produce and distribute a research-backed digital media campaign with interactive assets, paid acquisition experiments and strict brand/legal verification.",
+      "assumptions": [
+        "Audience reach, conversion rates and campaign budgets are illustrative scenario inputs.",
+        "No external advertising spend or public release occurs without human authorization."
+      ],
+      "exclusions": [
+        "No automated ad-spend commitment or unreviewed public claims."
+      ],
+      "leadUnit": "media-growth",
+      "participatingUnits": [
+        "media-growth",
+        "sales-customer-ops",
+        "human-ai-interaction-lab"
+      ],
+      "sharedServices": [
+        "strategy-intelligence",
+        "marketing-comms",
+        "product-innovation",
+        "legal-risk-compliance",
+        "finance-admin"
+      ],
+      "candidateCapabilityDivisions": [
+        "research",
+        "marketing",
+        "paid-media",
+        "design",
+        "spatial-computing",
+        "sales",
+        "finance"
+      ],
+      "financialPresetId": "preset-media-campaign",
+      "steps": [
+        {
+          "id": "step-mc-01",
+          "order": 1,
+          "stage": "STRATEGY",
+          "title": "Synthesize market research and editorial thesis",
+          "ownerUnit": "media-growth",
+          "supportUnits": ["strategy-intelligence", "marketing-comms"],
+          "candidateDivisions": ["research", "marketing"],
+          "humanGate": {
+            "id": "gate-mc-01",
+            "category": "strategy",
+            "requiredRole": "Brand & Strategy Lead",
+            "description": "Approve editorial thesis, source citations and institutional positioning."
+          }
+        },
+        {
+          "id": "step-mc-02",
+          "order": 2,
+          "stage": "BUILD",
+          "title": "Produce interactive media and visual assets",
+          "ownerUnit": "media-growth",
+          "supportUnits": ["product-innovation", "human-ai-interaction-lab"],
+          "candidateDivisions": ["design", "spatial-computing", "marketing"],
+          "humanGate": {
+            "id": "gate-mc-02",
+            "category": "legal",
+            "requiredRole": "Legal & IP Compliance Reviewer",
+            "description": "Approve asset provenance, licensing compliance and factual disclaimers."
+          }
+        },
+        {
+          "id": "step-mc-03",
+          "order": 3,
+          "stage": "GROW",
+          "title": "Execute bounded distribution and lead handoff",
+          "ownerUnit": "media-growth",
+          "supportUnits": ["sales-customer-ops"],
+          "candidateDivisions": ["paid-media", "sales"],
+          "humanGate": {
+            "id": "gate-mc-03",
+            "category": "financial",
+            "requiredRole": "Finance & Growth Lead",
+            "description": "Approve media budget cap, channel allocation and commercial handoff criteria."
+          }
+        },
+        {
+          "id": "step-mc-04",
+          "order": 4,
+          "stage": "CONTROL",
+          "title": "Evaluate attribution and unit economics",
+          "ownerUnit": "media-growth",
+          "supportUnits": ["finance-admin", "strategy-intelligence"],
+          "candidateDivisions": ["finance", "paid-media"],
+          "humanGate": {
+            "id": "gate-mc-04",
+            "category": "client",
+            "requiredRole": "Executive Direction",
+            "description": "Review post-campaign evidence and approve continuation or termination."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mission-customer-operations",
+      "code": "03",
+      "shortLabel": "Customer operations",
+      "title": "Design a human-supervised customer onboarding and support workflow",
+      "scenarioStatus": "illustrative",
+      "badge": "Illustrative simulation — not a live GWD operation",
+      "objective": "Establish a structured enterprise onboarding and support workflow combining knowledge retrieval templates with mandatory human approval gates for security, contracts and service commitments.",
+      "assumptions": [
+        "Service volumes, ticket resolution times and account values are illustrative parameters.",
+        "No live customer PII or production CRM database is connected."
+      ],
+      "exclusions": [
+        "No autonomous contract modification, SLA commitment or unsupervised customer communication."
+      ],
+      "leadUnit": "sales-customer-ops",
+      "participatingUnits": [
+        "sales-customer-ops",
+        "agentic-architecture-lab",
+        "data-knowledge-lab"
+      ],
+      "sharedServices": [
+        "ai-platform-engineering",
+        "security-data-governance",
+        "legal-risk-compliance",
+        "people-agent-ops",
+        "finance-admin"
+      ],
+      "candidateCapabilityDivisions": [
+        "sales",
+        "support",
+        "engineering",
+        "security",
+        "testing",
+        "project-management",
+        "finance"
+      ],
+      "financialPresetId": "preset-sales-ops",
+      "steps": [
+        {
+          "id": "step-co-01",
+          "order": 1,
+          "stage": "STRATEGY",
+          "title": "Map customer journey and risk boundaries",
+          "ownerUnit": "sales-customer-ops",
+          "supportUnits": ["legal-risk-compliance", "security-data-governance"],
+          "candidateDivisions": ["sales", "support", "security"],
+          "humanGate": {
+            "id": "gate-co-01",
+            "category": "security",
+            "requiredRole": "Security & Data Governance Lead",
+            "description": "Approve data classification rules, access boundaries and escalation triggers."
+          }
+        },
+        {
+          "id": "step-co-02",
+          "order": 2,
+          "stage": "BUILD",
+          "title": "Prototype knowledge retrieval and triage playbooks",
+          "ownerUnit": "sales-customer-ops",
+          "supportUnits": ["ai-platform-engineering", "agentic-architecture-lab", "data-knowledge-lab"],
+          "candidateDivisions": ["engineering", "support", "testing"],
+          "humanGate": {
+            "id": "gate-co-02",
+            "category": "legal",
+            "requiredRole": "Legal & Quality Assurance Lead",
+            "description": "Verify response accuracy, hallucination safeguards and contract-term compliance."
+          }
+        },
+        {
+          "id": "step-co-03",
+          "order": 3,
+          "stage": "GROW",
+          "title": "Train operators and launch supervised onboarding",
+          "ownerUnit": "sales-customer-ops",
+          "supportUnits": ["people-agent-ops"],
+          "candidateDivisions": ["project-management", "support", "sales"],
+          "humanGate": {
+            "id": "gate-co-03",
+            "category": "client",
+            "requiredRole": "Customer Operations Lead",
+            "description": "Sign off on operator readiness and human-in-the-loop approval thresholds for client communications."
+          }
+        },
+        {
+          "id": "step-co-04",
+          "order": 4,
+          "stage": "CONTROL",
+          "title": "Audit service quality and delivery margin",
+          "ownerUnit": "sales-customer-ops",
+          "supportUnits": ["finance-admin", "security-data-governance"],
+          "candidateDivisions": ["finance", "testing"],
+          "humanGate": {
+            "id": "gate-co-04",
+            "category": "financial",
+            "requiredRole": "Finance & Executive Direction",
+            "description": "Approve service delivery cost allocation and SLA audit report."
+          }
+        }
+      ]
+    }
+  ]
+}

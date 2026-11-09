@@ -1,33 +1,172 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "source": {
     "repository": "https://github.com/msitarzewski/agency-agents",
-    "commit": "b859515c813efcfc4755d3471dd9e7686c7706d",
+    "commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+    "tree": "94d97cfd0c3731995a3b22ae96e2a88a004482a5",
+    "commitDate": "2026-11-06T01:58:56Z",
     "snapshotDate": "2026-11-08",
-    "license": "MIT - re-check exact upstream licence text before redistributing profile files",
+    "verificationStatus": "verified-upstream-snapshot",
+    "license": "MIT",
+    "licenseFile": "LICENSE",
+    "licenseBlobSha": "523078c01624b9b1b1c551e75054b9d3a9f953ab",
+    "licenseNotice": "MIT License — Copyright (c) 2025 AgentLand Contributors. Retain all notices before redistributing profile files.",
     "profileCount": 283,
     "divisionCount": 18,
+    "excludedDirectories": [
+      ".github",
+      "examples",
+      "integrations",
+      "scripts",
+      "strategy"
+    ],
     "status": "catalogued-source",
-    "disclaimer": "Upstream profile templates, not 283 deployed, active or authorized GWD agents."
+    "disclaimer": "Upstream profile templates in a verified source snapshot, not 283 deployed, active or authorized GWD agents."
   },
   "divisions": [
-    {"id":"academic","label":"Academic","profileCount":6},
-    {"id":"design","label":"Design","profileCount":10},
-    {"id":"engineering","label":"Engineering","profileCount":66},
-    {"id":"finance","label":"Finance","profileCount":5},
-    {"id":"game-development","label":"Game Development","profileCount":21},
-    {"id":"gis","label":"GIS","profileCount":13},
-    {"id":"healthcare","label":"Healthcare","profileCount":3},
-    {"id":"marketing","label":"Marketing","profileCount":37},
-    {"id":"paid-media","label":"Paid Media","profileCount":7},
-    {"id":"product","label":"Product","profileCount":6},
-    {"id":"project-management","label":"Project Management","profileCount":7},
-    {"id":"research","label":"Research","profileCount":1},
-    {"id":"sales","label":"Sales","profileCount":9},
-    {"id":"security","label":"Security","profileCount":12},
-    {"id":"spatial-computing","label":"Spatial Computing","profileCount":6},
-    {"id":"specialized","label":"Specialized","profileCount":59},
-    {"id":"support","label":"Support","profileCount":6},
-    {"id":"testing","label":"Testing","profileCount":9}
+    {
+      "id": "academic",
+      "label": "Academic",
+      "profileCount": 6,
+      "status": "catalogued",
+      "summary": "Instructional design, curriculum structure, scholarly synthesis and academic pedagogy templates.",
+      "candidateUnits": ["academy", "ai-research-lab"]
+    },
+    {
+      "id": "design",
+      "label": "Design",
+      "profileCount": 10,
+      "status": "catalogued",
+      "summary": "UX architecture, visual systems, brand expression, interface critique and design research templates.",
+      "candidateUnits": ["product-innovation", "media-growth", "human-ai-interaction-lab"]
+    },
+    {
+      "id": "engineering",
+      "label": "Engineering",
+      "profileCount": 66,
+      "status": "catalogued",
+      "summary": "Full-stack software, cloud infrastructure, AI systems, DevOps and platform architecture templates.",
+      "candidateUnits": ["ai-platform-engineering", "agentic-architecture-lab", "ai-research-lab"]
+    },
+    {
+      "id": "finance",
+      "label": "Finance",
+      "profileCount": 5,
+      "status": "catalogued",
+      "summary": "Financial planning, unit economics modelling, budget analysis and management reporting templates.",
+      "candidateUnits": ["finance-admin", "ventures"]
+    },
+    {
+      "id": "game-development",
+      "label": "Game Development",
+      "profileCount": 21,
+      "status": "catalogued",
+      "summary": "Interactive simulation, engine scripting, level systems and real-time mechanics templates.",
+      "candidateUnits": ["media-growth", "human-ai-interaction-lab"]
+    },
+    {
+      "id": "gis",
+      "label": "GIS",
+      "profileCount": 13,
+      "status": "catalogued",
+      "summary": "Geospatial data processing, cartographic visualization and spatial intelligence templates.",
+      "candidateUnits": ["data-knowledge-lab", "strategy-intelligence"]
+    },
+    {
+      "id": "healthcare",
+      "label": "Healthcare",
+      "profileCount": 3,
+      "status": "catalogued",
+      "summary": "Regulated health-domain workflow analysis and compliance-sensitive documentation templates.",
+      "candidateUnits": ["legal-risk-compliance", "venture-experimentation-lab"]
+    },
+    {
+      "id": "marketing",
+      "label": "Marketing",
+      "profileCount": 37,
+      "status": "catalogued",
+      "summary": "Content strategy, channel growth, editorial production, audience positioning and brand storytelling templates.",
+      "candidateUnits": ["marketing-comms", "media-growth", "academy"]
+    },
+    {
+      "id": "paid-media",
+      "label": "Paid Media",
+      "profileCount": 7,
+      "status": "catalogued",
+      "summary": "Campaign bidding, ad creative testing, attribution analysis and paid acquisition templates.",
+      "candidateUnits": ["media-growth", "marketing-comms", "sales-customer-ops"]
+    },
+    {
+      "id": "product",
+      "label": "Product",
+      "profileCount": 6,
+      "status": "catalogued",
+      "summary": "Product discovery, roadmap prioritization, requirement specification and lifecycle management templates.",
+      "candidateUnits": ["product-innovation", "academy", "ventures"]
+    },
+    {
+      "id": "project-management",
+      "label": "Project Management",
+      "profileCount": 7,
+      "status": "catalogued",
+      "summary": "Delivery coordination, milestone tracking, cross-unit dependency mapping and risk escalation templates.",
+      "candidateUnits": ["ai-operations", "people-agent-ops", "product-innovation"]
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "profileCount": 1,
+      "status": "catalogued",
+      "summary": "Deep domain synthesis, literature review and structured hypothesis investigation template.",
+      "candidateUnits": ["strategy-intelligence", "ai-research-lab", "data-knowledge-lab"]
+    },
+    {
+      "id": "sales",
+      "label": "Sales",
+      "profileCount": 9,
+      "status": "catalogued",
+      "summary": "Pipeline qualification, account intelligence, proposal drafting and revenue operations templates.",
+      "candidateUnits": ["sales-customer-ops", "media-growth"]
+    },
+    {
+      "id": "security",
+      "label": "Security",
+      "profileCount": 12,
+      "status": "catalogued",
+      "summary": "Application security, threat modelling, access governance, compliance auditing and incident readiness templates.",
+      "candidateUnits": ["security-data-governance", "legal-risk-compliance", "ai-platform-engineering"]
+    },
+    {
+      "id": "spatial-computing",
+      "label": "Spatial Computing",
+      "profileCount": 6,
+      "status": "catalogued",
+      "summary": "3D scene architecture, WebXR/WebGL visualization and spatial interaction design templates.",
+      "candidateUnits": ["product-innovation", "human-ai-interaction-lab", "media-growth"]
+    },
+    {
+      "id": "specialized",
+      "label": "Specialized",
+      "profileCount": 59,
+      "status": "catalogued",
+      "summary": "Cross-disciplinary domain specialists, localization, operations orchestration and niche technical templates.",
+      "candidateUnits": ["people-agent-ops", "strategy-intelligence", "agentic-architecture-lab", "venture-experimentation-lab"]
+    },
+    {
+      "id": "support",
+      "label": "Support",
+      "profileCount": 6,
+      "status": "catalogued",
+      "summary": "Customer onboarding, ticket triage, knowledge base curation and service recovery templates.",
+      "candidateUnits": ["sales-customer-ops", "academy"]
+    },
+    {
+      "id": "testing",
+      "label": "Testing",
+      "profileCount": 9,
+      "status": "catalogued",
+      "summary": "Automated QA, regression verification, performance benchmarking and accessibility auditing templates.",
+      "candidateUnits": ["ai-platform-engineering", "security-data-governance", "product-innovation"]
+    }
   ]
 }

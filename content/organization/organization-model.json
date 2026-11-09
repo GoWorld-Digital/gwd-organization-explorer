@@ -1,45 +1,561 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "organization": {
     "id": "gwd",
     "name": "GoWorld Digital",
     "shortName": "GWD",
     "modelStatus": "proposed",
+    "asOf": "2026-11-08",
     "publicDomain": "explore.goworld.digital",
     "disclaimer": "Proposed organizational model; this does not assert legal constitution, staffing or operational deployment."
   },
   "layers": [
-    {"id":"governance","label":"Governance","rank":1,"status":"proposed","purpose":"Strategic direction, oversight, capital principles, risk and accountability.","units":[
-      {"id":"board","label":"Board of Administration","status":"proposed","kind":"governance"},
-      {"id":"advisory-council","label":"Advisory / Strategic Council","status":"proposed","kind":"advisory"}
-    ]},
-    {"id":"executive","label":"Executive Leadership","rank":2,"status":"proposed","purpose":"Coordinate strategy, priorities, performance and operational authority.","units":[
-      {"id":"ceo-direction","label":"CEO & Executive Direction","status":"proposed","kind":"executive"},
-      {"id":"ai-operations","label":"AI Operations / Ops Core","status":"design-principle","kind":"coordination","note":"Intended control plane, not the public Explorer and not assumed to be in production."}
-    ]},
-    {"id":"shared-services","label":"Shared Services","rank":3,"status":"proposed","purpose":"Transversal capabilities serving multiple business units.","units":[
-      {"id":"strategy-intelligence","label":"Strategy & Intelligence","economicType":"cost-centre"},
-      {"id":"finance-admin","label":"Finance & Administration","economicType":"cost-centre"},
-      {"id":"people-agent-ops","label":"People & Agent Operations","economicType":"cost-centre"},
-      {"id":"ai-platform-engineering","label":"AI Platform & Engineering","economicType":"cost-centre"},
-      {"id":"legal-risk-compliance","label":"Legal, Risk & Compliance","economicType":"cost-centre"},
-      {"id":"marketing-comms","label":"Marketing & Communications","economicType":"cost-centre-or-allocated-service"},
-      {"id":"product-innovation","label":"Product & Innovation","economicType":"cost-centre-or-allocated-service"},
-      {"id":"security-data-governance","label":"Security & Data Governance","economicType":"cost-centre"}
-    ]},
-    {"id":"business-units","label":"Business Units","rank":4,"status":"proposed","purpose":"Own customer outcomes, products, services and unit economics.","units":[
-      {"id":"academy","label":"GWD Academy","economicType":"profit-centre-candidate","status":"proposed"},
-      {"id":"media-growth","label":"GWD Media Factory & Growth","economicType":"profit-centre-candidate","status":"proposed"},
-      {"id":"sales-customer-ops","label":"GWD Sales & Customer Operations","economicType":"profit-centre-candidate","status":"proposed"},
-      {"id":"ventures","label":"GWD Ventures & Venture Studio","economicType":"investment-centre-candidate","status":"proposed"}
-    ]},
-    {"id":"labs-innovation","label":"Labs & Innovation","rank":5,"status":"proposed","purpose":"Research, experimentation, prototypes and validation.","units":[
-      {"id":"ai-research-lab","label":"AI Research & Systems Lab","status":"proposed"},
-      {"id":"agentic-architecture-lab","label":"Agentic Architecture Lab","status":"proposed"},
-      {"id":"data-knowledge-lab","label":"Data & Knowledge Lab","status":"proposed"},
-      {"id":"human-ai-interaction-lab","label":"Human-AI Interaction Lab","status":"proposed"},
-      {"id":"venture-experimentation-lab","label":"Venture Experimentation Lab","status":"proposed"}
-    ]}
+    {
+      "id": "governance",
+      "label": "Governance",
+      "rank": 1,
+      "status": "proposed",
+      "purpose": "Strategic direction, oversight, capital principles, risk and accountability.",
+      "units": [
+        {
+          "id": "board",
+          "label": "Board of Administration",
+          "status": "proposed",
+          "kind": "governance",
+          "mandate": "Define institutional purpose, long-term strategic direction, capital allocation principles, risk appetite and executive accountability.",
+          "candidateCapabilityDivisions": ["finance", "security"]
+        },
+        {
+          "id": "advisory-council",
+          "label": "Advisory / Strategic Council",
+          "status": "proposed",
+          "kind": "advisory",
+          "mandate": "Provide independent domain expertise, research critique, strategic challenge and ecosystem perspectives without executive or statutory authority.",
+          "note": "Advisory rather than executive authority unless separately mandated.",
+          "candidateCapabilityDivisions": ["academic", "research", "specialized"]
+        }
+      ]
+    },
+    {
+      "id": "executive",
+      "label": "Executive Leadership",
+      "rank": 2,
+      "status": "proposed",
+      "purpose": "Coordinate strategy, priorities, performance and operational authority.",
+      "units": [
+        {
+          "id": "ceo-direction",
+          "label": "CEO & Executive Direction",
+          "status": "proposed",
+          "kind": "executive",
+          "mandate": "Translate board mandate into corporate strategy, operating priorities, portfolio resource allocation and executive accountability.",
+          "candidateCapabilityDivisions": ["finance", "product", "project-management"]
+        },
+        {
+          "id": "ai-operations",
+          "label": "AI Operations / Ops Core",
+          "status": "design-principle",
+          "kind": "coordination",
+          "mandate": "Intended coordination architecture for cross-unit missions, dependency tracking, human approval gates, budget evidence and operating rhythm.",
+          "note": "Intended control plane, not the public Explorer and not assumed to be in production.",
+          "candidateCapabilityDivisions": ["project-management", "engineering", "security"]
+        }
+      ]
+    },
+    {
+      "id": "shared-services",
+      "label": "Shared Services",
+      "rank": 3,
+      "status": "proposed",
+      "purpose": "Transversal capabilities serving multiple business units.",
+      "units": [
+        {
+          "id": "strategy-intelligence",
+          "label": "Strategy & Intelligence",
+          "status": "proposed",
+          "kind": "shared-service",
+          "economicType": "cost-centre",
+          "mandate": "Conduct strategic analysis, market and competitive intelligence, geospatial/data synthesis and scenario planning for leadership and business units.",
+          "candidateCapabilityDivisions": ["research", "gis", "specialized"]
+        },
+        {
+          "id": "finance-admin",
+          "label": "Finance & Administration",
+          "status": "proposed",
+          "kind": "shared-service",
+          "economicType": "cost-centre",
+          "mandate": "Manage financial control, budgeting, shared-service cost allocation, unit-economics reporting and administrative operations.",
+          "candidateCapabilityDivisions": ["finance"]
+        },
+        {
+          "id": "people-agent-ops",
+          "label": "People & Agent Operations",
+          "status": "proposed",
+          "kind": "shared-service",
+          "economicType": "cost-centre",
+          "mandate": "Steward human talent, role design, upstream agent profile evaluation, capability lifecycle governance and human-in-the-loop operating standards.",
+          "candidateCapabilityDivisions": ["project-management", "specialized", "academic"]
+        },
+        {
+          "id": "ai-platform-engineering",
+          "label": "AI Platform & Engineering",
+          "status": "proposed",
+          "kind": "shared-service",
+          "economicType": "cost-centre",
+          "mandate": "Architect and maintain shared software infrastructure, AI integration patterns, reliability engineering and automated quality verification.",
+          "candidateCapabilityDivisions": ["engineering", "testing", "security"]
+        },
+        {
+          "id": "legal-risk-compliance",
+          "label": "Legal, Risk & Compliance",
+          "status": "proposed",
+          "kind": "shared-service",
+          "economicType": "cost-centre",
+          "mandate": "Oversee legal review, intellectual property and licensing provenance, regulatory compliance, contract governance and risk controls.",
+          "candidateCapabilityDivisions": ["security", "healthcare", "finance"]
+        },
+        {
+          "id": "marketing-comms",
+          "label": "Marketing & Communications",
+          "status": "proposed",
+          "kind": "shared-service",
+          "economicType": "cost-centre-or-allocated-service",
+          "mandate": "Steward institutional brand narrative, public communications, editorial standards and shared demand-generation systems.",
+          "candidateCapabilityDivisions": ["marketing", "paid-media", "design"]
+        },
+        {
+          "id": "product-innovation",
+          "label": "Product & Innovation",
+          "status": "proposed",
+          "kind": "shared-service",
+          "economicType": "cost-centre-or-allocated-service",
+          "mandate": "Guide product strategy, design systems, spatial/interactive user experience, prototyping standards and quality of experience across offerings.",
+          "candidateCapabilityDivisions": ["product", "design", "spatial-computing", "testing"]
+        },
+        {
+          "id": "security-data-governance",
+          "label": "Security & Data Governance",
+          "status": "proposed",
+          "kind": "shared-service",
+          "economicType": "cost-centre",
+          "mandate": "Enforce cybersecurity architecture, privacy protection, data access boundaries, auditability and operational assurance.",
+          "candidateCapabilityDivisions": ["security", "testing", "engineering"]
+        }
+      ]
+    },
+    {
+      "id": "business-units",
+      "label": "Business Units",
+      "rank": 4,
+      "status": "proposed",
+      "purpose": "Own customer outcomes, products, services and unit economics.",
+      "units": [
+        {
+          "id": "academy",
+          "label": "GWD Academy",
+          "economicType": "profit-centre-candidate",
+          "status": "proposed",
+          "kind": "business-unit",
+          "mandate": "Design and deliver executive education, applied AI training programs, learning communities, curricula and certification tracks.",
+          "candidateCapabilityDivisions": ["academic", "product", "marketing", "support"]
+        },
+        {
+          "id": "media-growth",
+          "label": "GWD Media Factory & Growth",
+          "economicType": "profit-centre-candidate",
+          "status": "proposed",
+          "kind": "business-unit",
+          "mandate": "Produce digital media, interactive brand storytelling, multi-channel campaigns and measurable audience/revenue growth programs.",
+          "candidateCapabilityDivisions": ["marketing", "paid-media", "design", "game-development", "spatial-computing", "sales"]
+        },
+        {
+          "id": "sales-customer-ops",
+          "label": "GWD Sales & Customer Operations",
+          "economicType": "profit-centre-candidate",
+          "status": "proposed",
+          "kind": "business-unit",
+          "mandate": "Run commercial pipeline operations, client onboarding, CRM workflows, service delivery coordination and customer success.",
+          "candidateCapabilityDivisions": ["sales", "support", "paid-media"]
+        },
+        {
+          "id": "ventures",
+          "label": "GWD Ventures & Venture Studio",
+          "economicType": "investment-centre-candidate",
+          "status": "proposed",
+          "kind": "venture-studio",
+          "maturityStage": "venture-proposal",
+          "mandate": "Identify, validate and incubate new AI-native venture opportunities, strategic partnerships and potential spin-offs under stage-gated capital discipline.",
+          "note": "Investment-centre candidate for portfolio exploration, not an established investment fund or operating spin-off.",
+          "candidateCapabilityDivisions": ["product", "finance", "research", "specialized"]
+        }
+      ]
+    },
+    {
+      "id": "labs-innovation",
+      "label": "Labs & Innovation",
+      "rank": 5,
+      "status": "proposed",
+      "purpose": "Research, experimentation, prototypes and validation.",
+      "units": [
+        {
+          "id": "ai-research-lab",
+          "label": "AI Research & Systems Lab",
+          "status": "proposed",
+          "kind": "lab",
+          "economicType": "innovation-cost-centre-candidate",
+          "maturityStage": "research",
+          "mandate": "Investigate applied AI systems, model evaluation benchmarks, reasoning reliability and foundational technical capabilities.",
+          "candidateCapabilityDivisions": ["research", "engineering", "academic"]
+        },
+        {
+          "id": "agentic-architecture-lab",
+          "label": "Agentic Architecture Lab",
+          "status": "proposed",
+          "kind": "lab",
+          "economicType": "innovation-cost-centre-candidate",
+          "maturityStage": "prototype",
+          "mandate": "Experiment with multi-step workflow orchestration, bounded tool use, verification loops and human-approval gate protocols.",
+          "candidateCapabilityDivisions": ["engineering", "specialized", "security"]
+        },
+        {
+          "id": "data-knowledge-lab",
+          "label": "Data & Knowledge Lab",
+          "status": "proposed",
+          "kind": "lab",
+          "economicType": "innovation-cost-centre-candidate",
+          "maturityStage": "research",
+          "mandate": "Explore structured knowledge graphs, provenance tracking, geospatial/domain datasets and retrieval quality.",
+          "candidateCapabilityDivisions": ["gis", "research", "engineering"]
+        },
+        {
+          "id": "human-ai-interaction-lab",
+          "label": "Human-AI Interaction Lab",
+          "status": "proposed",
+          "kind": "lab",
+          "economicType": "innovation-cost-centre-candidate",
+          "maturityStage": "prototype",
+          "mandate": "Prototype spatial interfaces, supervisory command environments, accessible 2D/3D visual grammars and collaborative human-agent workflows.",
+          "candidateCapabilityDivisions": ["design", "spatial-computing", "game-development"]
+        },
+        {
+          "id": "venture-experimentation-lab",
+          "label": "Venture Experimentation Lab",
+          "status": "proposed",
+          "kind": "lab",
+          "economicType": "innovation-cost-centre-candidate",
+          "maturityStage": "validation",
+          "mandate": "Run time-boxed problem discovery, market validation sprints and early prototypes prior to formal Venture Studio incubation.",
+          "candidateCapabilityDivisions": ["product", "specialized", "healthcare", "finance"]
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel-reports-ceo-board",
+      "from": "ceo-direction",
+      "to": "board",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Executive leadership is accountable to the Board of Administration for strategy execution, risk and capital stewardship."
+    },
+    {
+      "id": "rel-advises-council-board",
+      "from": "advisory-council",
+      "to": "board",
+      "type": "advises",
+      "status": "proposed",
+      "rationale": "Advisory / Strategic Council provides non-binding independent domain and research counsel to the Board."
+    },
+    {
+      "id": "rel-reports-aiops-ceo",
+      "from": "ai-operations",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "AI Operations / Ops Core is a proposed coordination mechanism operating under executive direction and human sign-off."
+    },
+    {
+      "id": "rel-reports-strategy-ceo",
+      "from": "strategy-intelligence",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Strategy & Intelligence reports to executive leadership as a transversal shared service."
+    },
+    {
+      "id": "rel-reports-finance-ceo",
+      "from": "finance-admin",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Finance & Administration reports to executive leadership for financial control and governance."
+    },
+    {
+      "id": "rel-reports-people-ceo",
+      "from": "people-agent-ops",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "People & Agent Operations reports to executive leadership for human talent and capability stewardship."
+    },
+    {
+      "id": "rel-reports-platform-ceo",
+      "from": "ai-platform-engineering",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "AI Platform & Engineering reports to executive leadership as shared technical infrastructure."
+    },
+    {
+      "id": "rel-reports-legal-ceo",
+      "from": "legal-risk-compliance",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Legal, Risk & Compliance reports to executive leadership with escalation paths to governance."
+    },
+    {
+      "id": "rel-reports-marketing-ceo",
+      "from": "marketing-comms",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Marketing & Communications reports to executive leadership for institutional brand and shared growth systems."
+    },
+    {
+      "id": "rel-reports-product-ceo",
+      "from": "product-innovation",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Product & Innovation reports to executive leadership for cross-portfolio product and UX standards."
+    },
+    {
+      "id": "rel-reports-security-ceo",
+      "from": "security-data-governance",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Security & Data Governance reports to executive leadership for security architecture and data assurance."
+    },
+    {
+      "id": "rel-reports-academy-ceo",
+      "from": "academy",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "GWD Academy is accountable to executive leadership for learning outcomes and candidate profit-centre performance."
+    },
+    {
+      "id": "rel-reports-media-ceo",
+      "from": "media-growth",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "GWD Media Factory & Growth is accountable to executive leadership for media production and growth programs."
+    },
+    {
+      "id": "rel-reports-sales-ceo",
+      "from": "sales-customer-ops",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "GWD Sales & Customer Operations is accountable to executive leadership for commercial and customer outcomes."
+    },
+    {
+      "id": "rel-reports-ventures-ceo",
+      "from": "ventures",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "GWD Ventures & Venture Studio reports to executive leadership on candidate investment-centre initiatives."
+    },
+    {
+      "id": "rel-reports-airesearch-ceo",
+      "from": "ai-research-lab",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "AI Research & Systems Lab operates under executive direction as a time-boxed research program."
+    },
+    {
+      "id": "rel-reports-agenticlab-ceo",
+      "from": "agentic-architecture-lab",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Agentic Architecture Lab operates under executive direction for workflow and governance prototyping."
+    },
+    {
+      "id": "rel-reports-datalab-ceo",
+      "from": "data-knowledge-lab",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Data & Knowledge Lab operates under executive direction for provenance and knowledge-system research."
+    },
+    {
+      "id": "rel-reports-hailab-ceo",
+      "from": "human-ai-interaction-lab",
+      "to": "ceo-direction",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Human-AI Interaction Lab operates under executive direction for spatial and supervisory interface research."
+    },
+    {
+      "id": "rel-reports-venturelab-ventures",
+      "from": "venture-experimentation-lab",
+      "to": "ventures",
+      "type": "reports_to",
+      "status": "proposed",
+      "rationale": "Venture Experimentation Lab feeds validated problem/prototype hypotheses into GWD Ventures & Venture Studio."
+    },
+    {
+      "id": "rel-service-strategy-academy",
+      "from": "strategy-intelligence",
+      "to": "academy",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Provides market demand analysis and curriculum positioning intelligence to GWD Academy."
+    },
+    {
+      "id": "rel-service-strategy-media",
+      "from": "strategy-intelligence",
+      "to": "media-growth",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Provides audience research and competitive intelligence to GWD Media Factory & Growth."
+    },
+    {
+      "id": "rel-service-finance-academy",
+      "from": "finance-admin",
+      "to": "academy",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Provides cohort budgeting, pricing analysis and cost allocation tracking for GWD Academy."
+    },
+    {
+      "id": "rel-service-finance-ventures",
+      "from": "finance-admin",
+      "to": "ventures",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Provides stage-gate capital accounting and milestone tracking for GWD Ventures & Venture Studio."
+    },
+    {
+      "id": "rel-service-people-academy",
+      "from": "people-agent-ops",
+      "to": "academy",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Supports instructor enablement and reviewed capability template stewardship for GWD Academy."
+    },
+    {
+      "id": "rel-service-people-sales",
+      "from": "people-agent-ops",
+      "to": "sales-customer-ops",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Supports role enablement and human-in-the-loop operational training for Sales & Customer Operations."
+    },
+    {
+      "id": "rel-service-platform-academy",
+      "from": "ai-platform-engineering",
+      "to": "academy",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Delivers learning platform infrastructure, lab environments and technical QA for GWD Academy."
+    },
+    {
+      "id": "rel-service-platform-sales",
+      "from": "ai-platform-engineering",
+      "to": "sales-customer-ops",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Delivers CRM integrations, workflow automation and reliability engineering for Sales & Customer Operations."
+    },
+    {
+      "id": "rel-service-marketing-academy",
+      "from": "marketing-comms",
+      "to": "academy",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Provides brand governance, program communications and learner acquisition support for GWD Academy."
+    },
+    {
+      "id": "rel-service-marketing-media",
+      "from": "marketing-comms",
+      "to": "media-growth",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Aligns institutional brand standards and editorial governance with GWD Media Factory & Growth."
+    },
+    {
+      "id": "rel-service-product-academy",
+      "from": "product-innovation",
+      "to": "academy",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Provides learning experience design, curriculum UX and product discovery support to GWD Academy."
+    },
+    {
+      "id": "rel-service-product-ventures",
+      "from": "product-innovation",
+      "to": "ventures",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Provides prototype design and product validation frameworks to GWD Ventures & Venture Studio."
+    },
+    {
+      "id": "rel-service-legal-ventures",
+      "from": "legal-risk-compliance",
+      "to": "ventures",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Provides IP review, regulatory screening and entity-structuring counsel to GWD Ventures & Venture Studio."
+    },
+    {
+      "id": "rel-service-security-sales",
+      "from": "security-data-governance",
+      "to": "sales-customer-ops",
+      "type": "provides_service_to",
+      "status": "proposed",
+      "rationale": "Enforces customer data privacy, consent governance and access controls in Sales & Customer Operations."
+    }
+  ],
+  "capabilityMappings": [
+    {"id": "cap-academic-academy", "divisionId": "academic", "unitId": "academy", "type": "capability_supports", "status": "catalogued", "rationale": "Curriculum and instructional design templates map to GWD Academy."},
+    {"id": "cap-design-product", "divisionId": "design", "unitId": "product-innovation", "type": "capability_supports", "status": "catalogued", "rationale": "Design system and UX templates support Product & Innovation."},
+    {"id": "cap-design-hai", "divisionId": "design", "unitId": "human-ai-interaction-lab", "type": "capability_supports", "status": "catalogued", "rationale": "Interface research templates support Human-AI Interaction Lab."},
+    {"id": "cap-engineering-platform", "divisionId": "engineering", "unitId": "ai-platform-engineering", "type": "capability_supports", "status": "catalogued", "rationale": "Software and infrastructure templates support AI Platform & Engineering."},
+    {"id": "cap-engineering-agentic", "divisionId": "engineering", "unitId": "agentic-architecture-lab", "type": "capability_supports", "status": "catalogued", "rationale": "Systems engineering templates support Agentic Architecture Lab."},
+    {"id": "cap-finance-finance", "divisionId": "finance", "unitId": "finance-admin", "type": "capability_supports", "status": "catalogued", "rationale": "Financial planning and unit economics templates support Finance & Administration."},
+    {"id": "cap-gamedev-media", "divisionId": "game-development", "unitId": "media-growth", "type": "capability_supports", "status": "catalogued", "rationale": "Interactive engine and simulation templates support Media Factory & Growth."},
+    {"id": "cap-gis-datalab", "divisionId": "gis", "unitId": "data-knowledge-lab", "type": "capability_supports", "status": "catalogued", "rationale": "Spatial data and cartographic templates support Data & Knowledge Lab."},
+    {"id": "cap-healthcare-legal", "divisionId": "healthcare", "unitId": "legal-risk-compliance", "type": "capability_supports", "status": "catalogued", "rationale": "Regulated-domain workflow templates inform Legal, Risk & Compliance reviews."},
+    {"id": "cap-marketing-marketing", "divisionId": "marketing", "unitId": "marketing-comms", "type": "capability_supports", "status": "catalogued", "rationale": "Brand and content strategy templates support Marketing & Communications."},
+    {"id": "cap-marketing-media", "divisionId": "marketing", "unitId": "media-growth", "type": "capability_supports", "status": "catalogued", "rationale": "Editorial and growth templates support GWD Media Factory & Growth."},
+    {"id": "cap-paidmedia-media", "divisionId": "paid-media", "unitId": "media-growth", "type": "capability_supports", "status": "catalogued", "rationale": "Paid acquisition and campaign analytics templates support Media Factory & Growth."},
+    {"id": "cap-product-product", "divisionId": "product", "unitId": "product-innovation", "type": "capability_supports", "status": "catalogued", "rationale": "Product discovery and specification templates support Product & Innovation."},
+    {"id": "cap-pm-people", "divisionId": "project-management", "unitId": "people-agent-ops", "type": "capability_supports", "status": "catalogued", "rationale": "Delivery coordination templates support People & Agent Operations."},
+    {"id": "cap-research-strategy", "divisionId": "research", "unitId": "strategy-intelligence", "type": "capability_supports", "status": "catalogued", "rationale": "Synthesis and investigation templates support Strategy & Intelligence."},
+    {"id": "cap-research-ailab", "divisionId": "research", "unitId": "ai-research-lab", "type": "capability_supports", "status": "catalogued", "rationale": "Research methodology templates support AI Research & Systems Lab."},
+    {"id": "cap-sales-sales", "divisionId": "sales", "unitId": "sales-customer-ops", "type": "capability_supports", "status": "catalogued", "rationale": "Commercial pipeline and proposal templates support Sales & Customer Operations."},
+    {"id": "cap-security-security", "divisionId": "security", "unitId": "security-data-governance", "type": "capability_supports", "status": "catalogued", "rationale": "Threat modelling and security audit templates support Security & Data Governance."},
+    {"id": "cap-spatial-hai", "divisionId": "spatial-computing", "unitId": "human-ai-interaction-lab", "type": "capability_supports", "status": "catalogued", "rationale": "3D and spatial interaction templates support Human-AI Interaction Lab."},
+    {"id": "cap-specialized-venturelab", "divisionId": "specialized", "unitId": "venture-experimentation-lab", "type": "capability_supports", "status": "catalogued", "rationale": "Cross-domain specialist templates support Venture Experimentation Lab."},
+    {"id": "cap-support-sales", "divisionId": "support", "unitId": "sales-customer-ops", "type": "capability_supports", "status": "catalogued", "rationale": "Customer service and onboarding templates support Sales & Customer Operations."},
+    {"id": "cap-testing-platform", "divisionId": "testing", "unitId": "ai-platform-engineering", "type": "capability_supports", "status": "catalogued", "rationale": "Automated verification and QA templates support AI Platform & Engineering."}
+  ],
+  "discrepancyNotes": [
+    {
+      "id": "disc-labs-count",
+      "topic": "Layer 5 Labs count and naming between blueprint branches",
+      "activeBranchModel": "5 Labs in blueprint/immersive-explorer-v1: AI Research & Systems Lab, Agentic Architecture Lab, Data & Knowledge Lab, Human-AI Interaction Lab, Venture Experimentation Lab.",
+      "alternativeSeedModel": "3 Labs in blueprint/gwd-explorer-v1 (organization.seed.json): AI & Systems Lab, Organization Design Lab, Venture Lab.",
+      "resolution": "Preserved the 5 Labs documented in blueprint/immersive-explorer-v1 docs/ORGANIZATION_MODEL.md and organization-model.json. Organization Design Lab from the earlier seed overlaps with Human-AI Interaction Lab and People & Agent Operations; human governance decision is required on whether Organization Design Lab should be added as a 6th lab or folded into Human-AI Interaction Lab."
+    }
   ],
   "economicModelDisclaimer": "Centre types are proposed classifications. No real revenue, cost, budget, valuation or return is represented."
 }

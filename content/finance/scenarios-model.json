@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0.0",
+  "modelStatus": "illustrative",
+  "badge": "Illustrative scenario / assumptions — not GWD accounting or forecast",
+  "disclaimer": "All figures, prices, volumes and allocations in this simulator are deterministic illustrative inputs. They do not represent actual GWD revenue, costs, budgets, forecasts, valuations or financial advice.",
+  "currency": "USD",
+  "defaultPeriod": "Quarterly (illustrative)",
+  "formulas": {
+    "grossRevenue": "customers * averageRevenuePerCustomer",
+    "directDeliveryCosts": "customers * directCostPerUnit",
+    "contribution": "grossRevenue - directDeliveryCosts",
+    "illustrativeMargin": "contribution - allocatedSharedServiceCosts",
+    "netPositionAfterExperiments": "illustrativeMargin - experimentationBudget"
+  },
+  "bounds": {
+    "customers": { "min": 0, "max": 100000, "step": 10 },
+    "averageRevenuePerCustomer": { "min": 0, "max": 100000, "step": 50 },
+    "directCostPerUnit": { "min": 0, "max": 100000, "step": 25 },
+    "allocatedSharedServiceCosts": { "min": 0, "max": 5000000, "step": 1000 },
+    "experimentationBudget": { "min": 0, "max": 2000000, "step": 1000 }
+  },
+  "centreDefinitions": [
+    {
+      "id": "cost-centre",
+      "label": "Cost Centre",
+      "status": "proposed",
+      "description": "Shared capabilities (Strategy, Finance, People & Agent Ops, AI Platform, Legal, Marketing, Product, Security) measured on cost discipline, service quality and transparent allocation to business units."
+    },
+    {
+      "id": "profit-centre-candidate",
+      "label": "Profit Centre Candidate",
+      "status": "proposed",
+      "description": "Business units (GWD Academy, Media Factory & Growth, Sales & Customer Operations) that become profit centres only once real offers, attributable revenue, direct delivery costs and management accountability exist."
+    },
+    {
+      "id": "investment-centre-candidate",
+      "label": "Investment / Innovation Centre Candidate",
+      "status": "proposed",
+      "description": "Time-boxed venture and lab portfolios (GWD Ventures & Venture Studio and Layer 5 Labs) measured on stage-gated capital allocation, validated hypotheses and learning milestones rather than immediate operating margin."
+    }
+  ],
+  "presets": [
+    {
+      "id": "preset-academy-cohort",
+      "title": "Scenario A — Executive Learning Cohort (Illustrative)",
+      "unitId": "academy",
+      "centreType": "profit-centre-candidate",
+      "scenarioStatus": "illustrative",
+      "currency": "USD",
+      "period": "Quarterly (illustrative)",
+      "description": "Hypothetical two-market digital learning cohort evaluating whether participant tuition covers direct instructional/platform delivery and allocated shared services.",
+      "inputs": {
+        "customers": 120,
+        "averageRevenuePerCustomer": 1200,
+        "directCostPerUnit": 350,
+        "allocatedSharedServiceCosts": 48000,
+        "experimentationBudget": 12000
+      },
+      "allocatedSharedServices": [
+        "ai-platform-engineering",
+        "product-innovation",
+        "marketing-comms",
+        "finance-admin",
+        "legal-risk-compliance"
+      ],
+      "exclusions": [
+        "Excludes corporate tax, statutory audit fees, historical sunk R&D and capital fundraising."
+      ]
+    },
+    {
+      "id": "preset-media-campaign",
+      "title": "Scenario B — Media & Growth Program (Illustrative)",
+      "unitId": "media-growth",
+      "centreType": "profit-centre-candidate",
+      "scenarioStatus": "illustrative",
+      "currency": "USD",
+      "period": "Quarterly (illustrative)",
+      "description": "Hypothetical digital media and campaign production package modelling client retainers against production delivery and shared brand/platform overhead.",
+      "inputs": {
+        "customers": 18,
+        "averageRevenuePerCustomer": 9500,
+        "directCostPerUnit": 3200,
+        "allocatedSharedServiceCosts": 52000,
+        "experimentationBudget": 15000
+      },
+      "allocatedSharedServices": [
+        "marketing-comms",
+        "strategy-intelligence",
+        "product-innovation",
+        "legal-risk-compliance",
+        "finance-admin"
+      ],
+      "exclusions": [
+        "Excludes third-party pass-through ad media spend billed directly to clients."
+      ]
+    },
+    {
+      "id": "preset-sales-ops",
+      "title": "Scenario C — Managed Customer Operations (Illustrative)",
+      "unitId": "sales-customer-ops",
+      "centreType": "profit-centre-candidate",
+      "scenarioStatus": "illustrative",
+      "currency": "USD",
+      "period": "Quarterly (illustrative)",
+      "description": "Hypothetical managed commercial and customer-success workflow evaluating recurring service accounts against human-supervised delivery and security/platform allocations.",
+      "inputs": {
+        "customers": 30,
+        "averageRevenuePerCustomer": 6000,
+        "directCostPerUnit": 2100,
+        "allocatedSharedServiceCosts": 55000,
+        "experimentationBudget": 10000
+      },
+      "allocatedSharedServices": [
+        "ai-platform-engineering",
+        "security-data-governance",
+        "people-agent-ops",
+        "legal-risk-compliance",
+        "finance-admin"
+      ],
+      "exclusions": [
+        "Excludes enterprise custom integration hardware or external legal counsel retainers."
+      ]
+    },
+    {
+      "id": "preset-venture-validation",
+      "title": "Scenario D — Venture & Lab Validation Sprint (Illustrative)",
+      "unitId": "ventures",
+      "centreType": "investment-centre-candidate",
+      "scenarioStatus": "illustrative",
+      "currency": "USD",
+      "period": "Quarterly (illustrative)",
+      "description": "Hypothetical pre-revenue venture and lab experimentation sprint illustrating stage-gated R&D and shared-service consumption with zero assumed commercial revenue.",
+      "inputs": {
+        "customers": 0,
+        "averageRevenuePerCustomer": 0,
+        "directCostPerUnit": 0,
+        "allocatedSharedServiceCosts": 35000,
+        "experimentationBudget": 45000
+      },
+      "allocatedSharedServices": [
+        "ai-platform-engineering",
+        "product-innovation",
+        "legal-risk-compliance",
+        "finance-admin"
+      ],
+      "exclusions": [
+        "No valuation, equity return, IRR or future revenue projection is assumed or implied."
+      ]
+    }
+  ]
+}
