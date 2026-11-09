@@ -6,14 +6,29 @@
 
 ## Product status
 
-**Stage:** Blueprint / product architecture  
+**Stage:** First functional Organization Explorer slice
 **Public destination (proposed):** `https://explore.goworld.digital`  
 **Repository:** `GoWorld-Digital/gwd-organization-explorer`  
 **Organization:** GoWorld Digital (GWD)
 
 This repository is the independent public-experience project. It is not the GWD Ops Core, not an ERP, not a live agent control plane and not an AtlasHub product.
 
-## What this will become
+## Run the Explorer locally
+
+Use Node.js 22.13+ or Node.js 24 and npm. From the repository root:
+
+```sh
+npm ci
+npm run dev
+```
+
+Open [localhost:3000](http://localhost:3000). Select a layer from the model or the navigation below it. Drag to orbit and scroll or pinch to zoom. When the canvas has keyboard focus, arrows orbit and plus/minus zoom. Escape returns to the overview. The 2D outline shares the selection with the spatial view.
+
+The **Source catalogue** tab lists the recorded Agency Agents division counts. The initial slice represents proposed structures and candidate economic roles. The snapshot supplies no verified operational-agent inventory or financial results.
+
+[Implementation, verification and limitations](docs/FIRST_BUILD.md) · [Desktop capture](docs/screenshots/desktop.png) · [Mobile capture](docs/screenshots/mobile.png)
+
+## Product roadmap
 
 The Explorer will combine five connected experiences:
 
