@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": {
+    "repository": "https://github.com/msitarzewski/agency-agents",
+    "commit": "b859515c813efcfc4755d3471dd9e7686c7706d",
+    "snapshotDate": "2026-11-08",
+    "license": "MIT - re-check exact upstream licence text before redistributing profile files",
+    "profileCount": 283,
+    "divisionCount": 18,
+    "status": "catalogued-source",
+    "disclaimer": "Upstream profile templates, not 283 deployed, active or authorized GWD agents."
+  },
+  "divisions": [
+    {"id":"academic","label":"Academic","profileCount":6},
+    {"id":"design","label":"Design","profileCount":10},
+    {"id":"engineering","label":"Engineering","profileCount":66},
+    {"id":"finance","label":"Finance","profileCount":5},
+    {"id":"game-development","label":"Game Development","profileCount":21},
+    {"id":"gis","label":"GIS","profileCount":13},
+    {"id":"healthcare","label":"Healthcare","profileCount":3},
+    {"id":"marketing","label":"Marketing","profileCount":37},
+    {"id":"paid-media","label":"Paid Media","profileCount":7},
+    {"id":"product","label":"Product","profileCount":6},
+    {"id":"project-management","label":"Project Management","profileCount":7},
+    {"id":"research","label":"Research","profileCount":1},
+    {"id":"sales","label":"Sales","profileCount":9},
+    {"id":"security","label":"Security","profileCount":12},
+    {"id":"spatial-computing","label":"Spatial Computing","profileCount":6},
+    {"id":"specialized","label":"Specialized","profileCount":59},
+    {"id":"support","label":"Support","profileCount":6},
+    {"id":"testing","label":"Testing","profileCount":9}
+  ]
+}
