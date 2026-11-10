@@ -32,6 +32,10 @@ The **Source catalogue** tab lists the recorded Agency Agents division counts. T
 
 [Implementation, verification and limitations](docs/FIRST_BUILD.md) · [Desktop capture](docs/screenshots/desktop.png) · [Source catalogue](docs/screenshots/catalog.png) · [Mission simulator](docs/screenshots/missions.png) · [Business simulator](docs/screenshots/finance.png) · [Ventures & Labs](docs/screenshots/ventures.png) · [Mobile capture](docs/screenshots/mobile.png)
 
+## Immersion and languages
+
+The V2 branch adds optional 3D architectural studies to all five environments, editorial reading dossiers, PT / FR / EN navigation and analysis, and touch navigation for phones and landscape tablets. Use the language selector or `?lang=pt`, `?lang=fr`, `?lang=en`. Commercial names and approved image artwork retain their source form. See [implementation and verification](docs/IMMERSION_V2.md).
+
 ## Product roadmap
 
 The Explorer will combine five connected experiences:

@@ -1,6 +1,7 @@
+import { serveBuiltSite } from './offline-site.mjs';
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
-import { mkdir, readFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || (existsSync('C:/Program Files/Google/Chrome/Application/chrome.exe') ? 'C:/Program Files/Google/Chrome/Application/chrome.exe' : undefined),
@@ -10,24 +11,7 @@ const out = "docs/screenshots";
 await mkdir(out, { recursive: true });
 const url = process.argv[2] || process.env.EXPLORER_URL || "http://127.0.0.1:3000";
 async function open(page) {
-  if (process.env.EXPLORER_BUILD_FILES === "1") {
-    await page.route(url + "/**", async (route) => {
-      const pathname = new URL(route.request().url()).pathname;
-      const file =
-        pathname === "/architecture"
-          ? ".next/server/app/architecture.html"
-          : pathname.startsWith("/_next/static/")
-            ? ".next/static/" + pathname.slice(14)
-            : null;
-      if (!file) return route.fulfill({ status: 404, body: "" });
-      const contentType = file.endsWith(".js")
-        ? "application/javascript"
-        : file.endsWith(".css")
-          ? "text/css"
-          : "text/html";
-      await route.fulfill({ body: await readFile(file), contentType });
-    });
-  }
+  await serveBuiltSite(page, url);
   await page.goto(url + "/architecture");
 }
 try {
