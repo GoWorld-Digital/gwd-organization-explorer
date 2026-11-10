@@ -11,6 +11,7 @@ import {
 } from "react";
 import { InstancedMesh, Object3D, Vector3 } from "three";
 import { gsap } from "gsap";
+import { useLanguage } from "./Language";
 import {
   divisions,
   layers,
@@ -382,6 +383,7 @@ function World({
   fail,
 }: Props) {
   const { camera, gl, invalidate } = useThree();
+  const { t } = useLanguage();
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
 
   const flight = useRef<gsap.core.Tween | null>(null);
@@ -445,7 +447,7 @@ function World({
     el.setAttribute("tabindex", "0");
     el.setAttribute(
       "aria-label",
-      "3D model. Arrow keys orbit. Plus and minus zoom.",
+      t("3D model. Arrow keys orbit. Plus and minus zoom."),
     );
     const key = (event: KeyboardEvent) => {
       const c = controls.current;
@@ -487,7 +489,7 @@ function World({
     };
     el.addEventListener("keydown", key);
     return () => el.removeEventListener("keydown", key);
-  }, [camera, gl, invalidate]);
+  }, [camera, gl, invalidate, t]);
 
   return (
     <>
@@ -566,6 +568,7 @@ function World({
 }
 
 export default function Scene(props: Props) {
+  const { t } = useLanguage();
   const labels = useRef<(HTMLSpanElement | null)[]>([]);
   const [supported, setSupported] = useState(false);
   const fail = useRef(props.fail);
@@ -587,7 +590,7 @@ export default function Scene(props: Props) {
   return (
     <>
       <Canvas
-        aria-label="Five suspended organizational layers"
+        aria-label={t("Five suspended organizational layers")}
         frameloop="demand"
         dpr={[1, 1.5]}
         camera={{ position: [7.5, 5.4, 9], fov: 40 }}
@@ -605,7 +608,7 @@ export default function Scene(props: Props) {
               labels.current[i] = el;
             }}
           >
-            0{l.rank} / {l.label}
+            0{l.rank} / {t(l.label)}
           </span>
         ))}
       </div>

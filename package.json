@@ -8,9 +8,10 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint app components lib",
-    "test": "node --test tests/model.test.mjs tests/experience.test.mjs",
+    "test": "node --test tests/model.test.mjs tests/experience.test.mjs tests/localization.test.mjs",
     "test:browser": "node tests/browser.mjs",
-    "test:cinematic": "node tests/cinematic.mjs"
+    "test:cinematic": "node tests/cinematic.mjs",
+    "test:immersion": "node tests/immersion.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.9",

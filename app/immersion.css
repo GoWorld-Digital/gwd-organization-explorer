@@ -1,0 +1,147 @@
+/* The original artwork is untouched. Immersion lives in optional spatial
+   studies, responsive semantic navigation and the contextual reading layer. */
+select { font: inherit; color-scheme: dark; }
+select:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.language-selector { display: inline-flex; align-items: center; max-width: 100%; }
+.language-selector select { border: 1px solid #a8bdcf38; border-radius: 8px; background: #0b1725; color: #e5d9be; padding: 9px 8px; min-height: 44px; font-size: 11px; cursor: pointer; max-width: 135px; }
+.experience-bar .spatial-launch { color: #f6d695; border: 1px solid #d2ab5655; background: #bd91300c; }
+.art-language-note { margin: 0; padding: 10px 24px; text-align: center; background: #040b14; color: #8094a8; font-size: 11px; line-height: 1.7; }
+.dossier-dialog { width: min(1040px, calc(100vw - 56px)); background: #07121e; border-color: #ccb47955; border-radius: 20px; }
+.dossier-dialog .dialog-inner { padding: 28px clamp(24px, 4vw, 44px) 42px; }
+.dossier-cover { position: relative; min-height: 188px; padding: 22px clamp(24px, 4vw, 44px) 26px; overflow: hidden; border-bottom: 1px solid #c3a76b40; background: linear-gradient(90deg, #07121ef7 20%, #07121e88 65%, #07121e38), var(--dossier-art) center 44% / cover; }
+.dossier-dialog .dossier-cover h2 { margin: 12px 0 0; font: 350 clamp(27px, 3.4vw, 43px)/1.15 'Segoe UI', Arial, sans-serif; max-width: 80%; letter-spacing: -.025em; color: #f1e4c9; }
+.dossier-tools { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+.dossier-tools > div { display: flex; gap: 8px; }
+.dossier-dialog .dialog-close, .dossier-tools .reading-toggle { position: static; margin: 0; width: 44px; height: 44px; min-height: 44px; border: 1px solid #c9ac6b55; background: #07121ec9; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #f5dcac; cursor: pointer; }
+.dossier-tools .reading-toggle { font-size: 15px; }
+.dossier-tools .reading-toggle[aria-pressed=true] { background: #f4d58d; color: #102039; }
+.dossier-dialog .panel-intro { margin: 0 0 14px; max-width: 800px; color: #d2deea; font-size: 17px; line-height: 1.8; }
+.dossier-metrics { display: grid; grid-template-columns: repeat(3, 1fr); margin: 24px 0 30px; border-block: 1px solid #8ba8bc30; padding-block: 20px; }
+.dossier-metrics > div { display: flex; align-items: center; gap: 12px; padding-inline: 20px; border-left: 1px solid #8ba8bc30; }
+.dossier-metrics > div:first-child { border-left: 0; padding-left: 0; }
+.dossier-metrics strong { color: #ecd09c; font-size: 30px; font-weight: 300; font-variant-numeric: tabular-nums; }
+.dossier-metrics span { font-size: 11px; line-height: 1.5; color: #93a9bd; }
+.dossier-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 30px; align-items: start; }
+.dossier-index { display: grid; gap: 7px; position: sticky; top: 16px; }
+.cinema .dossier-index button { display: flex; align-items: center; justify-content: space-between; text-align: left; gap: 8px; padding: 12px 14px; min-height: 48px; border: 1px solid #718fa62b; border-radius: 9px; font-size: 12px; line-height: 1.6; color: #afc1d1; background: #12263925; }
+.cinema .dossier-index button[aria-pressed=true] { border-color: #c3a46c70; background: #b68d2810; color: #f2d8a6; }
+.dossier-reading { min-width: 0; }
+.dossier-sections { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid #829bad24; }
+.cinema .dossier-sections button { padding: 10px 13px; min-height: 44px; border-radius: 7px; font-size: 12px; color: #9bb2c7; }
+.cinema .dossier-sections button[aria-pressed=true] { color: #f1d5a0; background: #d9ba7130; }
+.dossier-dialog .unit-list details { border: 1px solid #718fa633; background: linear-gradient(135deg, #172c3d50, #0a172500); padding: 18px 20px; border-radius: 10px; margin-block: 12px; }
+.dossier-dialog .unit-list details[open] { border-color: #ccaf6655; }
+.dossier-dialog .unit-list summary { font-size: 17px; }
+.dossier-dialog p { font-size: 15px; line-height: 1.85; }
+.dossier-dialog h3 { margin-top: 24px; font-size: 16px; }
+.dossier-dialog h4 { color: #b8cad8; font-size: 10px; }
+.dossier-dialog .relationship-list li { background: #0a1a2c80; border-left: 2px solid #c5a36c55; padding: 12px 16px; border-radius: 0 7px 7px 0; line-height: 1.7; }
+.dossier-dialog .relationship-list li strong { display: block; color: #d7e5ef; font-size: 12px; font-weight: 500; }
+.dossier-dialog .relationship-list span { display: inline-block; color: #9baec0; margin-block: 3px; font-size: 11px; }
+.dossier-dialog .relationship-list p { color: #8fa7bd; font-size: 12px; }
+.dossier-dialog .tag-list span { border-radius: 7px; padding: 8px 10px; }
+.dossier-dialog.comfort-reading p, .dossier-dialog.comfort-reading .panel-intro { font-size: 19px; line-height: 1.95; }
+.dossier-dialog.comfort-reading summary { font-size: 21px; }
+.dossier-dialog .division-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dossier-dialog .reading-links a, .dossier-dialog .knowledge-list > * { min-height: 56px; }
+.dossier-dialog .search-label input { min-height: 54px; font-size: 17px; }
+.spatial-dialog { width: min(1240px, calc(100vw - 40px)); }
+.spatial-dialog .dossier-cover { min-height: 145px; }
+.spatial-dialog .dialog-inner { padding: 20px 24px 30px; }
+.spatial-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+.shot-controls { display: flex; flex-wrap: wrap; gap: 5px; }
+.cinema .shot-controls button { padding: 10px 12px; min-height: 44px; border: 1px solid #7b9eb440; border-radius: 7px; font-size: 12px; color: #afc5d6; }
+.cinema .shot-controls button[aria-pressed=true] { border-color: #d1b36d80; color: #f6dba6; background: #cda95013; }
+.spatial-stage { position: relative; height: clamp(330px, 48svh, 590px); overflow: hidden; border: 1px solid #9cb4ca40; border-radius: 12px; background: #050d19; }
+.spatial-stage canvas { touch-action: none; }
+.spatial-stage canvas:focus-visible { outline: 2px solid var(--gold); outline-offset: -5px; }
+.spatial-caption { position: absolute; pointer-events: none; inset: auto 0 15px; text-align: center; font-size: 11px; color: #b4c6d7; text-shadow: 0 1px 5px #000; }
+.spatial-fallback { padding: 60px 30px; text-align: center; }
+.spatial-details { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 24px; margin-top: 20px; }
+.spatial-details nav { display: grid; gap: 5px; align-content: start; }
+.cinema .spatial-details nav button { text-align: left; padding: 11px 13px; border: 1px solid #8099b63a; border-radius: 7px; font-size: 12px; min-height: 44px; line-height: 1.6; }
+.cinema .spatial-details nav button[aria-pressed=true] { border-color: #ddbd72; color: #f2d69c; background: #ddbd7210; }
+.spatial-details section { border-left: 1px solid #8099b62b; padding-left: 24px; }
+.spatial-details section .gold-button { margin-top: 10px; }
+.environment-menu { display: none; }
+.architecture-shell .language-selector { flex-shrink: 0; }
+.architecture-shell header { flex-wrap: wrap; }
+@media (min-width: 900px) and (max-width: 1200px) {
+  .experience-bar { flex-wrap: wrap; justify-content: center; }
+  .model-status { display: none; }
+}
+/* Coarse pointers need readable DOM controls even on wide landscape tablets. */
+@media (max-width: 1100px), (pointer: coarse) {
+  .mobile-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 20px; border-bottom: 1px solid #d7b46830; }
+  .mobile-header > button { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+  .mobile-header strong { font-size: 28px; letter-spacing: -.07em; font-style: italic; }
+  .mobile-header > button > span { color: #b8c8d6; font-size: 12px; }
+  .mobile-header-tools { display: flex; align-items: center; gap: 7px; }
+  .mobile-header-tools > button { width: 44px; height: 44px; border: 1px solid #8ca1bc35; border-radius: 8px; font-size: 22px; }
+  .mobile-header-tools .language-selector select { width: 72px; padding: 8px 4px; font-size: 11px; }
+  .desktop-language { display: none; }
+  .cinema-view { min-height: 0; height: auto; }
+  .art-frame { width: 100%; aspect-ratio: 1672 / 941; height: auto; }
+  .scene-art { width: 100%; height: 100%; min-height: 0; left: 0; right: auto; top: 0; object-fit: contain; }
+  .art-navigation, .art-body { display: none; }
+  .art-composition { transform: none; }
+  .mobile-content { display: block; padding: 24px clamp(20px, 4vw, 40px) 30px; background: linear-gradient(180deg, #0b1828, #040b14); border-top: 1px solid #adbfce30; }
+  .mobile-content h2 { font-size: clamp(28px, 5vw, 42px); font-weight: 300; color: #f1dfbd; margin: 12px 0; line-height: 1.2; }
+  .mobile-content p { font-size: 15px; line-height: 1.8; color: #a8bfd1; }
+  .mobile-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+  .cinema .mobile-actions button { min-height: 48px; }
+  .cinema .mobile-link { border: 1px solid #8fa6bb44; border-radius: 9px; padding: 12px 14px; text-align: left; font-size: 13px; display: flex; gap: 14px; align-items: center; }
+  .mobile-content nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; padding-top: 20px; margin-top: 22px; border-top: 1px solid #8cacc52c; }
+  .cinema .mobile-content nav button { display: flex; align-items: center; justify-content: space-between; gap: 10px; text-align: left; padding: 14px; min-height: 56px; border: 1px solid #6b91b33d; border-radius: 9px; font-size: 13px; line-height: 1.5; }
+  .mobile-spatial { margin-top: 16px; }
+  .scene-progress { display: flex; margin-bottom: 22px; gap: 3px; }
+  .cinema .scene-progress button { flex: 1; min-width: 24px; height: 28px; position: relative; }
+  .scene-progress button::after { content: ''; position: absolute; height: 2px; inset: 12px 2px auto; background: #58748b60; }
+  .scene-progress button[aria-current]::after { background: #ecc57f; box-shadow: 0 0 8px #ecc57f40; }
+  .environment-menu { display: grid; position: relative; padding: 16px 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; border-bottom: 1px solid #a3b8c530; background: #06101d; }
+  .cinema .environment-menu button { text-align: left; padding: 13px; min-height: 70px; border: 1px solid #91afc22b; border-radius: 8px; font-size: 13px; line-height: 1.5; }
+  .environment-menu small { display: block; color: #d7bd86; font-size: 9px; margin-bottom: 6px; }
+  .environment-menu button[aria-current] { background: #cfb16c13; }
+  .environment-menu button > span { float: right; color: #d7bd86; }
+  .experience-bar { flex-direction: column; align-items: stretch; padding: 15px 20px; gap: 12px; }
+  .experience-bar nav { gap: 5px; }
+  .experience-bar button, .experience-bar a { padding: 12px; min-height: 44px; border: 1px solid #8295ae25; display: inline-flex; align-items: center; font-size: 12px; }
+}
+@media (max-width: 700px) {
+  .dossier-dialog { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); border-radius: 14px; }
+  .dossier-cover { min-height: 170px; padding: 16px 20px 24px; }
+  .dossier-dialog .dossier-cover h2 { font-size: 28px; max-width: 100%; }
+  .dossier-tools { margin-bottom: 20px; }
+  .dossier-dialog .dialog-inner { padding: 22px 18px 28px; }
+  .dossier-metrics { padding-block: 15px; }
+  .dossier-metrics > div { padding-inline: 10px; flex-direction: column; align-items: flex-start; gap: 2px; }
+  .dossier-metrics strong { font-size: 26px; }
+  .dossier-layout, .spatial-details { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .dossier-index { display: flex; flex-wrap: wrap; position: static; gap: 6px; }
+  .cinema .dossier-index button { flex: 1 1 130px; font-size: 12px; padding: 10px; }
+  .dossier-dialog .unit-list details { padding: 15px; }
+  .dossier-dialog .division-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .spatial-stage { height: 340px; }
+  .spatial-caption { font-size: 10px; padding-inline: 12px; }
+  .spatial-details nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .spatial-details section { border-left: 0; border-top: 1px solid #8cabc52c; padding: 20px 0 0; }
+  .spatial-dialog .dossier-cover { min-height: 135px; }
+  .spatial-dialog .dossier-tools { margin-bottom: 12px; }
+  .spatial-toolbar { gap: 5px; }
+  .shot-controls { gap: 4px; }
+  .cinema .shot-controls button { padding: 10px; font-size: 11px; }
+  .art-language-note span { display: block; }
+  .architecture-shell header { padding-inline: 16px; }
+}
+@media (max-width: 380px) {
+  .mobile-header { padding-inline: 12px; }
+  .mobile-header > button > span { display: none; }
+  .environment-menu { grid-template-columns: 1fr; }
+  .mobile-content nav { grid-template-columns: 1fr; }
+}
+@media (max-height: 550px) and (orientation: landscape) {
+  .dossier-dialog { max-height: calc(100dvh - 12px); }
+  .spatial-dialog .dossier-cover { min-height: 100px; }
+  .spatial-dialog .dossier-cover h2 { font-size: 24px; }
+  .spatial-stage { height: 300px; }
+}

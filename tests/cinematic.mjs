@@ -1,3 +1,4 @@
+import { serveBuiltSite } from './offline-site.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
@@ -8,6 +9,7 @@ import {scenes} from '../lib/experience.ts';
 const base=process.argv[2]||process.env.EXPLORER_URL||'http://127.0.0.1:3000';
 const localChrome='C:/Program Files/Google/Chrome/Application/chrome.exe';
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||(existsSync(localChrome)?localChrome:undefined),args:['--enable-unsafe-swiftshader','--use-angle=swiftshader']});
+async function createPage(options) { const page=await browser.newPage(options); await serveBuiltSite(page,base); return page; }
 const out='docs/screenshots/cinematic';
 await mkdir(out,{recursive:true});
 const errors=[];
@@ -19,7 +21,7 @@ async function ready(page,id){
 }
 const fidelity=[];
 try{
-  const page=await browser.newPage({viewport:{width:1672,height:995},reducedMotion:'reduce',deviceScaleFactor:1});
+  const page=await createPage({viewport:{width:1672,height:995},reducedMotion:'reduce',deviceScaleFactor:1});
     page.on('pageerror',error=>{errors.push(error.message);console.error('Browser error:',error.message);});
   for(const scene of scenes){
     await page.goto(base+'/#'+scene.id);
@@ -62,7 +64,7 @@ try{
   await page.getByRole('button',{name:'Back to universe',exact:true}).click();await ready(page,'universe');
   await page.goBack();await ready(page,'shared-services');
 
-  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'});
+  const mobile=await createPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'});
   mobile.on('pageerror',error=>errors.push(error.message));
   await mobile.goto(base);await ready(mobile,'arrival');
   assert.equal(await mobile.locator('canvas').count(),0);
@@ -76,12 +78,12 @@ try{
   assert.equal(await mobile.getByRole('button',{name:'Motion off'}).getAttribute('aria-pressed'),'true');
   await mobile.screenshot({path:out+'/mobile.png',fullPage:true});
 
-  const tablet=await browser.newPage({viewport:{width:768,height:1024},reducedMotion:'reduce'});
+  const tablet=await createPage({viewport:{width:768,height:1024},reducedMotion:'reduce'});
   await tablet.goto(base+'/#knowledge');await ready(tablet,'knowledge');
   assert.ok(await tablet.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await tablet.screenshot({path:out+'/tablet.png',fullPage:true});
 
-  const blocked=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
+  const blocked=await createPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
   await blocked.addInitScript(()=>{HTMLCanvasElement.prototype.getContext=()=>null;});
   await blocked.goto(base+'/#labs');await ready(blocked,'labs');
   await blocked.getByRole('button',{name:'Explore the labs',exact:true}).click();
@@ -89,7 +91,7 @@ try{
   assert.equal(await blocked.locator('canvas').count(),0);
   await blocked.screenshot({path:out+'/no-webgl.png'});
 
-  const missing=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
+  const missing=await createPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
   await missing.route('**/scenes/**',route=>route.abort());
   await missing.goto(base+'/#governance');
   await missing.locator('.art-error').waitFor();

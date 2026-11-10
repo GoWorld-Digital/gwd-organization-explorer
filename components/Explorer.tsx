@@ -1,5 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
+import { LanguageSelector, Localized, useLanguage } from "./Language";
+import { normalizeSearch } from "../lib/translations";
 import {
   Component,
   useEffect,
@@ -94,18 +96,10 @@ const VENTURE_STAGES = [
   },
 ] as const;
 
-function formatUsd(n: number): string {
-  const sign = n < 0 ? "-" : "";
-  return (
-    sign +
-    "$" +
-    Math.abs(Math.round(n)).toLocaleString("en-US", {
-      maximumFractionDigits: 0,
-    })
-  );
-}
-
 export default function Explorer() {
+  const { t, locale } = useLanguage();
+  const numberLocale = locale === "pt" ? "pt-BR" : locale === "fr" ? "fr-FR" : "en-US";
+  const formatMoney = (value: number) => new Intl.NumberFormat(numberLocale, { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
   const [selected, select] = useState<number | null>(null);
   const [selectedUnitId, setSelectedUnitId] = useState<string | null>(null);
   const [selectedDivisionId, setSelectedDivisionId] = useState<string | null>(
@@ -218,13 +212,13 @@ export default function Explorer() {
   );
 
   const filteredDivisions = useMemo(() => {
-    const q = catalogQuery.trim().toLowerCase();
+    const q = normalizeSearch(catalogQuery.trim());
     return divisions.filter((d) => {
       const matchesQuery =
         !q ||
-        d.label.toLowerCase().includes(q) ||
+        normalizeSearch(d.label + " " + t(d.label)).includes(q) ||
         d.id.toLowerCase().includes(q) ||
-        d.summary.toLowerCase().includes(q) ||
+        normalizeSearch(d.summary + " " + t(d.summary)).includes(q) ||
         d.candidateUnits.some((u) => u.toLowerCase().includes(q));
       if (!matchesQuery) return false;
       if (catalogLayerFilter === "all") return true;
@@ -233,7 +227,7 @@ export default function Explorer() {
         return entry?.layer.id === catalogLayerFilter;
       });
     });
-  }, [catalogQuery, catalogLayerFilter]);
+  }, [catalogQuery, catalogLayerFilter, t]);
 
   const focusedDivision =
     divisions.find((d) => d.id === focusedDivisionId) ?? divisions[0];
@@ -310,7 +304,7 @@ export default function Explorer() {
   };
 
   return (
-    <MotionConfig reducedMotion={quiet ? "always" : "user"}>
+    <Localized><MotionConfig reducedMotion={quiet ? "always" : "user"}>
       <main
         onKeyDown={(e) => {
           if (e.key === "Escape") {
@@ -322,7 +316,7 @@ export default function Explorer() {
           }
         }}
       >
-        <header>
+        <header><LanguageSelector />
           <div className="brand">
             <span className="mark" aria-hidden="true">
               ◈
@@ -1102,7 +1096,7 @@ export default function Explorer() {
                 <div className="input-group">
                   <label htmlFor="fin-customers">
                     <span>Customers / Participants</span>
-                    <b>{scenarioInputs.customers.toLocaleString("en-US")}</b>
+                    <b>{scenarioInputs.customers.toLocaleString(numberLocale)}</b>
                   </label>
                   <input
                     id="fin-customers"
@@ -1130,7 +1124,7 @@ export default function Explorer() {
                 <div className="input-group">
                   <label htmlFor="fin-arpu">
                     <span>Average Revenue per Customer (USD)</span>
-                    <b>{formatUsd(scenarioInputs.averageRevenuePerCustomer)}</b>
+                    <b>{formatMoney(scenarioInputs.averageRevenuePerCustomer)}</b>
                   </label>
                   <input
                     id="fin-arpu"
@@ -1167,7 +1161,7 @@ export default function Explorer() {
                 <div className="input-group">
                   <label htmlFor="fin-direct">
                     <span>Direct Delivery Cost per Unit (USD)</span>
-                    <b>{formatUsd(scenarioInputs.directCostPerUnit)}</b>
+                    <b>{formatMoney(scenarioInputs.directCostPerUnit)}</b>
                   </label>
                   <input
                     id="fin-direct"
@@ -1202,7 +1196,7 @@ export default function Explorer() {
                   <label htmlFor="fin-shared">
                     <span>Allocated Shared-Service Costs (USD)</span>
                     <b>
-                      {formatUsd(scenarioInputs.allocatedSharedServiceCosts)}
+                      {formatMoney(scenarioInputs.allocatedSharedServiceCosts)}
                     </b>
                   </label>
                   <input
@@ -1242,7 +1236,7 @@ export default function Explorer() {
                 <div className="input-group">
                   <label htmlFor="fin-exp">
                     <span>Experimentation / Lab Budget (USD)</span>
-                    <b>{formatUsd(scenarioInputs.experimentationBudget)}</b>
+                    <b>{formatMoney(scenarioInputs.experimentationBudget)}</b>
                   </label>
                   <input
                     id="fin-exp"
@@ -1302,7 +1296,7 @@ export default function Explorer() {
                       GROSS REVENUE (ILLUSTRATIVE)
                     </span>
                     <strong data-testid="kpi-gross-revenue">
-                      {formatUsd(economics.grossRevenue)}
+                      {formatMoney(economics.grossRevenue)}
                     </strong>
                     <small>
                       <code>{financialModel.formulas.grossRevenue}</code>
@@ -1312,7 +1306,7 @@ export default function Explorer() {
                   <div className="kpi-card">
                     <span className="eyebrow">DIRECT DELIVERY COSTS</span>
                     <strong data-testid="kpi-direct-costs">
-                      {formatUsd(economics.directDeliveryCosts)}
+                      {formatMoney(economics.directDeliveryCosts)}
                     </strong>
                     <small>
                       <code>{financialModel.formulas.directDeliveryCosts}</code>
@@ -1322,7 +1316,7 @@ export default function Explorer() {
                   <div className="kpi-card">
                     <span className="eyebrow">CONTRIBUTION MARGIN</span>
                     <strong data-testid="kpi-contribution">
-                      {formatUsd(economics.contribution)}
+                      {formatMoney(economics.contribution)}
                     </strong>
                     <small>
                       {(economics.contributionMarginRatio * 100).toFixed(1)}% ·{" "}
@@ -1335,7 +1329,7 @@ export default function Explorer() {
                       ILLUSTRATIVE MARGIN (AFTER SHARED SERVICES)
                     </span>
                     <strong data-testid="kpi-illustrative-margin">
-                      {formatUsd(economics.illustrativeMargin)}
+                      {formatMoney(economics.illustrativeMargin)}
                     </strong>
                     <small>
                       <code>{financialModel.formulas.illustrativeMargin}</code>
@@ -1347,7 +1341,7 @@ export default function Explorer() {
                       NET POSITION AFTER EXPERIMENTATION BUDGET
                     </span>
                     <strong data-testid="kpi-net-position">
-                      {formatUsd(economics.netPositionAfterExperiments)}
+                      {formatMoney(economics.netPositionAfterExperiments)}
                     </strong>
                     <small>
                       <code>
@@ -1548,6 +1542,6 @@ export default function Explorer() {
           </button>
         </footer>
       </main>
-    </MotionConfig>
+    </MotionConfig></Localized>
   );
 }
